@@ -6,6 +6,7 @@ import { DataHolderConstants } from 'src/app/core/constants/dataHolder.constants
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CacheService } from 'src/app/core/services/cache.service';
+import { MessageService } from 'src/app/core/services/message.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     private _router: Router,
     private _authService : AuthService,
     private _cacheService : CacheService,
+    private _messageService : MessageService
   ) { }
 
   loginForm!: FormGroup;
@@ -48,6 +50,7 @@ export class LoginComponent implements OnInit {
     }
     this._authService.login(body).subscribe({
       next : (response : any) => {
+        console.log("Login Response",response);
         if(response){
           this._cacheService.clearCache();
           this._cacheService.saveInCache(this._cacheKeysConstants.CACHE_KEYS.TOKEN,response?.access_token);
@@ -55,6 +58,8 @@ export class LoginComponent implements OnInit {
           this._cacheService.saveInCache(this._cacheKeysConstants.CACHE_KEYS.REFRESH_TOKEN,response?.refresh_token);
           this._cacheService.saveInCache(this._cacheKeysConstants.CACHE_KEYS.TOKEN_TYPE,response?.token_type);
           this._cacheService.saveInCache(this._cacheKeysConstants.CACHE_KEYS.IS_LOGGEDIN,'true');
+          this._router.navigate(['click-pay']);
+          this._messageService.success('Successfully Login');
         }
         else{
           // this._messageService.error('Error')

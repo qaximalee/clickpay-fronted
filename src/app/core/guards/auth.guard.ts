@@ -5,7 +5,6 @@ import { Role } from '../models/role';
 import { AuthService } from '../services/auth.service';
 import { CacheService } from '../services/cache.service';
 import { MessageService } from '../services/message.service';
-import { UserService } from '../services/user.service';
 
 @Injectable({
   providedIn: 'root'
