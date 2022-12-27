@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
      { path: '', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) },
-     { path: 'click-pay', loadChildren: () => import('./components/layout/layout.module').then(m => m.LayoutModule) }
+     { path: 'click-pay', loadChildren: () => import('./components/layout/layout.module').then(m => m.LayoutModule) },
   ];
 
 @NgModule({
