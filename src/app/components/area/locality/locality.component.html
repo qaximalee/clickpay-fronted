@@ -1,4 +1,8 @@
 <p>locality works!</p>
+<button nz-button nzType="primary" nzShape="round">
+    <span nz-icon nzType="plus" ></span>
+    Add
+</button>
 <nz-table #basicTable [nzData]="localitiesList">
     <thead>
       <tr>
@@ -18,6 +22,9 @@
         <td>
             <button nz-button >
                 <span nz-icon nzType="edit" ></span>
+            </button>
+            <button nz-button >
+                <span nz-icon nzType="delete" ></span>
             </button>
         </td>
       </tr>
