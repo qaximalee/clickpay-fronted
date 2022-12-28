@@ -3,13 +3,23 @@
     <thead>
       <tr>
         <th>Id</th>
-        <th>Name</th>
-      </tr>
+        <th>Country</th>
+        <th>City</th>
+        <th>Locality</th>
+        <th>Actions</th>
+    </tr>
     </thead>
     <tbody>
       <tr *ngFor="let locality of basicTable.data">
         <td>{{locality.id}}</td>
+        <td>{{locality.city.country.name}}</td>
+        <td>{{locality.city.name}}</td>
         <td>{{locality.name}}</td>
+        <td>
+            <button nz-button >
+                <span nz-icon nzType="edit" ></span>
+            </button>
+        </td>
       </tr>
     </tbody>
 </nz-table>

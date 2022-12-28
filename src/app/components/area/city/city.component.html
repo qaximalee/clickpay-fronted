@@ -1,15 +1,28 @@
 <p>city works!</p>
+<button nz-button nzType="primary" nzShape="round">
+    <span nz-icon nzType="plus" ></span>
+    Add
+</button>
+  
 <nz-table #basicTable [nzData]="citiesList">
     <thead>
       <tr>
         <th>Id</th>
-        <th>Name</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let city of basicTable.data">
         <td>{{city.id}}</td>
+        <td>{{city.country.name}}</td>
         <td>{{city.name}}</td>
+        <td>
+            <button nz-button >
+                <span nz-icon nzType="edit" ></span>
+            </button>
+        </td>
       </tr>
     </tbody>
 </nz-table>

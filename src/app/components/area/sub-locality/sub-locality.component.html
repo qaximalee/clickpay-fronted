@@ -3,13 +3,25 @@
     <thead>
       <tr>
         <th>Id</th>
-        <th>Name</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Locality</th>
+        <th>SubLocality</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let subLocality of basicTable.data">
         <td>{{subLocality.id}}</td>
+        <td>{{subLocality.locality.city.country.name}}</td>
+        <td>{{subLocality.locality.city.name}}</td>
+        <td>{{subLocality.locality.name}}</td>
         <td>{{subLocality.name}}</td>
+        <td>
+            <button nz-button >
+                <span nz-icon nzType="edit" ></span>
+            </button>
+        </td>
       </tr>
     </tbody>
 </nz-table>
