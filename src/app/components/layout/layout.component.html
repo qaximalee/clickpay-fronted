@@ -1,21 +1,59 @@
 <nz-layout>
     <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+      
       <ul nz-menu nzTheme="dark" nzMode="inline">
         <li nz-menu-item>
-          <span nz-icon nzType="file"></span>
-          <span>Area</span>
+          <div class="logo">
+          CLICK PAY
+          <!-- <img src="./../../../../assets/images/clicklogo.JPG" alt="logo" width="140px" height="50px"> -->
+          </div>
+        </li>
+        <li nz-menu-item>
+          <span nz-icon nzType="home" nzTheme="outline"></span>
+          <span>Dashboard</span>
+        </li>
+        <li nz-submenu nzTitle="Creation" nzIcon="user">
+          <ul>
+            <li nz-menu-item>Bill Creation</li>
+            <li nz-menu-item>Package</li>
+            <li nz-menu-item>Area</li>
+            <li nz-menu-item>Box / Media</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Admin Management" nzIcon="team">
+          <ul>
+            <li nz-menu-item>Admin Details</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="User Management" nzIcon="team">
+          <ul>
+            <li nz-menu-item>User Details</li>
+            <li nz-menu-item>User Collections</li>
+            <li nz-menu-item>Complain View</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Dealer Management" nzIcon="team">
+          <ul>
+            <li nz-menu-item>Dealer Details</li>
+            <li nz-menu-item>Dealer Collections</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Officer Management" nzIcon="team">
+          <ul>
+            <li nz-menu-item>Officer Details</li>
+            <li nz-menu-item>Area Allocation</li>
+            <li nz-menu-item>Collection From Officer</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Settings" nzIcon="setting">
+          <ul>
+            <li nz-menu-item>Configurations</li>
+            <li nz-menu-item>User Rights</li>
+          </ul>
         </li>
         <li nz-menu-item>
           <span nz-icon nzType="file"></span>
-          <span>User Profile</span>
-        </li>
-        <li nz-menu-item>
-          <span nz-icon nzType="file"></span>
-          <span>Dealer Profile</span>
-        </li>
-        <li nz-menu-item>
-          <span nz-icon nzType="file"></span>
-          <span>Recovery Officer</span>
+          <span>File</span>
         </li>
       </ul>
     </nz-sider>
@@ -37,6 +75,6 @@
           <router-outlet></router-outlet>
         </div>
       </nz-content>
-      <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+      <nz-footer>Click Pay ©2022 Implement By Qasim And Tahir</nz-footer>
     </nz-layout>
   </nz-layout>
