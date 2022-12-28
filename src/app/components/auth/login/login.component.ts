@@ -62,15 +62,15 @@ export class LoginComponent implements OnInit {
           this._messageService.success('Successfully Login');
         }
         else{
-          // this._messageService.error('Error')
+          this._messageService.error('Error')
         }
       },
       error : (error : any) => {
         if(error?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE){
-          // this._messageService.error('Email or Password is Incorrect');  
+           this._messageService.error('Email or Password is Incorrect');  
         }
         else if(error?.status == this._httpConstants.REQUEST_STATUS.UNAUTHORIZED_401.CODE){
-          // this._messageService.error('User inactive or unauthorized');
+          this._messageService.error('User inactive or unauthorized');
         }
       },
       complete : () => {}

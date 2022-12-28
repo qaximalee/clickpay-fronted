@@ -29,6 +29,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 const icons: IconDefinition[] = [MenuFoldOutline, MenuUnfoldOutline];
 
@@ -61,7 +62,8 @@ registerLocaleData(en);
     NzPaginationModule,
     NzCollapseModule,
     NzToolTipModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzTabsModule
     ],
 
   exports: [
@@ -88,7 +90,8 @@ registerLocaleData(en);
     NzPaginationModule,
     NzCollapseModule,
     NzToolTipModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzTabsModule
   ],
   providers : [
     { provide: NZ_I18N, useValue: en_US }

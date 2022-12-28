@@ -1,1 +1,15 @@
 <p>sub-locality works!</p>
+<nz-table #basicTable [nzData]="subLocalitiesList">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subLocality of basicTable.data">
+        <td>{{subLocality.id}}</td>
+        <td>{{subLocality.name}}</td>
+      </tr>
+    </tbody>
+</nz-table>

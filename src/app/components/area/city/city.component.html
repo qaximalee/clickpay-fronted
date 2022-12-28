@@ -1,1 +1,15 @@
 <p>city works!</p>
+<nz-table #basicTable [nzData]="citiesList">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let city of basicTable.data">
+        <td>{{city.id}}</td>
+        <td>{{city.name}}</td>
+      </tr>
+    </tbody>
+</nz-table>

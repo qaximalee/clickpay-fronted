@@ -1,1 +1,15 @@
 <p>locality works!</p>
+<nz-table #basicTable [nzData]="localitiesList">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let locality of basicTable.data">
+        <td>{{locality.id}}</td>
+        <td>{{locality.name}}</td>
+      </tr>
+    </tbody>
+</nz-table>
