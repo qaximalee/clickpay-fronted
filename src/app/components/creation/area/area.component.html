@@ -1,0 +1,105 @@
+<nz-tabset>
+    <nz-tab nzTitle="City">
+       
+<button nz-button nzType="primary" nzShape="round">
+    <span nz-icon nzType="plus" ></span>
+    Add
+</button>
+  
+<nz-table #basicTable [nzData]="citiesList">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let city of basicTable.data">
+        <td>{{city.id}}</td>
+        <td>{{city.country.name}}</td>
+        <td>{{city.name}}</td>
+        <td>
+            <button nz-button >
+                <span nz-icon nzType="edit" ></span>
+            </button>
+        </td>
+      </tr>
+    </tbody>
+</nz-table>
+
+    </nz-tab>
+    <nz-tab nzTitle="Locality">
+       
+<button nz-button nzType="primary" nzShape="round">
+    <span nz-icon nzType="plus" ></span>
+    Add
+</button>
+<nz-table #basicTable [nzData]="localitiesList">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Locality</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let locality of basicTable.data">
+        <td>{{locality.id}}</td>
+        <td>{{locality.city.country.name}}</td>
+        <td>{{locality.city.name}}</td>
+        <td>{{locality.name}}</td>
+        <td>
+            <button nz-button >
+                <span nz-icon nzType="edit" ></span>
+            </button>
+            <button nz-button >
+                <span nz-icon nzType="delete" ></span>
+            </button>
+        </td>
+      </tr>
+    </tbody>
+</nz-table>
+
+    </nz-tab>
+    <nz-tab nzTitle="Sub Locality">
+        
+<button nz-button nzType="primary" nzShape="round">
+    <span nz-icon nzType="plus" ></span>
+    Add
+</button>
+<nz-table #basicTable [nzData]="subLocalitiesList">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Locality</th>
+        <th>SubLocality</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subLocality of basicTable.data">
+        <td>{{subLocality.id}}</td>
+        <td>{{subLocality.locality.city.country.name}}</td>
+        <td>{{subLocality.locality.city.name}}</td>
+        <td>{{subLocality.locality.name}}</td>
+        <td>{{subLocality.name}}</td>
+        <td>
+            <button nz-button >
+                <span nz-icon nzType="edit" ></span>
+            </button>
+            <button nz-button >
+                <span nz-icon nzType="delete" ></span>
+            </button>
+        </td>
+      </tr>
+    </tbody>
+</nz-table>
+
+    </nz-tab>
+</nz-tabset>
