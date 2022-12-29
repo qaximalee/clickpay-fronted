@@ -12,12 +12,12 @@
           <span nz-icon nzType="home" nzTheme="outline"></span>
           <span>Dashboard</span>
         </li>
-        <li nz-submenu nzTitle="Creation" nzIcon="user">
+        <li [routerLink]="['creation']" nz-submenu nzTitle="Creation" nzIcon="user">
           <ul>
-            <li nz-menu-item>Bill Creation</li>
-            <li nz-menu-item>Package</li>
-            <li nz-menu-item>Area</li>
-            <li nz-menu-item>Box / Media</li>
+            <li (click)="routeToBill()" nz-menu-item>Bill Creation</li>
+            <li (click)="routeToPackage()" nz-menu-item>Package</li>
+            <li (click)="routeToArea()" nz-menu-item>Area</li>
+            <li (click)="routeToBoxMedia()" nz-menu-item>Box / Media</li>
           </ul>
         </li>
         <li nz-submenu nzTitle="Admin Management" nzIcon="team">
