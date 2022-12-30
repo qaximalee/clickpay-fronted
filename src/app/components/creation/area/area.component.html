@@ -17,9 +17,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let city of basicTable.data">
-        <td>{{city.id}}</td>
-        <td>{{city.country.name}}</td>
-        <td>{{city.name}}</td>
+        <td>{{city?.id}}</td>
+        <td>{{city?.country?.name}}</td>
+        <td>{{city?.name}}</td>
         <td>
             <button nz-button >
                 <span nz-icon nzType="edit" ></span>
@@ -48,10 +48,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let locality of basicTable.data">
-        <td>{{locality.id}}</td>
-        <td>{{locality.city.country.name}}</td>
-        <td>{{locality.city.name}}</td>
-        <td>{{locality.name}}</td>
+        <td>{{locality?.id}}</td>
+        <td>{{locality?.city?.country?.name}}</td>
+        <td>{{locality?.city?.name}}</td>
+        <td>{{locality?.name}}</td>
         <td>
             <button nz-button >
                 <span nz-icon nzType="edit" ></span>
@@ -84,11 +84,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let subLocality of basicTable.data">
-        <td>{{subLocality.id}}</td>
-        <td>{{subLocality.locality.city.country.name}}</td>
-        <td>{{subLocality.locality.city.name}}</td>
-        <td>{{subLocality.locality.name}}</td>
-        <td>{{subLocality.name}}</td>
+        <td>{{subLocality?.id}}</td>
+        <td>{{subLocality?.locality?.city?.country?.name}}</td>
+        <td>{{subLocality?.locality?.city?.name}}</td>
+        <td>{{subLocality?.locality?.name}}</td>
+        <td>{{subLocality?.name}}</td>
         <td>
             <button nz-button >
                 <span nz-icon nzType="edit" ></span>

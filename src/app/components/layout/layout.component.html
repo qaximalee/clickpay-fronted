@@ -9,10 +9,10 @@
           </div>
         </li>
         <li nz-menu-item>
-          <span nz-icon nzType="home" nzTheme="outline"></span>
-          <span>Dashboard</span>
+          <span  nz-icon nzType="home" nzTheme="outline"></span>
+          <span [routerLink]="['dashboard']">Dashboard</span>
         </li>
-        <li [routerLink]="['creation']" nz-submenu nzTitle="Creation" nzIcon="user">
+        <li nz-submenu nzTitle="Creation" nzIcon="user">
           <ul>
             <li (click)="routeToBill()" nz-menu-item>Bill Creation</li>
             <li (click)="routeToPackage()" nz-menu-item>Package</li>

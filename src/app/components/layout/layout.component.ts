@@ -20,19 +20,19 @@ export class LayoutComponent implements OnInit {
   }
 
   routeToBill(){
-   this._router.navigate(['bill'],{ relativeTo: this._activatedRoute});
+   this._router.navigate(['click-pay/creation/bill']);
   }
 
   routeToPackage(){
-    this._router.navigate(['creation/package'],{ relativeTo: this._activatedRoute});
+    this._router.navigate(['click-pay/creation/package']);
   }
 
   routeToArea(){
-
+    this._router.navigate(['click-pay/creation/area']);
   }
 
   routeToBoxMedia(){
-
+    this._router.navigate(['click-pay/creation/box-media']);
   }
 
 }

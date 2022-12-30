@@ -8,8 +8,8 @@ import { PackageComponent } from './package/package.component';
 
 const routes: Routes = [
 { path: '', component: CreationComponent,
+
 children : [
-  { path: '', redirectTo : 'bill', pathMatch :'full'},
   { 
     path: 'bill', component: BillComponent
   },
