@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
-import { AreaService } from 'src/app/core/services/area.service';
+import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class AreaComponent implements OnInit {
   subLocalitiesList : Array<any> = [];
   
   constructor(
-    private _areaService : AreaService,
+    private _creationService : CreationService,
     private _messageService : MessageService
   ) { }
 
@@ -27,7 +27,7 @@ export class AreaComponent implements OnInit {
   }
 
   getCityList() {    
-    this._areaService.getCityList().subscribe({
+    this._creationService.getCityList().subscribe({
       next : (response : any) => {
         console.log("Get City List Response",response);
         if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
@@ -53,7 +53,7 @@ export class AreaComponent implements OnInit {
   }  
 
   getLocalityList() {    
-    this._areaService.getLocalityList().subscribe({
+    this._creationService.getLocalityList().subscribe({
       next : (response : any) => {
         console.log("Get Locality List Response",response);
         if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
@@ -79,7 +79,7 @@ export class AreaComponent implements OnInit {
   }  
 
   getSubLocalityList() {    
-    this._areaService.getSubLocalityList().subscribe({
+    this._creationService.getSubLocalityList().subscribe({
       next : (response : any) => {
         console.log("Get Sub-Locality List Response",response);
         if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){

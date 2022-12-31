@@ -22,27 +22,27 @@
         </li>
         <li nz-submenu nzTitle="Admin Management" nzIcon="team">
           <ul>
-            <li nz-menu-item>Admin Details</li>
+            <li (click)="routeToAdminDetails()" nz-menu-item>Admin Details</li>
           </ul>
         </li>
         <li nz-submenu nzTitle="User Management" nzIcon="team">
           <ul>
-            <li nz-menu-item>User Details</li>
-            <li nz-menu-item>User Collections</li>
-            <li nz-menu-item>Complain View</li>
+            <li (click)="routeToUserDetails()" nz-menu-item>User Details</li>
+            <li (click)="routeToUserCollections()" nz-menu-item>User Collections</li>
+            <li (click)="routeToComplainView()" nz-menu-item>Complain View</li>
           </ul>
         </li>
         <li nz-submenu nzTitle="Dealer Management" nzIcon="team">
           <ul>
-            <li nz-menu-item>Dealer Details</li>
-            <li nz-menu-item>Dealer Collections</li>
+            <li (click)="routeToDealerDetails()" nz-menu-item>Dealer Details</li>
+            <li (click)="routeToDealerCollections()" nz-menu-item>Dealer Collections</li>
           </ul>
         </li>
         <li nz-submenu nzTitle="Officer Management" nzIcon="team">
           <ul>
-            <li nz-menu-item>Officer Details</li>
-            <li nz-menu-item>Area Allocation</li>
-            <li nz-menu-item>Collection From Officer</li>
+            <li (click)="routeToOfficerDetails()" nz-menu-item>Officer Details</li>
+            <li (click)="routeToAreaAllocation()" nz-menu-item>Area Allocation</li>
+            <li (click)="routeToCollectionFromOfficer()" nz-menu-item>Collection From Officer</li>
           </ul>
         </li>
         <li nz-submenu nzTitle="Settings" nzIcon="setting">
@@ -50,10 +50,6 @@
             <li nz-menu-item>Configurations</li>
             <li nz-menu-item>User Rights</li>
           </ul>
-        </li>
-        <li nz-menu-item>
-          <span nz-icon nzType="file"></span>
-          <span>File</span>
         </li>
       </ul>
     </nz-sider>

@@ -35,4 +35,39 @@ export class LayoutComponent implements OnInit {
     this._router.navigate(['click-pay/creation/box-media']);
   }
 
+  routeToAdminDetails(){
+    this._router.navigate(['click-pay/admin-management/admin-details']);
+  }
+
+  routeToUserDetails(){
+    this._router.navigate(['click-pay/user-management/user-details']);
+  }
+
+  routeToUserCollections(){
+    this._router.navigate(['click-pay/user-management/user-collections']);
+  }
+
+  routeToComplainView(){
+    this._router.navigate(['click-pay/user-management/complain-view']);
+  }
+
+  routeToDealerDetails(){
+    this._router.navigate(['click-pay/dealer-management/dealer-details']);
+  }
+
+  routeToDealerCollections(){
+    this._router.navigate(['click-pay/dealer-management/dealer-collections']);
+  }
+
+  routeToOfficerDetails(){
+    this._router.navigate(['click-pay/officer-management/']);
+  }
+
+  routeToAreaAllocation(){
+    this._router.navigate(['click-pay/officer-management/']);
+  }
+
+  routeToCollectionFromOfficer(){
+    this._router.navigate(['click-pay/officer-management/']);
+  }
 }

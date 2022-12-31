@@ -23,4 +23,12 @@ export class CreationService {
   public getSubLocalityList():Observable<any>{
     return this._http.get(this.baseUrl+`area/sub-locality`);
   }
+
+  public getBoxMediaList():Observable<any>{
+    return this._http.get(this.baseUrl+`user-profile/box-media`)
+  }
+
+  public getPackageList():Observable<any>{
+    return this._http.get(this.baseUrl+`user-profile/package`)
+  }
 }

@@ -1,1 +1,32 @@
-<p>package works!</p>
+<button nz-button nzType="primary" nzShape="round">
+    <span nz-icon nzType="plus" ></span>
+    Add
+</button>
+<nz-table #basicTable [nzData]="packageList">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Package</th>
+        <th>Sale Price</th>
+        <th>Purchase Price</th>
+        <th>Type</th>
+        <th>Country</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let package of basicTable.data">
+        <td>{{package?.id}}</td>
+        <td>{{package?.packageName}}</td>
+        <td>{{package?.salePrice}}</td>
+        <td>{{package?.purchasePrice}}</td>
+        <td>{{package?.connectionType?.type}}</td>
+        <td>{{package?.company?.name}}</td>
+        <td>
+            <button nz-button >
+                <span nz-icon nzType="edit" ></span>
+            </button>
+        </td>
+      </tr>
+    </tbody>
+</nz-table>
