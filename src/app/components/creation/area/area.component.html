@@ -6,7 +6,7 @@
     Add
 </button>
   
-<nz-table #basicTable [nzData]="citiesList">
+<nz-table #cities [nzData]="citiesList">
     <thead>
       <tr>
         <th>Id</th>
@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let city of basicTable.data">
+      <tr *ngFor="let city of cities.data">
         <td>{{city?.id}}</td>
         <td>{{city?.country?.name}}</td>
         <td>{{city?.name}}</td>
@@ -36,7 +36,7 @@
     <span nz-icon nzType="plus" ></span>
     Add
 </button>
-<nz-table #basicTable [nzData]="localitiesList">
+<nz-table #localities [nzData]="localitiesList">
     <thead>
       <tr>
         <th>Id</th>
@@ -47,7 +47,7 @@
     </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let locality of basicTable.data">
+      <tr *ngFor="let locality of localities.data">
         <td>{{locality?.id}}</td>
         <td>{{locality?.city?.country?.name}}</td>
         <td>{{locality?.city?.name}}</td>
@@ -71,7 +71,7 @@
     <span nz-icon nzType="plus" ></span>
     Add
 </button>
-<nz-table #basicTable [nzData]="subLocalitiesList">
+<nz-table #subLocalities [nzData]="subLocalitiesList">
     <thead>
       <tr>
         <th>Id</th>
@@ -83,7 +83,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let subLocality of basicTable.data">
+      <tr *ngFor="let subLocality of subLocalities.data">
         <td>{{subLocality?.id}}</td>
         <td>{{subLocality?.locality?.city?.country?.name}}</td>
         <td>{{subLocality?.locality?.city?.name}}</td>
