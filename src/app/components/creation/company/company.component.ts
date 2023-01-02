@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
+import { CreateUpdateModalComponent } from './create-update-modal/create-update-modal.component';
 
 @Component({
   selector: 'app-company',
@@ -11,18 +13,21 @@ import { MessageService } from 'src/app/core/services/message.service';
 export class CompanyComponent implements OnInit {
 
   private _httpConstants: HttpConstants = new HttpConstants();
+
   companyList: Array<any> = [];
 
   constructor(
+    private _modal: NzModalService,
+    private _viewContainerRef: ViewContainerRef,
     private _creationService : CreationService,
     private _messageService : MessageService
   ) { }
 
   ngOnInit(): void {
-    this.getCityList();
+    this.getCompanyList();
   }
 
-  getCityList() {    
+  getCompanyList() {    
     this._creationService.getCompanyList().subscribe({
       next : (response : any) => {
         console.log("Get City List Response",response);
@@ -47,4 +52,29 @@ export class CompanyComponent implements OnInit {
       }
     })
   }  
+
+  createAddOrUpdateCompanyModal(companyId:any){
+    const modal = this._modal.create({
+      nzTitle: companyId ? 'Edit Comapny' : 'Create Company',
+      nzContent: CreateUpdateModalComponent,
+      nzViewContainerRef: this._viewContainerRef,
+      nzComponentParams: {
+        data : companyId ? companyId : null,
+        title : 'COMPANY'
+      },
+      nzFooter: null,
+      nzKeyboard : true,
+      nzWidth : "60%",
+      nzCentered : true,
+      nzMaskClosable : false,
+    })
+    modal.afterClose.subscribe(()=> {
+      this.getCompanyList();
+    })
+  }
+
+  
+
+
+
 }
