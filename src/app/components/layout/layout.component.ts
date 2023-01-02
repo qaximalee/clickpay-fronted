@@ -31,6 +31,10 @@ export class LayoutComponent implements OnInit {
     this._router.navigate(['click-pay/creation/area']);
   }
 
+  routeToCompany(){
+    this._router.navigate(['click-pay/creation/company']);
+  }
+
   routeToBoxMedia(){
     this._router.navigate(['click-pay/creation/box-media']);
   }
@@ -70,4 +74,5 @@ export class LayoutComponent implements OnInit {
   routeToCollectionFromOfficer(){
     this._router.navigate(['click-pay/officer-management/']);
   }
+
 }

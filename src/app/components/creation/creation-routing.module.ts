@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AreaComponent } from './area/area.component';
 import { BillComponent } from './bill/bill.component';
 import { BoxMediaComponent } from './box-media/box-media.component';
+import { CompanyComponent } from './company/company.component';
 import { CreationComponent } from './creation.component';
 import { PackageComponent } from './package/package.component';
 
@@ -15,6 +16,9 @@ children : [
   },
   { 
     path: 'package', component: PackageComponent
+  },
+  { 
+    path: 'company', component: CompanyComponent
   },
   { 
     path: 'box-media', component: BoxMediaComponent

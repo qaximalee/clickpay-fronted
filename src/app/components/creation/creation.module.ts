@@ -8,6 +8,7 @@ import { PackageComponent } from './package/package.component';
 import { BoxMediaComponent } from './box-media/box-media.component';
 import { AreaComponent } from './area/area.component';
 import { AntdesignModule } from 'src/app/modules/antdesign.module';
+import { CompanyComponent } from './company/company.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AntdesignModule } from 'src/app/modules/antdesign.module';
     BillComponent,
     PackageComponent,
     BoxMediaComponent,
-    AreaComponent
+    AreaComponent,
+    CompanyComponent
   ],
   imports: [
     CommonModule,
