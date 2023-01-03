@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
+import { CreateUpdatePackageModalComponent } from './create-update-package-modal/create-update-package-modal.component';
 
 @Component({
   selector: 'app-package',
@@ -14,6 +16,8 @@ export class PackageComponent implements OnInit {
   packageList : Array<any> = [];
 
   constructor(
+    private _modal: NzModalService,
+    private _viewContainerRef: ViewContainerRef,
     private _creationService : CreationService,
     private _messageService : MessageService
   ) { }
@@ -45,6 +49,26 @@ export class PackageComponent implements OnInit {
       complete : () => {
         console.log('Complete');
       }
+    })
+  }
+
+  createAddOrUpdatePackageModal(packageId:any){
+    const modal = this._modal.create({
+      nzTitle: packageId ? 'Edit Package' : 'Create Package',
+      nzContent: CreateUpdatePackageModalComponent,
+      nzViewContainerRef: this._viewContainerRef,
+      nzComponentParams: {
+        data : packageId ? packageId : null,
+        title : 'PACKAGE'
+      },
+      nzFooter: null,
+      nzKeyboard : true,
+      nzWidth : "60%",
+      nzCentered : true,
+      nzMaskClosable : false,
+    })
+    modal.afterClose.subscribe(()=> {
+      this.getPackageList();
     })
   }
 

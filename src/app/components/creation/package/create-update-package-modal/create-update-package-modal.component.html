@@ -1,0 +1,63 @@
+<form nz-form #pForm="ngForm" >
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Package Name</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <input nz-input type="text" name="PackageName" [(ngModel)]="packageForm.packageName" placeholder="Package Name" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">Please input box/media number!</ng-container>
+          <ng-container *ngIf="control.hasError('duplicated')">The box/media number is redundant!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Company Name</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+          <input nz-input type="text" name="CompanyName" [(ngModel)]="packageForm.companyId" placeholder="Company Name" />
+          <ng-template #userErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">Please input nearby location!</ng-container>
+            <ng-container *ngIf="control.hasError('duplicated')">The nearby location is redundant!</ng-container>
+          </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Sale Price</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+          <input nz-input type="number" name="SalePrice" [(ngModel)]="packageForm.salePrice" placeholder="Sale Price" />
+          <ng-template #userErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">Please input nearby location!</ng-container>
+            <ng-container *ngIf="control.hasError('duplicated')">The nearby location is redundant!</ng-container>
+          </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Purchase Price</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+          <input nz-input type="number" name="PurchasePrice" [(ngModel)]="packageForm.purchasePrice" placeholder="Purchase Price" />
+          <ng-template #userErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">Please input nearby location!</ng-container>
+            <ng-container *ngIf="control.hasError('duplicated')">The nearby location is redundant!</ng-container>
+          </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Package Type</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+          <input nz-input type="text" name="PackageType" [(ngModel)]="packageForm.connectionTypeId" placeholder="Package Type" />
+          <ng-template #userErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">Please input nearby location!</ng-container>
+            <ng-container *ngIf="control.hasError('duplicated')">The nearby location is redundant!</ng-container>
+          </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+    
+    <nz-form-item>
+      <nz-form-control [nzOffset]="7" [nzSpan]="12">
+        <!-- <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
+        <button nz-button (click)="createOrUpdatePackage()">{{ buttonName }}</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
