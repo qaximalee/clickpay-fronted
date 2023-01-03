@@ -35,4 +35,8 @@ export class CreationService {
   public getCompanyList():Observable<any>{
     return this._http.get(this.baseUrl+`user-profile/company`)
   }
+
+  public createCompany(name:string):Observable<any>{
+    return this._http.post(this.baseUrl+`user-profile/company?name=${name}`,null)
+  }
 }
