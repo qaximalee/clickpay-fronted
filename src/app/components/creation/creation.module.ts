@@ -10,6 +10,7 @@ import { AreaComponent } from './area/area.component';
 import { AntdesignModule } from 'src/app/modules/antdesign.module';
 import { CompanyComponent } from './company/company.component';
 import { CreateUpdateModalComponent } from './company/create-update-modal/create-update-modal.component';
+import { CreateUpdateBoxMediaModalComponent } from './box-media/create-update-box-media-modal/create-update-box-media-modal.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { CreateUpdateModalComponent } from './company/create-update-modal/create
     BoxMediaComponent,
     AreaComponent,
     CompanyComponent,
-    CreateUpdateModalComponent
+    CreateUpdateModalComponent,
+    CreateUpdateBoxMediaModalComponent
   ],
   imports: [
     CommonModule,

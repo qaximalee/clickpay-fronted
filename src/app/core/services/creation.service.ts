@@ -39,4 +39,8 @@ export class CreationService {
   public createCompany(name:string):Observable<any>{
     return this._http.post(this.baseUrl+`user-profile/company?name=${name}`,null)
   }
+
+  public createBoxMedia(boxNumber:string,nearByLocation:string):Observable<any>{
+    return this._http.post(this.baseUrl+`user-profile/box-media?boxNumber=${boxNumber}&nearbyLocation=${nearByLocation}`,null)
+  }
 }
