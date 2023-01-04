@@ -2,7 +2,7 @@
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Company Name</nz-form-label>
       <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-        <input nz-input type="text" name="name" [(ngModel)]="companyName" placeholder="async validate try to write JasonWood" />
+        <input nz-input type="text" name="name" [(ngModel)]="companyName" placeholder="Company Name" />
         <ng-template #userErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">Please input your company name!</ng-container>
           <ng-container *ngIf="control.hasError('duplicated')">The company name is redundant!</ng-container>

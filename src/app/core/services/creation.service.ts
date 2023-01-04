@@ -27,9 +27,17 @@ export class CreationService {
   public getBoxMediaList():Observable<any>{
     return this._http.get(this.baseUrl+`user-profile/box-media`)
   }
+  
+  public createBoxMedia(boxNumber:string,nearByLocation:string):Observable<any>{
+    return this._http.post(this.baseUrl+`user-profile/box-media?boxNumber=${boxNumber}&nearbyLocation=${nearByLocation}`,null)
+  }
 
   public getPackageList():Observable<any>{
     return this._http.get(this.baseUrl+`user-profile/package`)
+  }
+
+  public createPackage(p:any):Observable<any>{
+    return this._http.post(this.baseUrl+`user-profile/package`,p)
   }
 
   public getCompanyList():Observable<any>{
@@ -39,4 +47,6 @@ export class CreationService {
   public createCompany(name:string):Observable<any>{
     return this._http.post(this.baseUrl+`user-profile/company?name=${name}`,null)
   }
+
+  
 }

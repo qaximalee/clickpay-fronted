@@ -1,4 +1,4 @@
-<button nz-button nzType="primary" nzShape="round">
+<button (click)="createAddOrUpdateBoxMediaModal(null)" nz-button nzType="primary" nzShape="round">
     <span nz-icon nzType="plus" ></span>
     Add
 </button>
@@ -7,6 +7,7 @@
       <tr>
         <th>Id</th>
         <th>Box/Media</th>
+        <th>NearBy Location</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -14,6 +15,7 @@
       <tr *ngFor="let boxMedia of basicTable.data">
         <td>{{boxMedia?.id}}</td>
         <td>{{boxMedia?.boxNumber}}</td>
+        <td>{{boxMedia?.nearbyLocation}}</td>
         <td>
             <button nz-button >
                 <span nz-icon nzType="edit" ></span>

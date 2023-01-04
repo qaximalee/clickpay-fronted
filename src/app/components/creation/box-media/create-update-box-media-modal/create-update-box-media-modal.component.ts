@@ -6,19 +6,20 @@ import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
 
 @Component({
-  selector: 'app-create-update-modal',
-  templateUrl: './create-update-modal.component.html',
-  styleUrls: ['./create-update-modal.component.css']
+  selector: 'app-create-update-box-media-modal',
+  templateUrl: './create-update-box-media-modal.component.html',
+  styleUrls: ['./create-update-box-media-modal.component.css']
 })
-export class CreateUpdateModalComponent implements OnInit {
+export class CreateUpdateBoxMediaModalComponent implements OnInit {
 
   @Input() data?: Array<any>;
   @Input() title?: string;
-  @ViewChild('cForm') cForm!: NgForm;
+  @ViewChild('bmForm') bmForm!: NgForm;
   
   private _httpConstants: HttpConstants = new HttpConstants();
 
-  companyName: string ='';
+  boxMediaNumber: string ='';
+  nearByLocation: string ='';
   buttonName: string = 'Create';
 
   constructor(
@@ -30,15 +31,15 @@ export class CreateUpdateModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createOrUpdateCompany() {
-    console.log(this.companyName);
-    this._creationService.createCompany(this.companyName).subscribe({
+  createOrUpdateBoxMedia() {
+    console.log(this.boxMediaNumber,this.nearByLocation);
+    this._creationService.createBoxMedia(this.boxMediaNumber,this.nearByLocation).subscribe({
       next: (response: any) => {
         console.log(response);
         if (response?.status == this._httpConstants.REQUEST_STATUS.CREATED_201.CODE) {
           this.data
-            ? this._messageService.success('Company Updated Successfully')
-            : this._messageService.success('Company Created Successfully')
+            ? this._messageService.success('Box/Media Updated Successfully')
+            : this._messageService.success('Box/Media Created Successfully')
           this._modal.closeAll();
         }
         else {
@@ -54,5 +55,6 @@ export class CreateUpdateModalComponent implements OnInit {
       complete: () => { }
     })
   }
+
 
 }

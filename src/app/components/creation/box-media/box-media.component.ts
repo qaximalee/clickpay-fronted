@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
+import { CreateUpdateBoxMediaModalComponent } from './create-update-box-media-modal/create-update-box-media-modal.component';
 
 @Component({
   selector: 'app-box-media',
@@ -11,9 +13,12 @@ import { MessageService } from 'src/app/core/services/message.service';
 export class BoxMediaComponent implements OnInit {
 
   private _httpConstants: HttpConstants = new HttpConstants();
+
   boxMediaList : Array<any> = [];
 
   constructor(
+    private _modal: NzModalService,
+    private _viewContainerRef: ViewContainerRef,
     private _creationService : CreationService,
     private _messageService : MessageService
   ) { }
@@ -45,6 +50,27 @@ export class BoxMediaComponent implements OnInit {
       complete : () => {
         console.log('Complete');
       }
+    })
+  }
+
+
+  createAddOrUpdateBoxMediaModal(boxMediaId:any){
+    const modal = this._modal.create({
+      nzTitle: boxMediaId ? 'Edit Box/Media' : 'Create Box/Media',
+      nzContent: CreateUpdateBoxMediaModalComponent,
+      nzViewContainerRef: this._viewContainerRef,
+      nzComponentParams: {
+        data : boxMediaId ? boxMediaId : null,
+        title : 'BOX/MEDIA'
+      },
+      nzFooter: null,
+      nzKeyboard : true,
+      nzWidth : "60%",
+      nzCentered : true,
+      nzMaskClosable : false,
+    })
+    modal.afterClose.subscribe(()=> {
+      this.getBoxMediaList();
     })
   }
 
