@@ -18,10 +18,11 @@ export class CreateUpdateSubLocalityModalComponent implements OnInit {
   
   private _httpConstants: HttpConstants = new HttpConstants();
 
-  selectedLocalityId : any;
+  selectedLocality : any;
   subLocalityName: string = '';
-  localityId: number = 1;
+  localityId: any;
   buttonName: string = "Create";
+  localityList: Array<any> = [];
   
   constructor(
     private _creationService: CreationService,
@@ -30,22 +31,11 @@ export class CreateUpdateSubLocalityModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (this.data != null) {
+      this.buttonName = 'Update';
+    }
+    this.getLocalityList();
   }
-
-  // onChangeOfClaim(event: any){
-  //   console.log(event);
-  //   if(event){
-  //     let claim = this.getLocalityList.find((x:any) => x.id == event);
-  //     this.dealerName = claim?.dealerName;
-  //     this.plant = claim?.plantCode;
-  //     this.date = this.dateFormat(new Date());
-  //     this.claimId = event;
-  //     this.disableSubmitButton = false;
-  //   }
-  //   else{
-  //     this.reset();
-  //   }
-  // }
 
   createOrUpdateSubLocality(){
     console.log(this.subLocalityName);
@@ -70,6 +60,36 @@ export class CreateUpdateSubLocalityModalComponent implements OnInit {
       },
       complete: () => { }
     })
+  }
+
+  getLocalityList() {    
+    this._creationService.getLocalityList().subscribe({
+      next : (response : any) => {
+        console.log("Get Locality List Response",response);
+        if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+          this.localityList = response?.data
+        } 
+        else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('Localities Not Found')
+        }
+        else{
+          this._messageService.error('Error')
+        }
+      },
+      error : (error : any) => {
+        console.log(error);  
+        if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+          this._messageService.info('Localities Not Found');
+        }
+      },
+      complete : () => {
+        console.log('Complete');
+      }
+    })
+  }
+
+  onChangeOfLocality(event: any) {
+    event != null ? this.selectedLocality = event : this.selectedLocality = null;
   }
 
 }

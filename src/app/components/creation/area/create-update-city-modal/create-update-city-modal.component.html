@@ -14,10 +14,6 @@
         <nz-form-label [nzSpan]="7" nzRequired>Country</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
           <input nz-input type="text" name="Country" value="Pakistan" disabled/>
-          <ng-template #userErrorTpl let-control>
-            <ng-container *ngIf="control.hasError('required')">Please input nearby location!</ng-container>
-            <ng-container *ngIf="control.hasError('duplicated')">The nearby location is redundant!</ng-container>
-          </ng-template>
         </nz-form-control>
     </nz-form-item>
     

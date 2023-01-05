@@ -19,9 +19,11 @@ export class CreateUpdateLocalityModalComponent implements OnInit {
   private _httpConstants: HttpConstants = new HttpConstants();
 
   localityName: string = '';
-  cityId: number = 1;
+  cityId: any;
   buttonName: string = "Create";
-  
+  selectedCity: any;
+  cityList: Array<any> = [];
+
   constructor(
     private _creationService: CreationService,
     private _messageService: MessageService,
@@ -29,6 +31,10 @@ export class CreateUpdateLocalityModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (this.data != null) {
+      this.buttonName = 'Update';
+    }
+    this.getCityList();
   }
 
   createOrUpdateLocality(){
@@ -54,6 +60,36 @@ export class CreateUpdateLocalityModalComponent implements OnInit {
       },
       complete: () => { }
     })
+  }
+
+  getCityList() {    
+    this._creationService.getCityList().subscribe({
+      next : (response : any) => {
+        console.log("Get City List Response",response);
+        if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+          this.cityList = response?.data
+        } 
+        else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('Cities Not Found')
+        }
+        else{
+          this._messageService.error('Error')
+        }
+      },
+      error : (error : any) => {
+        console.log(error);  
+        if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+          this._messageService.info('Cities Not Found');
+        }
+      },
+      complete : () => {
+        console.log('Complete');
+      }
+    })
+  }  
+
+  onChangeOfCity(event: any) {
+    event != null ? this.selectedCity = event : this.selectedCity = null;
   }
 
 }
