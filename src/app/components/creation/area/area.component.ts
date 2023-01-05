@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
+import { CreateUpdateCityModalComponent } from './create-update-city-modal/create-update-city-modal.component';
+import { CreateUpdateLocalityModalComponent } from './create-update-locality-modal/create-update-locality-modal.component';
+import { CreateUpdateSubLocalityModalComponent } from './create-update-sub-locality-modal/create-update-sub-locality-modal.component';
 
 @Component({
   selector: 'app-area',
@@ -16,6 +20,8 @@ export class AreaComponent implements OnInit {
   subLocalitiesList : Array<any> = [];
   
   constructor(
+    private _modal: NzModalService,
+    private _viewContainerRef: ViewContainerRef,
     private _creationService : CreationService,
     private _messageService : MessageService
   ) { }
@@ -24,6 +30,69 @@ export class AreaComponent implements OnInit {
     this.getCityList();
     this.getLocalityList();
     this.getSubLocalityList();
+  }
+
+  /**
+   * MODAL WORKS
+   */
+  createAndUpdateCityModal(cityId: any){
+    const modal = this._modal.create({
+      nzTitle: cityId ? 'Edit City' : 'Create City',
+      nzContent: CreateUpdateCityModalComponent,
+      nzViewContainerRef: this._viewContainerRef,
+      nzComponentParams: {
+        data : cityId ? cityId : null,
+        title : 'CITY'
+      },
+      nzFooter: null,
+      nzKeyboard : true,
+      nzWidth : "60%",
+      nzCentered : true,
+      nzMaskClosable : false,
+    })
+    modal.afterClose.subscribe(()=> {
+      this.getCityList();
+    })
+  }
+
+  createAndUpdateLocalityModal(localityId: any){
+    const modal = this._modal.create({
+      nzTitle: localityId ? 'Edit Locality' : 'Create Locality',
+      nzContent: CreateUpdateLocalityModalComponent,
+      nzViewContainerRef: this._viewContainerRef,
+      nzComponentParams: {
+        data : localityId ? localityId : null,
+        title : 'LOCALITY'
+      },
+      nzFooter: null,
+      nzKeyboard : true,
+      nzWidth : "60%",
+      nzCentered : true,
+      nzMaskClosable : false,
+    })
+    modal.afterClose.subscribe(()=> {
+      this.getLocalityList();
+    })
+  }
+
+  createAndUpdateSubLocalityModal(subLocalityId: any){
+    const modal = this._modal.create({
+      nzTitle: subLocalityId ? 'Edit Sub Locality' : 'Create Sub Locality',
+      nzContent: CreateUpdateSubLocalityModalComponent,
+      nzViewContainerRef: this._viewContainerRef,
+      nzComponentParams: {
+        data : subLocalityId ? subLocalityId : null,
+        title : 'SUB LOCALITY'
+      },
+      nzFooter: null,
+      nzKeyboard : true,
+      nzWidth : "60%",
+      nzCentered : true,
+      nzMaskClosable : false,
+    })
+    modal.afterClose.subscribe(()=> {
+      this.getSubLocalityList();
+    })
   }
 
   getCityList() {    

@@ -1,7 +1,7 @@
 <nz-tabset>
     <nz-tab nzTitle="City">
        
-<button nz-button nzType="primary" nzShape="round">
+<button (click)="createAndUpdateCityModal(null)" nz-button nzType="primary" nzShape="round">
     <span nz-icon nzType="plus" ></span>
     Add
 </button>
@@ -32,7 +32,7 @@
     </nz-tab>
     <nz-tab nzTitle="Locality">
        
-<button nz-button nzType="primary" nzShape="round">
+<button (click)="createAndUpdateLocalityModal(null)" nz-button nzType="primary" nzShape="round">
     <span nz-icon nzType="plus" ></span>
     Add
 </button>
@@ -67,7 +67,7 @@
     </nz-tab>
     <nz-tab nzTitle="Sub Locality">
         
-<button nz-button nzType="primary" nzShape="round">
+<button (click)="createAndUpdateSubLocalityModal(null)" nz-button nzType="primary" nzShape="round">
     <span nz-icon nzType="plus" ></span>
     Add
 </button>

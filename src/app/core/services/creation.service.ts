@@ -48,5 +48,15 @@ export class CreationService {
     return this._http.post(this.baseUrl+`user-profile/company?name=${name}`,null)
   }
 
-  
+  public createCity(name:string):Observable<any>{
+    return this._http.post(this.baseUrl+`area/city?cityName=${name}`,null)
+  }
+
+  public createLocality(cityId: number, name:string):Observable<any>{
+    return this._http.post(this.baseUrl+`area/locality?cityId=${cityId}&localityName=${name}`,null)
+  }
+
+  public createSubLocality(localityId: number, subLocalityName:string):Observable<any>{
+    return this._http.post(this.baseUrl+`area/sub-locality?localityId=${localityId}&subLocalityName=${subLocalityName}`,null)
+  }
 }

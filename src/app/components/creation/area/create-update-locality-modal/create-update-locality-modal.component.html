@@ -1,0 +1,30 @@
+<form nz-form #localityForm="ngForm" >
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Locality Name</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <input nz-input type="text" name="LocalityName" [(ngModel)]="localityName" placeholder="Locality Name" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">Please input locality name!</ng-container>
+          <ng-container *ngIf="control.hasError('duplicated')">The locality name is redundant!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>City</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+          <input nz-input type="text" name="city" [(ngModel)]="cityId" />
+          <ng-template #userErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">Please input locality name!</ng-container>
+            <ng-container *ngIf="control.hasError('duplicated')">The locality name is redundant!</ng-container>
+          </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+    
+    <nz-form-item>
+      <nz-form-control [nzOffset]="7" [nzSpan]="12">
+        <!-- <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
+        <button nz-button (click)="createOrUpdateLocality()">{{ buttonName }}</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>

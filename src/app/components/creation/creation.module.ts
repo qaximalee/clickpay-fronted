@@ -12,6 +12,9 @@ import { CompanyComponent } from './company/company.component';
 import { CreateUpdateModalComponent } from './company/create-update-modal/create-update-modal.component';
 import { CreateUpdateBoxMediaModalComponent } from './box-media/create-update-box-media-modal/create-update-box-media-modal.component';
 import { CreateUpdatePackageModalComponent } from './package/create-update-package-modal/create-update-package-modal.component';
+import { CreateUpdateCityModalComponent } from './area/create-update-city-modal/create-update-city-modal.component';
+import { CreateUpdateLocalityModalComponent } from './area/create-update-locality-modal/create-update-locality-modal.component';
+import { CreateUpdateSubLocalityModalComponent } from './area/create-update-sub-locality-modal/create-update-sub-locality-modal.component';
 
 
 @NgModule({
@@ -24,7 +27,10 @@ import { CreateUpdatePackageModalComponent } from './package/create-update-packa
     CompanyComponent,
     CreateUpdateModalComponent,
     CreateUpdateBoxMediaModalComponent,
-    CreateUpdatePackageModalComponent
+    CreateUpdatePackageModalComponent,
+    CreateUpdateCityModalComponent,
+    CreateUpdateLocalityModalComponent,
+    CreateUpdateSubLocalityModalComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,29 @@
+<form nz-form #subLocalityForm="ngForm" >
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Sub Locality Name</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <input nz-input type="text" name="SubLocalityName" [(ngModel)]="subLocalityName" placeholder="Sub Locality Name" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">Please input sub locality name!</ng-container>
+          <ng-container *ngIf="control.hasError('duplicated')">The sub locality name is redundant!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Locality</nz-form-label>
+        <nz-input-group nzSize="large" [nzPrefix]="prefixTemplateNumber">
+            <nz-select [nzBorderless]="true" nzShowSearch nzAllowClear nzPlaceHolder="Select Claim..."
+             [(ngModel)]="selectedLocalityId" (ngModelChange)="onChangeOfClaim($event)">
+                <nz-option *ngFor="let claim of claimList" [nzLabel]="'CIR-'+ claim?.id " [nzValue]="claim?.id"></nz-option>
+            </nz-select>                
+        </nz-input-group>
+    </nz-form-item> -->
+    
+    <nz-form-item>
+      <nz-form-control [nzOffset]="7" [nzSpan]="12">
+        <!-- <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
+        <button nz-button (click)="createOrUpdateSubLocality()">{{ buttonName }}</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
