@@ -21,8 +21,10 @@ export class CreateUpdatePackageModalComponent implements OnInit {
   private _httpConstants: HttpConstants = new HttpConstants();
 
   selectedCompany = null;
+  selectedConnectionType = null;
   buttonName: string = 'Create';
   companyList: Array<any> = [];
+  connectionTypeList: Array<any> = [];
 
   constructor(
     private _creationService : CreationService,
@@ -35,6 +37,7 @@ export class CreateUpdatePackageModalComponent implements OnInit {
       this.buttonName = 'Update';
     }
     this.getCompanyList();
+    this.getConnectionTypeList();
   }
 
   createOrUpdatePackage() {
@@ -90,6 +93,36 @@ export class CreateUpdatePackageModalComponent implements OnInit {
 
   onChangeOfCompany(event: any) {
     event != null ? this.selectedCompany = event : this.selectedCompany = null;
+  }
+
+  getConnectionTypeList() {    
+    this._creationService.getConnectionTypeList().subscribe({
+      next : (response : any) => {
+        console.log("Get Connection Type List Response",response);
+        if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+          this.connectionTypeList = response?.data
+        } 
+        else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('Connection Types Not Found')
+        }
+        else{
+          this._messageService.error('Error')
+        }
+      },
+      error : (error : any) => {
+        console.log(error);  
+        if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+          this._messageService.info('Connection Types Not Found');
+        }
+      },
+      complete : () => {
+        console.log('Complete');
+      }
+    })
+  }  
+
+  onChangeOfConnectionType(event: any) {
+    event != null ? this.selectedConnectionType = event : this.selectedConnectionType = null;
   }
 
 }

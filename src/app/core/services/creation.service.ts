@@ -48,5 +48,9 @@ export class CreationService {
     return this._http.post(this.baseUrl+`user-profile/company?name=${name}`,null)
   }
 
+  public getConnectionTypeList(){
+    return this._http.get(this.baseUrl+`user-profile/connection-type`)
+  }
+
   
 }

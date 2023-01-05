@@ -13,13 +13,13 @@
     <nz-form-item >
       <nz-form-label [nzSpan]="7" nzRequired>Company Name</nz-form-label>
       <nz-form-control [nzSpan]="12">
-      <nz-input-group  nzSize="large" >
+      <nz-input-group  nzSize="large" [nzPrefix]="prefixTemplateCompany">
         <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Company..."
-        name="role" [(ngModel)]="packageForm.companyId" (ngModelChange)="onChangeOfCompany($event)" #role="ngModel" required>
-            <nz-option *ngFor="let company of companyList" [nzLabel]="company?.name" [nzValue]="company?.name"></nz-option>
+        name="company" [(ngModel)]="packageForm.companyId" (ngModelChange)="onChangeOfCompany($event)" #company="ngModel" required>
+            <nz-option *ngFor="let company of companyList" [nzLabel]="company?.name" [nzValue]="company?.id"></nz-option>
         </nz-select>                
     </nz-input-group>
-    <!-- <ng-template #prefixTemplateRole><span nz-icon nzType="user-switch"></span></ng-template> -->
+    <ng-template #prefixTemplateCompany><span nz-icon nzType="user-switch"></span></ng-template>
         <!-- <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
           <input nz-input type="text" name="CompanyName" [(ngModel)]="packageForm.companyId" placeholder="Company Name" />
           <ng-template #userErrorTpl let-control>
@@ -54,13 +54,29 @@
 
     <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Package Type</nz-form-label>
-        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <nz-form-control [nzSpan]="12">
+        <nz-input-group  nzSize="large" [nzPrefix]="prefixTemplateConnectionType">
+          <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Package Type..."
+          name="connectionType" [(ngModel)]="packageForm.connectionTypeId" (ngModelChange)="onChangeOfConnectionType($event)" #connectionType="ngModel" required>
+              <nz-option *ngFor="let connectionType of connectionTypeList" [nzLabel]="connectionType?.type" [nzValue]="connectionType?.id"></nz-option>
+          </nz-select>                
+      </nz-input-group>
+      <ng-template #prefixTemplateConnectionType><span nz-icon nzType="user-switch"></span></ng-template>
+          <!-- <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <input nz-input type="text" name="CompanyName" [(ngModel)]="packageForm.companyId" placeholder="Company Name" />
+            <ng-template #userErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')">Please input nearby location!</ng-container>
+              <ng-container *ngIf="control.hasError('duplicated')">The nearby location is redundant!</ng-container>
+            </ng-template>
+          </nz-form-control> -->
+        </nz-form-control>
+        <!-- <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
           <input nz-input type="text" name="PackageType" [(ngModel)]="packageForm.connectionTypeId" placeholder="Package Type" />
           <ng-template #userErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">Please input nearby location!</ng-container>
             <ng-container *ngIf="control.hasError('duplicated')">The nearby location is redundant!</ng-container>
           </ng-template>
-        </nz-form-control>
+        </nz-form-control> -->
     </nz-form-item>
     
     <nz-form-item>
