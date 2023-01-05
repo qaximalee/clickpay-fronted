@@ -20,7 +20,9 @@ export class CreateUpdatePackageModalComponent implements OnInit {
   
   private _httpConstants: HttpConstants = new HttpConstants();
 
+  selectedCompany = null;
   buttonName: string = 'Create';
+  companyList: Array<any> = [];
 
   constructor(
     private _creationService : CreationService,
@@ -29,6 +31,10 @@ export class CreateUpdatePackageModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (this.data != null) {
+      this.buttonName = 'Update';
+    }
+    this.getCompanyList();
   }
 
   createOrUpdatePackage() {
@@ -54,6 +60,36 @@ export class CreateUpdatePackageModalComponent implements OnInit {
       },
       complete: () => { }
     })
+  }
+
+  getCompanyList() {    
+    this._creationService.getCompanyList().subscribe({
+      next : (response : any) => {
+        console.log("Get City List Response",response);
+        if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+          this.companyList = response?.data
+        } 
+        else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('Companies Not Found')
+        }
+        else{
+          this._messageService.error('Error')
+        }
+      },
+      error : (error : any) => {
+        console.log(error);  
+        if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+          this._messageService.info('Companies Not Found');
+        }
+      },
+      complete : () => {
+        console.log('Complete');
+      }
+    })
+  }  
+
+  onChangeOfCompany(event: any) {
+    event != null ? this.selectedCompany = event : this.selectedCompany = null;
   }
 
 }
