@@ -47,7 +47,7 @@ export class CreationService {
   public createCompany(name:string):Observable<any>{
     return this._http.post(this.baseUrl+`user-profile/company?name=${name}`,null)
   }
-
+  
   public createCity(name:string):Observable<any>{
     return this._http.post(this.baseUrl+`area/city?cityName=${name}`,null)
   }
@@ -58,5 +58,9 @@ export class CreationService {
 
   public createSubLocality(localityId: number, subLocalityName:string):Observable<any>{
     return this._http.post(this.baseUrl+`area/sub-locality?localityId=${localityId}&subLocalityName=${subLocalityName}`,null)
+  }
+
+  public getConnectionTypeList(){
+    return this._http.get(this.baseUrl+`user-profile/connection-type`)
   }
 }
