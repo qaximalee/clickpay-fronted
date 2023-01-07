@@ -43,9 +43,7 @@ export class CreateUpdateBoxMediaModalComponent implements OnInit {
       next: (response: any) => {
         console.log(response);
         if (response?.status == this._httpConstants.REQUEST_STATUS.CREATED_201.CODE) {
-          this.data
-            ? this._messageService.success('Box/Media Updated Successfully')
-            : this._messageService.success('Box/Media Created Successfully')
+          this._messageService.success('Box/Media Created Successfully');
           this._modal.closeAll();
         }
         else {
@@ -68,7 +66,7 @@ export class CreateUpdateBoxMediaModalComponent implements OnInit {
       next: (response: any) => {
         console.log(response);
         if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
-          this._messageService.success('Box/Media Updated Successfully')
+          this._messageService.success('Box/Media Updated Successfully');
           this._modal.closeAll();
         }
         else {

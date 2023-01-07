@@ -55,6 +55,14 @@ export class CreationService {
   public createCompany(name:string):Observable<any>{
     return this._http.post(this.baseUrl+`user-profile/company?name=${name}`,null)
   }
+
+  public updateCompany(companyId:number,companyName:string):Observable<any>{
+    return this._http.put(this.baseUrl+`user-profile/company?id=${companyId}&name=${companyName}`,null)
+  }
+
+  public getCompanyDetails(companyId:any):Observable<any>{
+    return this._http.get(this.baseUrl+`user-profile/company/${companyId}`)
+  } 
   
   public createCity(name:string):Observable<any>{
     return this._http.post(this.baseUrl+`area/city?cityName=${name}`,null)
