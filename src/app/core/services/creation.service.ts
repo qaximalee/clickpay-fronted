@@ -48,6 +48,14 @@ export class CreationService {
     return this._http.post(this.baseUrl+`user-profile/package`,p)
   }
 
+  public updatePackage(p:any):Observable<any>{
+    return this._http.put(this.baseUrl+`user-profile/package`,p)
+  }
+
+  public getPackageDetails(packageId:any):Observable<any>{
+    return this._http.get(this.baseUrl+`user-profile/package/${packageId}`)
+  }
+
   public getCompanyList():Observable<any>{
     return this._http.get(this.baseUrl+`user-profile/company`)
   }
@@ -68,8 +76,24 @@ export class CreationService {
     return this._http.post(this.baseUrl+`area/city?cityName=${name}`,null)
   }
 
+  public updateCity(cityId:number,cityName:string):Observable<any>{
+    return this._http.put(this.baseUrl+`area/city?cityId=${cityId}&cityName=${cityName}`,null)
+  }
+
+  public getCityDetails(cityId:any):Observable<any>{
+    return this._http.get(this.baseUrl+`area/city/${cityId}`)
+  }
+
   public createLocality(cityId: number, name:string):Observable<any>{
     return this._http.post(this.baseUrl+`area/locality?cityId=${cityId}&localityName=${name}`,null)
+  }
+
+  public updateLocality(cityId:number,localityId:number,localityName:string):Observable<any>{
+    return this._http.put(this.baseUrl+`area/locality?cityId=${cityId}&localityId=${localityId}&localityName=${localityName}`,null)
+  }
+
+  public getLocalityDetails(localityId:any):Observable<any>{
+    return this._http.get(this.baseUrl+`area/locality/${localityId}`)
   }
 
   public createSubLocality(localityId: number, subLocalityName:string):Observable<any>{

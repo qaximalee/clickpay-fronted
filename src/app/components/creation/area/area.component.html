@@ -21,9 +21,11 @@
         <td>{{city?.country?.name}}</td>
         <td>{{city?.name}}</td>
         <td>
-            <button nz-button >
-                <span nz-icon nzType="edit" ></span>
-            </button>
+          <span class="edit-button" (click)="createAndUpdateCityModal(city?.id)" 
+          nz-icon nzType="edit" nzTheme="outline"></span>
+          <nz-divider nzType="vertical"></nz-divider>
+          <span class="delete-button" 
+           nz-icon nzType="delete" nzTheme="outline"></span>
         </td>
       </tr>
     </tbody>
@@ -53,12 +55,11 @@
         <td>{{locality?.city?.name}}</td>
         <td>{{locality?.name}}</td>
         <td>
-            <button nz-button >
-                <span nz-icon nzType="edit" ></span>
-            </button>
-            <button nz-button >
-                <span nz-icon nzType="delete" ></span>
-            </button>
+          <span class="edit-button" (click)="createAndUpdateLocalityModal(locality?.id)" 
+          nz-icon nzType="edit" nzTheme="outline"></span>
+          <nz-divider nzType="vertical"></nz-divider>
+          <span class="delete-button" 
+           nz-icon nzType="delete" nzTheme="outline"></span>
         </td>
       </tr>
     </tbody>
@@ -90,12 +91,11 @@
         <td>{{subLocality?.locality?.name}}</td>
         <td>{{subLocality?.name}}</td>
         <td>
-            <button nz-button >
-                <span nz-icon nzType="edit" ></span>
-            </button>
-            <button nz-button >
-                <span nz-icon nzType="delete" ></span>
-            </button>
+            <span class="edit-button" (click)="createAndUpdateSubLocalityModal(subLocality?.id)" 
+            nz-icon nzType="edit" nzTheme="outline"></span>
+            <nz-divider nzType="vertical"></nz-divider>
+            <span class="delete-button" 
+             nz-icon nzType="delete" nzTheme="outline"></span>
         </td>
       </tr>
     </tbody>

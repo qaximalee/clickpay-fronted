@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { Package } from 'src/app/core/models/package.model';
 import { CreationService } from 'src/app/core/services/creation.service';
@@ -16,6 +16,7 @@ export class CreateUpdatePackageModalComponent implements OnInit {
   @Input() data?: Array<any>;
   @Input() title?: string;
   packageForm: Package = new Package(); 
+  confirmModal?: NzModalRef;
   @ViewChild('pForm') pForm!: NgForm;
   
   private _httpConstants: HttpConstants = new HttpConstants();
@@ -35,20 +36,19 @@ export class CreateUpdatePackageModalComponent implements OnInit {
   ngOnInit(): void {
     if (this.data != null) {
       this.buttonName = 'Update';
+        this.getPackageById(this.data);
     }
     this.getCompanyList();
     this.getConnectionTypeList();
   }
 
-  createOrUpdatePackage() {
+  createPackage() {
     console.log(this.packageForm);
     this._creationService.createPackage(this.packageForm).subscribe({
       next: (response: any) => {
         console.log(response);
         if (response?.status == this._httpConstants.REQUEST_STATUS.CREATED_201.CODE) {
-          this.data
-            ? this._messageService.success('Package Updated Successfully')
-            : this._messageService.success('Package Created Successfully')
+          this._messageService.success('Package Created Successfully');
           this._modal.closeAll();
         }
         else {
@@ -60,6 +60,57 @@ export class CreateUpdatePackageModalComponent implements OnInit {
         if (error?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE) {
           this._messageService.info(error?.error?.msg);
         }
+      },
+      complete: () => { }
+    })
+  }
+
+  updatePackage() {
+    console.log(this.packageForm);
+    this._creationService.updatePackage(this.packageForm).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
+          this._messageService.success('Package Updated Successfully');
+          this._modal.closeAll();
+        }
+        else {
+          console.log('Error');
+        }
+      },
+      error: (error: any) => {
+        console.log(error);
+        if (error?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE) {
+          this._messageService.info(error?.error?.msg);
+        }
+      },
+      complete: () => { }
+    })
+  }
+
+  showConfirmationPopup(): void {
+    this.confirmModal = this._modal.confirm({
+      nzTitle: 'Are you sure you want to save changes?',
+      nzContent: '',
+      nzCentered: true,
+      nzOnOk: () => this.updatePackage()
+    });
+  }
+
+  getPackageById(packageId: any) {
+    this._creationService.getPackageDetails(packageId).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
+          this.packageForm = response?.data;
+          this.packageForm.connectionTypeId = response?.connectionType?.type;
+        }
+        else {
+          console.log('Error');
+        }
+      },
+      error: (error: any) => {
+        console.log(error);
       },
       complete: () => { }
     })

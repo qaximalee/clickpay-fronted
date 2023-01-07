@@ -62,7 +62,11 @@
     <nz-form-item>
       <nz-form-control [nzOffset]="7" [nzSpan]="12">
         <!-- <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
-        <button nz-button (click)="createOrUpdatePackage()">{{ buttonName }}</button>
+        <button nz-button (click)="createPackage()">{{ buttonName }}</button>
+        <button *ngIf="data" type="button" class="save-button" 
+                (click)="showConfirmationPopup()"  nz-button nzType="primary">{{ buttonName }}</button>
+        <button *ngIf="!data" type="button" class="save-button" 
+                (click)="createPackage()" nz-button nzType="primary">{{ buttonName }}</button>
       </nz-form-control>
     </nz-form-item>
   </form>

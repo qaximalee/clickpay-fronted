@@ -1,5 +1,5 @@
 export class Package {
-    
+    packageId: any = null;
     companyId: any = null;
     connectionTypeId: any = null;
     packageName: string = '';

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
@@ -14,10 +14,12 @@ export class CreateUpdateLocalityModalComponent implements OnInit {
 
   @Input() data?: Array<any>;
   @Input() title?: string;
+  confirmModal?: NzModalRef;
   @ViewChild('localityForm') localityForm!: NgForm;
   
   private _httpConstants: HttpConstants = new HttpConstants();
 
+  localityId: number = 0;
   localityName: string = '';
   cityId: any;
   buttonName: string = "Create";
@@ -33,19 +35,18 @@ export class CreateUpdateLocalityModalComponent implements OnInit {
   ngOnInit(): void {
     if (this.data != null) {
       this.buttonName = 'Update';
+      this.getLocalityById(this.data);
     }
     this.getCityList();
   }
 
-  createOrUpdateLocality(){
+  createLocality(){
     console.log(this.localityName);
     this._creationService.createLocality(this.cityId, this.localityName).subscribe({
       next: (response: any) => {
         console.log(response);
         if (response?.status == this._httpConstants.REQUEST_STATUS.CREATED_201.CODE) {
-          this.data
-            ? this._messageService.success('Locality Updated Successfully')
-            : this._messageService.success('Locality Created Successfully')
+          this._messageService.success('Locality Created Successfully')
           this._modal.closeAll();
         }
         else {
@@ -57,6 +58,58 @@ export class CreateUpdateLocalityModalComponent implements OnInit {
         if (error?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE) {
           this._messageService.info(error?.error?.msg);
         }
+      },
+      complete: () => { }
+    })
+  }
+
+  updateLocality(){
+    console.log(this.localityId,this.cityId,this.localityName);
+    this._creationService.updateLocality(this.cityId,this.localityId,this.localityName).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
+          this._messageService.success('Locality Updated Successfully');
+          this._modal.closeAll();
+        }
+        else {
+          console.log('Error');
+        }
+      },
+      error: (error: any) => {
+        console.log(error);
+        if (error?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE) {
+          this._messageService.info(error?.error?.msg);
+        }
+      },
+      complete: () => { }
+    })
+  }
+
+  showConfirmationPopup(): void {
+    this.confirmModal = this._modal.confirm({
+      nzTitle: 'Are you sure you want to save changes?',
+      nzContent: '',
+      nzCentered: true,
+      nzOnOk: () => this.updateLocality()
+    });
+  }
+
+  getLocalityById(localityId: any) {
+    this._creationService.getLocalityDetails(localityId).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
+          this.localityId = response?.data?.id;  
+          this.localityName = response?.data?.name;
+          this.cityId = response?.data?.city?.id;
+        }
+        else {
+          console.log('Error');
+        }
+      },
+      error: (error: any) => {
+        console.log(error);
       },
       complete: () => { }
     })

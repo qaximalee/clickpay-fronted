@@ -11,7 +11,7 @@
     </nz-form-item>
 
     <nz-form-item >
-      <nz-form-label [nzSpan]="7" nzRequired>City</nz-form-label>
+      <nz-form-label [nzSpan]="7" nzRequired>Locality</nz-form-label>
       <nz-form-control [nzSpan]="12">
       <nz-input-group  nzSize="large" >
         <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Locality..."
@@ -20,6 +20,13 @@
         </nz-select>                
     </nz-input-group>
     </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Country</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <input nz-input type="text" name="Country" value="Pakistan" disabled/>
+      </nz-form-control>
     </nz-form-item>
     
     <nz-form-item>

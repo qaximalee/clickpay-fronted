@@ -55,7 +55,7 @@ export class CompanyComponent implements OnInit {
 
   createAddOrUpdateCompanyModal(companyId:any){
     const modal = this._modal.create({
-      nzTitle: companyId ? 'Edit Comapny' : 'Create Company',
+      nzTitle: companyId ? 'Edit Company' : 'Create Company',
       nzContent: CreateUpdateModalComponent,
       nzViewContainerRef: this._viewContainerRef,
       nzComponentParams: {

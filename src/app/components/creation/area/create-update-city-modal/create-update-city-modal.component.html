@@ -20,7 +20,11 @@
     <nz-form-item>
       <nz-form-control [nzOffset]="7" [nzSpan]="12">
         <!-- <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
-        <button nz-button (click)="createOrUpdateCity()">{{ buttonName }}</button>
+        <button nz-button (click)="createCity()">{{ buttonName }}</button>
+        <button *ngIf="data" type="button" class="save-button" 
+                (click)="showConfirmationPopup()"  nz-button nzType="primary">{{ buttonName }}</button>
+        <button *ngIf="!data" type="button" class="save-button" 
+                (click)="createCity()" nz-button nzType="primary">{{ buttonName }}</button>
       </nz-form-control>
     </nz-form-item>
   </form>
