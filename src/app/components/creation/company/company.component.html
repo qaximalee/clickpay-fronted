@@ -16,9 +16,11 @@
         <td>{{company?.id}}</td>
         <td>{{company?.name}}</td>
         <td>
-            <button nz-button >
-                <span nz-icon nzType="edit" ></span>
-            </button>
+          <span class="edit-button" (click)="createAddOrUpdateCompanyModal(company?.id)" 
+          nz-icon nzType="edit" nzTheme="outline"></span>
+          <nz-divider nzType="vertical"></nz-divider>
+          <span class="delete-button" 
+           nz-icon nzType="delete" nzTheme="outline"></span>
         </td>
         
       </tr>

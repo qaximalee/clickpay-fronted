@@ -2,7 +2,7 @@
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Box/Media Number</nz-form-label>
       <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-        <input nz-input type="text" name="boxMediaNumber" [(ngModel)]="boxMediaNumber" placeholder="Box/Media Number" />
+        <input type="text" name="boxMediaNumber" [(ngModel)]="boxMediaNumber" nz-input placeholder="Box/Media Number" />
         <ng-template #userErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">Please input box/media number!</ng-container>
           <ng-container *ngIf="control.hasError('duplicated')">The box/media number is redundant!</ng-container>
@@ -24,7 +24,11 @@
     <nz-form-item>
       <nz-form-control [nzOffset]="7" [nzSpan]="12">
         <!-- <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
-        <button nz-button (click)="createOrUpdateBoxMedia()">{{ buttonName }}</button>
+        <button nz-button (click)="createBoxMedia()">{{ buttonName }}</button>
+        <button *ngIf="data" type="button" class="save-button" 
+                (click)="showConfirmationPopup()"  nz-button nzType="primary">{{ buttonName }}</button>
+        <button *ngIf="!data" type="button" class="save-button" 
+                (click)="createBoxMedia()" nz-button nzType="primary">{{ buttonName }}</button>
       </nz-form-control>
     </nz-form-item>
   </form>

@@ -32,6 +32,14 @@ export class CreationService {
     return this._http.post(this.baseUrl+`user-profile/box-media?boxNumber=${boxNumber}&nearbyLocation=${nearByLocation}`,null)
   }
 
+  public updateBoxMedia(boxId:number,boxNumber:string,nearByLocation:string):Observable<any>{
+    return this._http.put(this.baseUrl+`user-profile/box-media?boxMediaId=${boxId}&boxNumber=${boxNumber}&nearbyLocation=${nearByLocation}`,null)
+  }
+
+  public getBoxMediaDetails(boxMediaId:any):Observable<any>{
+    return this._http.get(this.baseUrl+`user-profile/box-media/${boxMediaId}`)
+  }
+
   public getPackageList():Observable<any>{
     return this._http.get(this.baseUrl+`user-profile/package`)
   }
@@ -60,7 +68,7 @@ export class CreationService {
     return this._http.post(this.baseUrl+`area/sub-locality?localityId=${localityId}&subLocalityName=${subLocalityName}`,null)
   }
 
-  public getConnectionTypeList(){
+  public getConnectionTypeList():Observable<any>{
     return this._http.get(this.baseUrl+`user-profile/connection-type`)
   }
 }

@@ -23,9 +23,11 @@
         <td>{{package?.connectionType?.type}}</td>
         <td>{{package?.company?.name}}</td>
         <td>
-            <button nz-button >
-                <span nz-icon nzType="edit" ></span>
-            </button>
+          <span class="edit-button" (click)="createAddOrUpdatePackageModal(package?.id)" 
+          nz-icon nzType="edit" nzTheme="outline"></span>
+          <nz-divider nzType="vertical"></nz-divider>
+          <span class="delete-button" 
+           nz-icon nzType="delete" nzTheme="outline"></span>
         </td>
       </tr>
     </tbody>
