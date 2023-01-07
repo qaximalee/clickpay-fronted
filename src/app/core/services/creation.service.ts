@@ -100,6 +100,14 @@ export class CreationService {
     return this._http.post(this.baseUrl+`area/sub-locality?localityId=${localityId}&subLocalityName=${subLocalityName}`,null)
   }
 
+  public updateSubLocality(subLocalityId:number,localityId:number,subLocalityName:string):Observable<any>{
+    return this._http.put(this.baseUrl+`area/sub-locality?localityId=${localityId}&subLocalityId=${subLocalityId}&subLocalityName=${subLocalityName}`,null)
+  }
+
+  public getSubLocalityDetails(subLocalityId:any):Observable<any>{
+    return this._http.get(this.baseUrl+`area/sub-locality/${subLocalityId}`)
+  }
+
   public getConnectionTypeList():Observable<any>{
     return this._http.get(this.baseUrl+`user-profile/connection-type`)
   }
