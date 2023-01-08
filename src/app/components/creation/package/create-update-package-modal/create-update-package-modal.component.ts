@@ -66,7 +66,7 @@ export class CreateUpdatePackageModalComponent implements OnInit {
   }
 
   updatePackage() {
-    console.log(this.packageForm);
+    console.log("update calling :"+this.packageForm.id);
     this._creationService.updatePackage(this.packageForm).subscribe({
       next: (response: any) => {
         console.log(response);
@@ -100,10 +100,11 @@ export class CreateUpdatePackageModalComponent implements OnInit {
   getPackageById(packageId: any) {
     this._creationService.getPackageDetails(packageId).subscribe({
       next: (response: any) => {
-        console.log(response);
+        console.log(response );
         if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
           this.packageForm = response?.data;
-          this.packageForm.connectionTypeId = response?.connectionType?.type;
+          this.packageForm.companyId = response?.data?.company?.id;
+          this.packageForm.connectionTypeId = response?.data?.connectionType?.id;
         }
         else {
           console.log('Error');
@@ -119,7 +120,7 @@ export class CreateUpdatePackageModalComponent implements OnInit {
   getCompanyList() {    
     this._creationService.getCompanyList().subscribe({
       next : (response : any) => {
-        console.log("Get City List Response",response);
+        console.log("Get Company List Response",response);
         if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
           this.companyList = response?.data
         } 
