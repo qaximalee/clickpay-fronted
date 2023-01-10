@@ -1,21 +1,22 @@
 export class User{
-
-    id : any = null;
-    email : string = '';
-    name : string = '';
-    password : string = '';
-    confirmPassword : string = '';
-    city : string = '';
-    phoneNumber : string = '';
-    employeeId : string = '';
-    profileImage : string = '';
-    role : string = '';
-    plantSaleGroups : Array<any> = [{
-        plantId : null,
-        salesGroup : [],
-        saleGroupIds: []
-    }];
-    status : boolean = true;
+    customerId: any = null;
+    name: string = '';
+    address: string = '';
+    amount: any = null;
+    boxMediaId: any = null;
+    cardCharge: boolean = true;
+    companyId: any = null;
+    connectionTypeId: any = null;
+    discount: string = '';
+    installationAmount: any = null;
+    installationDate: any = null;
+    mobile: string = '';
+    otherAmount: any = null;
+    packagesId: any = null;
+    phone: string = '';
+    rechargeDate: any = null;
+    subLocalityId: any = null;
+    email: string = '';
 }
 
 

@@ -1,1 +1,41 @@
-<p>user-details works!</p>
+<button (click)="createAddOrUpdateUserModal(null)" nz-button nzType="primary" nzShape="round">
+    <span nz-icon nzType="plus" ></span>
+    Add
+</button>
+  
+<nz-table #user [nzData]="userList">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Internet ID</th>
+        <th>Name</th>
+        <th>Mobile</th>
+        <th>Address</th>
+        <th>Connection Type</th>
+        <th>Package Type</th>
+        <th>Discount</th>
+        <th>Installation Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let userData of user.data">
+        <td>{{userData?.id}}</td>
+        <td>{{userData?.internetId}}</td>
+        <td>{{userData?.name}}</td>
+        <td>{{userData?.mobile}}</td>
+        <td>{{userData?.address}}</td>
+        <td>{{userData?.connectionType}}</td>
+        <td>{{userData?.packageType}}</td>
+        <td>{{userData?.discount}}</td>
+        <td>{{userData?.installationDate}}</td>
+        <td>{{userData?.status}}</td>
+        <td>
+            <button nz-button >
+                <span nz-icon nzType="edit" ></span>
+            </button>
+        </td>
+      </tr>
+    </tbody>
+</nz-table>
