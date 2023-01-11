@@ -76,15 +76,44 @@ export class CompanyComponent implements OnInit {
 
   showConfirmationPopupOnDelete(companyId:any) : void{
     this.confirmModal = this._modal.confirm({
-      nzTitle: 'Are you sure you want to save changes?',
+      nzTitle: 'Are you sure you want to delete company?',
       nzContent: '',
       nzCentered: true,
       nzOnOk: () => this.deleteCompany(companyId)
-    });
+    })
+    // modal.afterClose.subscribe(()=> {
+    //   this.getCompanyList();
+    // })
   }
   
   deleteCompany(companyId:any){
       console.log(companyId);
+      this._creationService.deleteCompany(companyId).subscribe({
+        next : (response : any) => {
+          console.log("Delete Company Response",response);
+          if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+            this._messageService.success('Company Deleted Successfully');
+          this._modal.closeAll();
+          } 
+          else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+              this._messageService.info('Company Not Found')
+          }
+          else{
+            this._messageService.error('Error')
+          }
+        },
+        error : (error : any) => {
+          console.log(error);  
+          if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('Company Not Found');
+          }
+        },
+        complete : () => {
+          console.log('Complete');
+          this.getCompanyList();
+        }
+      })
+
   }
 
 

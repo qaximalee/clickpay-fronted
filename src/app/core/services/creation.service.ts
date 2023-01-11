@@ -68,6 +68,10 @@ export class CreationService {
     return this._http.put(this.baseUrl+`user-profile/company?id=${companyId}&name=${companyName}`,null)
   }
 
+  public deleteCompany(companyId:number):Observable<any>{
+    return this._http.delete(this.baseUrl+`user-profile/company/delete?id=${companyId}`)
+  }
+
   public getCompanyDetails(companyId:any):Observable<any>{
     return this._http.get(this.baseUrl+`user-profile/company/${companyId}`)
   } 
