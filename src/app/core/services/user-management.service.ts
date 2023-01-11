@@ -6,13 +6,17 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AreaService {
+export class UserManagementService {
 
   baseUrl = environment.baseUrl;
 
   constructor(private _http : HttpClient) { }
 
   public getAllUserByPagination():Observable<any>{
-    return this._http.get(this.baseUrl+`area/city`);
+    return this._http.get(this.baseUrl+`user-profile/user-details`);
+  }
+
+  public createUser(user:any):Observable<any>{
+    return this._http.post(this.baseUrl+`user-profile/user-details`,user)
   }
 }
