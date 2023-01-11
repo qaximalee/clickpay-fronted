@@ -19,7 +19,7 @@
           <span class="edit-button" (click)="createAddOrUpdateCompanyModal(company?.id)" 
           nz-icon nzType="edit" nzTheme="outline"></span>
           <nz-divider nzType="vertical"></nz-divider>
-          <span class="delete-button" 
+          <span class="delete-button" (click)="showConfirmationPopupOnDelete(company?.id)" 
            nz-icon nzType="delete" nzTheme="outline"></span>
         </td>
         

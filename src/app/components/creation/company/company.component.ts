@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
@@ -12,6 +12,7 @@ import { CreateUpdateModalComponent } from './create-update-modal/create-update-
 })
 export class CompanyComponent implements OnInit {
 
+  confirmModal?: NzModalRef;
   private _httpConstants: HttpConstants = new HttpConstants();
 
   companyList: Array<any> = [];
@@ -73,7 +74,19 @@ export class CompanyComponent implements OnInit {
     })
   }
 
+  showConfirmationPopupOnDelete(companyId:any) : void{
+    this.confirmModal = this._modal.confirm({
+      nzTitle: 'Are you sure you want to save changes?',
+      nzContent: '',
+      nzCentered: true,
+      nzOnOk: () => this.deleteCompany(companyId)
+    });
+  }
   
+  deleteCompany(companyId:any){
+      console.log(companyId);
+  }
+
 
 
 
