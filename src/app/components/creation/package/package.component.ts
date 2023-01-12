@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
@@ -12,6 +12,7 @@ import { CreateUpdatePackageModalComponent } from './create-update-package-modal
 })
 export class PackageComponent implements OnInit {
 
+  confirmModal?:NzModalRef
   private _httpConstants: HttpConstants = new HttpConstants();
   packageList : Array<any> = [];
 
@@ -70,6 +71,45 @@ export class PackageComponent implements OnInit {
     modal.afterClose.subscribe(()=> {
       this.getPackageList();
     })
+  }
+
+  showConfirmationPopupOnDelete(packageId:any) : void{
+    this.confirmModal = this._modal.confirm({
+      nzTitle: 'Are you sure you want to delete package?',
+      nzContent: '',
+      nzCentered: true,
+      nzOnOk: () => this.deletePackage(packageId)
+    })
+  }
+  
+  deletePackage(packageId:any){
+      console.log(packageId);
+      this._creationService.deletePackage(packageId).subscribe({
+        next : (response : any) => {
+          console.log("Delete Package Response",response);
+          if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+            this._messageService.success('Package Deleted Successfully');
+            this._modal.closeAll();
+            this.getPackageList();
+          } 
+          else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+              this._messageService.info('Package Not Found')
+          }
+          else{
+            this._messageService.error('Error')
+          }
+        },
+        error : (error : any) => {
+          console.log(error);  
+          if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('Package Not Found');
+          }
+        },
+        complete : () => {
+          console.log('Complete');
+        }
+      })
+
   }
 
 }

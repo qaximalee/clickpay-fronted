@@ -26,7 +26,7 @@
           <span class="edit-button" (click)="createAddOrUpdatePackageModal(package?.id)" 
           nz-icon nzType="edit" nzTheme="outline"></span>
           <nz-divider nzType="vertical"></nz-divider>
-          <span class="delete-button" 
+          <span class="delete-button" (click)="showConfirmationPopupOnDelete(package?.id)"
            nz-icon nzType="delete" nzTheme="outline"></span>
         </td>
       </tr>

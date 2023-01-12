@@ -24,7 +24,7 @@
           <span class="edit-button" (click)="createAndUpdateCityModal(city?.id)" 
           nz-icon nzType="edit" nzTheme="outline"></span>
           <nz-divider nzType="vertical"></nz-divider>
-          <span class="delete-button" 
+          <span class="delete-button" (click)="showConfirmationPopupOnDeleteCity(city?.id)"
            nz-icon nzType="delete" nzTheme="outline"></span>
         </td>
       </tr>
@@ -58,7 +58,7 @@
           <span class="edit-button" (click)="createAndUpdateLocalityModal(locality?.id)" 
           nz-icon nzType="edit" nzTheme="outline"></span>
           <nz-divider nzType="vertical"></nz-divider>
-          <span class="delete-button" 
+          <span class="delete-button" (click)="showConfirmationPopupOnDeleteLocality(locality?.id)"
            nz-icon nzType="delete" nzTheme="outline"></span>
         </td>
       </tr>
@@ -94,7 +94,7 @@
             <span class="edit-button" (click)="createAndUpdateSubLocalityModal(subLocality?.id)" 
             nz-icon nzType="edit" nzTheme="outline"></span>
             <nz-divider nzType="vertical"></nz-divider>
-            <span class="delete-button" 
+            <span class="delete-button" (click)="showConfirmationPopupOnDeleteSubLocality(subLocality?.id)"
              nz-icon nzType="delete" nzTheme="outline"></span>
         </td>
       </tr>

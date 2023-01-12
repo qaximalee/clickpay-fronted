@@ -81,9 +81,6 @@ export class CompanyComponent implements OnInit {
       nzCentered: true,
       nzOnOk: () => this.deleteCompany(companyId)
     })
-    // modal.afterClose.subscribe(()=> {
-    //   this.getCompanyList();
-    // })
   }
   
   deleteCompany(companyId:any){
@@ -93,7 +90,8 @@ export class CompanyComponent implements OnInit {
           console.log("Delete Company Response",response);
           if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
             this._messageService.success('Company Deleted Successfully');
-          this._modal.closeAll();
+            this._modal.closeAll();
+            this.getCompanyList();
           } 
           else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
               this._messageService.info('Company Not Found')
@@ -110,7 +108,6 @@ export class CompanyComponent implements OnInit {
         },
         complete : () => {
           console.log('Complete');
-          this.getCompanyList();
         }
       })
 

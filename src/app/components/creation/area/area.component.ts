@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
@@ -14,6 +14,7 @@ import { CreateUpdateSubLocalityModalComponent } from './create-update-sub-local
 })
 export class AreaComponent implements OnInit {
 
+  confirmModal?:NzModalRef
   private _httpConstants: HttpConstants = new HttpConstants();
   citiesList : Array<any> = [];
   localitiesList : Array<any> = [];
@@ -121,6 +122,45 @@ export class AreaComponent implements OnInit {
     })
   }  
 
+  showConfirmationPopupOnDeleteCity(cityId:any) : void{
+    this.confirmModal = this._modal.confirm({
+      nzTitle: 'Are you sure you want to delete city?',
+      nzContent: '',
+      nzCentered: true,
+      nzOnOk: () => this.deleteCity(cityId)
+    })
+  }
+  
+  deleteCity(cityId:any){
+      console.log(cityId);
+      this._creationService.deleteCity(cityId).subscribe({
+        next : (response : any) => {
+          console.log("Delete City Response",response);
+          if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+            this._messageService.success('City Deleted Successfully');
+            this._modal.closeAll();
+            this.getCityList();
+          } 
+          else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+              this._messageService.info('City Not Found')
+          }
+          else{
+            this._messageService.error('Error')
+          }
+        },
+        error : (error : any) => {
+          console.log(error);  
+          if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('City Not Found');
+          }
+        },
+        complete : () => {
+          console.log('Complete');
+        }
+      })
+
+  }
+
   getLocalityList() {    
     this._creationService.getLocalityList().subscribe({
       next : (response : any) => {
@@ -147,6 +187,45 @@ export class AreaComponent implements OnInit {
     })
   }  
 
+  showConfirmationPopupOnDeleteLocality(localityId:any) : void{
+    this.confirmModal = this._modal.confirm({
+      nzTitle: 'Are you sure you want to delete locality?',
+      nzContent: '',
+      nzCentered: true,
+      nzOnOk: () => this.deleteLocality(localityId)
+    })
+  }
+  
+  deleteLocality(localityId:any){
+      console.log(localityId);
+      this._creationService.deleteLocality(localityId).subscribe({
+        next : (response : any) => {
+          console.log("Delete Locality Response",response);
+          if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+            this._messageService.success('Locality Deleted Successfully');
+            this._modal.closeAll();
+            this.getLocalityList();
+          } 
+          else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+              this._messageService.info('Locality Not Found')
+          }
+          else{
+            this._messageService.error('Error')
+          }
+        },
+        error : (error : any) => {
+          console.log(error);  
+          if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('Locality Not Found');
+          }
+        },
+        complete : () => {
+          console.log('Complete');
+        }
+      })
+
+  }
+
   getSubLocalityList() {    
     this._creationService.getSubLocalityList().subscribe({
       next : (response : any) => {
@@ -172,5 +251,46 @@ export class AreaComponent implements OnInit {
       }
     })
   }
+
+  showConfirmationPopupOnDeleteSubLocality(subLocalityId:any) : void{
+    this.confirmModal = this._modal.confirm({
+      nzTitle: 'Are you sure you want to delete Sub Locality?',
+      nzContent: '',
+      nzCentered: true,
+      nzOnOk: () => this.deleteSubLocality(subLocalityId)
+    })
+  }
+  
+  deleteSubLocality(subLocalityId:any){
+      console.log(subLocalityId);
+      this._creationService.deleteSubLocality(subLocalityId).subscribe({
+        next : (response : any) => {
+          console.log("Delete Sub Locality Response",response);
+          if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+            this._messageService.success('Sub Locality Deleted Successfully');
+            this._modal.closeAll();
+            this.getSubLocalityList();
+          } 
+          else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+              this._messageService.info('Sub Locality Not Found')
+          }
+          else{
+            this._messageService.error('Error')
+          }
+        },
+        error : (error : any) => {
+          console.log(error);  
+          if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('Sub Locality Not Found');
+          }
+        },
+        complete : () => {
+          console.log('Complete');
+        }
+      })
+
+  }
+
+
 
 }

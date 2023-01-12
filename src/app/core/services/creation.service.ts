@@ -36,6 +36,10 @@ export class CreationService {
     return this._http.put(this.baseUrl+`user-profile/box-media?boxMediaId=${boxId}&boxNumber=${boxNumber}&nearbyLocation=${nearByLocation}`,null)
   }
 
+  public deleteBoxMedia(boxId:number):Observable<any>{
+    return this._http.delete(this.baseUrl+`user-profile/box-media/delete?boxMediaId=${boxId}`)
+  }
+
   public getBoxMediaDetails(boxMediaId:any):Observable<any>{
     return this._http.get(this.baseUrl+`user-profile/box-media/${boxMediaId}`)
   }
@@ -50,6 +54,10 @@ export class CreationService {
 
   public updatePackage(p:any):Observable<any>{
     return this._http.put(this.baseUrl+`user-profile/package`,p)
+  }
+
+  public deletePackage(packageId:number):Observable<any>{
+    return this._http.delete(this.baseUrl+`user-profile/package/delete?id=${packageId}`)
   }
 
   public getPackageDetails(packageId:any):Observable<any>{
@@ -84,6 +92,10 @@ export class CreationService {
     return this._http.put(this.baseUrl+`area/city?cityId=${cityId}&cityName=${cityName}`,null)
   }
 
+  public deleteCity(cityId:number):Observable<any>{
+    return this._http.delete(this.baseUrl+`area/city/delete?cityId=${cityId}`)
+  }
+
   public getCityDetails(cityId:any):Observable<any>{
     return this._http.get(this.baseUrl+`area/city/${cityId}`)
   }
@@ -96,6 +108,10 @@ export class CreationService {
     return this._http.put(this.baseUrl+`area/locality?cityId=${cityId}&localityId=${localityId}&localityName=${localityName}`,null)
   }
 
+  public deleteLocality(localityId:number):Observable<any>{
+    return this._http.delete(this.baseUrl+`area/locality/delete?localityId=${localityId}`)
+  }
+
   public getLocalityDetails(localityId:any):Observable<any>{
     return this._http.get(this.baseUrl+`area/locality/${localityId}`)
   }
@@ -106,6 +122,10 @@ export class CreationService {
 
   public updateSubLocality(subLocalityId:number,localityId:number,subLocalityName:string):Observable<any>{
     return this._http.put(this.baseUrl+`area/sub-locality?localityId=${localityId}&subLocalityId=${subLocalityId}&subLocalityName=${subLocalityName}`,null)
+  }
+
+  public deleteSubLocality(subLocalityId:number):Observable<any>{
+    return this._http.delete(this.baseUrl+`area/sub-locality/delete?subLocalityId=${subLocalityId}`)
   }
 
   public getSubLocalityDetails(subLocalityId:any):Observable<any>{
