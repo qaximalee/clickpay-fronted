@@ -17,6 +17,7 @@ import { CreateUpdateLocalityModalComponent } from './area/create-update-localit
 import { CreateUpdateSubLocalityModalComponent } from './area/create-update-sub-locality-modal/create-update-sub-locality-modal.component';
 
 
+
 @NgModule({
   declarations: [
     CreationComponent,
@@ -30,7 +31,7 @@ import { CreateUpdateSubLocalityModalComponent } from './area/create-update-sub-
     CreateUpdatePackageModalComponent,
     CreateUpdateCityModalComponent,
     CreateUpdateLocalityModalComponent,
-    CreateUpdateSubLocalityModalComponent
+    CreateUpdateSubLocalityModalComponent,
   ],
   imports: [
     CommonModule,
