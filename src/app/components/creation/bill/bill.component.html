@@ -1,7 +1,6 @@
 
 
-<!-- (click)="createAddOrUpdateCompanyModal(null)" -->
-<button  nz-button nzType="primary" nzShape="round">
+<button (click)="createAddBillsCreatorModal(null)" nz-button nzType="primary" nzShape="round">
     <span nz-icon nzType="plus" ></span>
     Add
 </button>
@@ -19,6 +18,7 @@
         <th>Status</th>
         <th>Date</th>
         <th>Created/Deleted By</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -30,10 +30,13 @@
         <td>{{billCreator?.noOfUsers}}</td>
         <td>{{billCreator?.connectionType?.type}}</td>
         <td>{{billCreator?.subLocality ? billCreator?.subLocality?.id : 'ALL'}}</td>
-        <td>{{billCreator?.deleted ? 'Deleted' : 'Created'}}</td>
-        <td>{{billCreator?.creationDate | date:'short'}}</td>
-        <td>{{billCreator?.createdBy}}</td>
-        
+        <td>{{billCreator?.deleted ? 'Deleted' : 'Created' }}</td>
+        <td>{{billCreator?.deleted ? (billCreator?.lastModifiedDate|date:'short') : (billCreator?.creationDate|date:'short') }}</td>
+        <td>{{billCreator?.by?.firstName+' '+billCreator?.by?.lastName}}</td>
+        <td>
+          <span class="delete-button" (click)="showConfirmationPopupOnDelete(billCreator?.id)"
+           nz-icon nzType="delete" nzTheme="outline"></span>
+        </td>
       </tr>
     </tbody>
 </nz-table>

@@ -150,8 +150,12 @@ export class CreationService {
     return this._http.get(this.baseUrl+`bills-creator/`)
   }
 
-  public createBillsCreator():Observable<any>{
-    return this._http.post(this.baseUrl+'bills-creator/',null)
+  public createBillsCreator(billsCreator:any):Observable<any>{
+    return this._http.post(this.baseUrl+'bills-creator/',billsCreator)
+  }
+
+  public deleteBillsCreator(billCreatorId:number):Observable<any>{
+    return this._http.delete(this.baseUrl+`bills-creator/?billsCreatorId=${billCreatorId}`)
   }
 
 }
