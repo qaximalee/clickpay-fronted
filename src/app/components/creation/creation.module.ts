@@ -15,6 +15,7 @@ import { CreateUpdatePackageModalComponent } from './package/create-update-packa
 import { CreateUpdateCityModalComponent } from './area/create-update-city-modal/create-update-city-modal.component';
 import { CreateUpdateLocalityModalComponent } from './area/create-update-locality-modal/create-update-locality-modal.component';
 import { CreateUpdateSubLocalityModalComponent } from './area/create-update-sub-locality-modal/create-update-sub-locality-modal.component';
+import { CreateBillCreatorModalComponent } from './bill/create-bill-creator-modal/create-bill-creator-modal.component';
 
 
 
@@ -32,6 +33,7 @@ import { CreateUpdateSubLocalityModalComponent } from './area/create-update-sub-
     CreateUpdateCityModalComponent,
     CreateUpdateLocalityModalComponent,
     CreateUpdateSubLocalityModalComponent,
+    CreateBillCreatorModalComponent,
   ],
   imports: [
     CommonModule,
