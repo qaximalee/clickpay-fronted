@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AntdesignModule } from 'src/app/modules/antdesign.module';
 
 import { DealerManagementRoutingModule } from './dealer-management-routing.module';
 import { DealerManagementComponent } from './dealer-management.component';
@@ -15,6 +16,7 @@ import { DealerCollectionsComponent } from './dealer-collections/dealer-collecti
   ],
   imports: [
     CommonModule,
+    AntdesignModule,
     DealerManagementRoutingModule
   ]
 })
