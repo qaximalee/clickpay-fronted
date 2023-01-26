@@ -1,45 +1,65 @@
 
+<div class="bills">
+  <div nz-row>
+    <div nz-col [nzSpan]="21">
+      <div>
+        <h1>Bills Creator</h1>
+      </div>
+    </div>
+    <div nz-col>
+      <div class="add-button">
+        <button (click)="createAddBillsCreatorModal(null)" nz-button nzType="primary" nzShape="round">
+            <span nz-icon nzType="plus" ></span>
+            Create Bills
+        </button>
+      </div>
+    </div>
+  </div>
 
-<button (click)="createAddBillsCreatorModal(null)" nz-button nzType="primary" nzShape="round">
-    <span nz-icon nzType="plus" ></span>
-    Add
-</button>
-  
-<nz-table #billsCreators [nzData]="billCreatorList">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Month</th>
-        <th>Year</th>
-        <th>Amount</th>
-        <th>Users</th>
-        <th>Connection Type</th>
-        <th>SubLocality</th>
-        <th>Status</th>
-        <th>Date</th>
-        <th>Created/Deleted By</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let billCreator of billsCreators.data">
-        <td>{{billCreator?.id}}</td>
-        <td>{{billCreator?.month}}</td>
-        <td>{{billCreator?.year}}</td>
-        <td>{{billCreator?.amount}}</td>
-        <td>{{billCreator?.noOfUsers}}</td>
-        <td>{{billCreator?.connectionType?.type}}</td>
-        <td>{{billCreator?.subLocality ? billCreator?.subLocality?.id : 'ALL'}}</td>
-        <td>{{billCreator?.deleted ? 'Deleted' : 'Created' }}</td>
-        <td>{{billCreator?.deleted ? (billCreator?.lastModifiedDate|date:'short') : (billCreator?.creationDate|date:'short') }}</td>
-        <td>{{billCreator?.by?.firstName+' '+billCreator?.by?.lastName}}</td>
-        <td>
-          <span class="delete-button" (click)="showConfirmationPopupOnDelete(billCreator?.id)"
-           nz-icon nzType="delete" nzTheme="outline"></span>
-        </td>
-      </tr>
-    </tbody>
-</nz-table>
-
-<!-- (click)="createAddOrUpdateCompanyModal(company?.id)"
-(click)="showConfirmationPopupOnDelete(company?.id)" -->
+  <nz-card class="card">
+    <div class="bills-table">
+        <nz-table #billsCreators [nzData]="billCreatorList" [nzFrontPagination]="false">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Month</th>
+                <th>Year</th>
+                <th>Amount</th>
+                <th>Users</th>
+                <th>Connection Type</th>
+                <th>SubLocality</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Created/Deleted By</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let billCreator of billsCreators.data">
+                <td>{{billCreator?.id}}</td>
+                <td>{{billCreator?.month}}</td>
+                <td>{{billCreator?.year}}</td>
+                <td>{{billCreator?.amount}}</td>
+                <td>{{billCreator?.noOfUsers}}</td>
+                <td>{{billCreator?.connectionType?.type}}</td>
+                <td>{{billCreator?.subLocality ? billCreator?.subLocality?.id : 'ALL'}}</td>
+                <td>{{billCreator?.deleted ? 'Deleted' : 'Created' }}</td>
+                <td>{{billCreator?.deleted ? (billCreator?.lastModifiedDate|date:'short') : (billCreator?.creationDate|date:'short') }}</td>
+                <td>{{billCreator?.by?.firstName+' '+billCreator?.by?.lastName}}</td>
+                <td>
+                  <span class="delete-button" (click)="showConfirmationPopupOnDelete(billCreator?.id)"
+                  nz-icon nzType="delete" nzTheme="outline"></span>
+                </td>
+              </tr>
+            </tbody>
+        </nz-table>
+        <nz-pagination 
+          class="pagination" 
+          [nzPageIndex]="pageIndex" 
+          [nzPageSize]="pageSize" 
+          [nzTotal]="totalItems"
+          (nzPageIndexChange)="onPageChange($event)">
+        </nz-pagination>
+    </div>
+  </nz-card>
+</div>

@@ -1,1 +1,54 @@
-<p>user-collections works!</p>
+<div class="user-collection">
+
+    <div nz-row>
+      <div nz-col [nzSpan]="10">
+        <div class="heading">
+          <h1>
+            Customer Collections
+          </h1>
+      </div>
+  
+      </div>
+      <div nz-col [nzSpan]="10">
+        <nz-input-group  nzSize="large" >
+            <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Customer..."
+            name="customer" [(ngModel)]="customerId" (ngModelChange)="onChangeOfCustomer($event)" #customer="ngModel" required>
+                <nz-option *ngFor="let customer of customerList" [nzLabel]="customer?.name" [nzValue]="customer?.id"></nz-option>
+            </nz-select>                
+          </nz-input-group>
+      </div>
+      <div nz-col>
+        <button nz-button nzType="primary" nzShape="round">
+          <span nz-icon nzType="plus" ></span>
+          Add Collection
+      </button>
+      </div>
+    </div>
+
+  
+    <nz-card>
+      <nz-table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr >
+            <td>1111</td>
+            <td>
+                <button nz-button >
+                    <span nz-icon nzType="edit" ></span>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+    </nz-table>
+    </nz-card>
+  
+  </div>
+  
+  
+    
+  

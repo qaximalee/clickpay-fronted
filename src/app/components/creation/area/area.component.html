@@ -1,105 +1,155 @@
-<nz-tabset>
-    <nz-tab nzTitle="City">
-       
-<button (click)="createAndUpdateCityModal(null)" nz-button nzType="primary" nzShape="round">
-    <span nz-icon nzType="plus" ></span>
-    Add
-</button>
+<div class="area">
   
-<nz-table #cities [nzData]="citiesList">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Country</th>
-        <th>City</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let city of cities.data">
-        <td>{{city?.id}}</td>
-        <td>{{city?.country?.name}}</td>
-        <td>{{city?.name}}</td>
-        <td>
-          <span class="edit-button" (click)="createAndUpdateCityModal(city?.id)" 
-          nz-icon nzType="edit" nzTheme="outline"></span>
-          <nz-divider nzType="vertical"></nz-divider>
-          <span class="delete-button" (click)="showConfirmationPopupOnDeleteCity(city?.id)"
-           nz-icon nzType="delete" nzTheme="outline"></span>
-        </td>
-      </tr>
-    </tbody>
-</nz-table>
+  <nz-tabset>
+    
+    <nz-tab nzTitle="City">
+
+       <div nz-row >
+        <div nz-col [nzSpan]="21">
+          <div class="heading">
+              <h1>
+                Cities
+              </h1>
+          </div>
+        </div>
+        <div nz-col>
+          <button (click)="createAndUpdateCityModal(null)" nz-button nzType="primary" nzShape="round">
+              <span nz-icon nzType="plus" ></span>
+              Add City
+          </button>
+        </div>
+       </div>
+
+    <nz-card>  
+      <nz-table #cities [nzData]="citiesList">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Country</th>
+              <th>City</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let city of cities.data">
+              <td>{{city?.id}}</td>
+              <td>{{city?.country?.name}}</td>
+              <td>{{city?.name}}</td>
+              <td>
+                <span class="edit-button" (click)="createAndUpdateCityModal(city?.id)" 
+                nz-icon nzType="edit" nzTheme="outline"></span>
+                <nz-divider nzType="vertical"></nz-divider>
+                <span class="delete-button" (click)="showConfirmationPopupOnDeleteCity(city?.id)"
+                nz-icon nzType="delete" nzTheme="outline"></span>
+              </td>
+            </tr>
+          </tbody>
+      </nz-table>
+    </nz-card>
 
     </nz-tab>
+
     <nz-tab nzTitle="Locality">
-       
-<button (click)="createAndUpdateLocalityModal(null)" nz-button nzType="primary" nzShape="round">
-    <span nz-icon nzType="plus" ></span>
-    Add
-</button>
-<nz-table #localities [nzData]="localitiesList">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Country</th>
-        <th>City</th>
-        <th>Locality</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let locality of localities.data">
-        <td>{{locality?.id}}</td>
-        <td>{{locality?.city?.country?.name}}</td>
-        <td>{{locality?.city?.name}}</td>
-        <td>{{locality?.name}}</td>
-        <td>
-          <span class="edit-button" (click)="createAndUpdateLocalityModal(locality?.id)" 
-          nz-icon nzType="edit" nzTheme="outline"></span>
-          <nz-divider nzType="vertical"></nz-divider>
-          <span class="delete-button" (click)="showConfirmationPopupOnDeleteLocality(locality?.id)"
-           nz-icon nzType="delete" nzTheme="outline"></span>
-        </td>
-      </tr>
-    </tbody>
-</nz-table>
+
+      <div nz-row >
+        <div nz-col [nzSpan]="21">
+          <div class="heading">
+              <h1>
+                Localities
+              </h1>
+          </div>
+        </div>
+        <div nz-col>
+          <button (click)="createAndUpdateLocalityModal(null)" nz-button nzType="primary" nzShape="round">
+              <span nz-icon nzType="plus" ></span>
+              Add Locality
+          </button>
+        </div>
+       </div>
+
+       <nz-card>
+        <nz-table #localities [nzData]="localitiesList">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Country</th>
+              <th>City</th>
+              <th>Locality</th>
+              <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let locality of localities.data">
+              <td>{{locality?.id}}</td>
+              <td>{{locality?.city?.country?.name}}</td>
+              <td>{{locality?.city?.name}}</td>
+              <td>{{locality?.name}}</td>
+              <td>
+                <span class="edit-button" (click)="createAndUpdateLocalityModal(locality?.id)" 
+                nz-icon nzType="edit" nzTheme="outline"></span>
+                <nz-divider nzType="vertical"></nz-divider>
+                <span class="delete-button" (click)="showConfirmationPopupOnDeleteLocality(locality?.id)"
+                 nz-icon nzType="delete" nzTheme="outline"></span>
+              </td>
+            </tr>
+          </tbody>
+      </nz-table>
+       </nz-card>
 
     </nz-tab>
+
     <nz-tab nzTitle="Sub Locality">
-        
-<button (click)="createAndUpdateSubLocalityModal(null)" nz-button nzType="primary" nzShape="round">
-    <span nz-icon nzType="plus" ></span>
-    Add
-</button>
-<nz-table #subLocalities [nzData]="subLocalitiesList">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Country</th>
-        <th>City</th>
-        <th>Locality</th>
-        <th>SubLocality</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let subLocality of subLocalities.data">
-        <td>{{subLocality?.id}}</td>
-        <td>{{subLocality?.locality?.city?.country?.name}}</td>
-        <td>{{subLocality?.locality?.city?.name}}</td>
-        <td>{{subLocality?.locality?.name}}</td>
-        <td>{{subLocality?.name}}</td>
-        <td>
-            <span class="edit-button" (click)="createAndUpdateSubLocalityModal(subLocality?.id)" 
-            nz-icon nzType="edit" nzTheme="outline"></span>
-            <nz-divider nzType="vertical"></nz-divider>
-            <span class="delete-button" (click)="showConfirmationPopupOnDeleteSubLocality(subLocality?.id)"
-             nz-icon nzType="delete" nzTheme="outline"></span>
-        </td>
-      </tr>
-    </tbody>
-</nz-table>
+
+        <div nz-row >
+        <div nz-col [nzSpan]="20">
+          <div class="heading">
+              <h1>
+                Sub-Localities
+              </h1>
+          </div>
+        </div>
+        <div nz-col>
+          <button (click)="createAndUpdateSubLocalityModal(null)" nz-button nzType="primary" nzShape="round">
+              <span nz-icon nzType="plus" ></span>
+              Add Sub-Locality
+          </button>
+        </div>
+       </div>
+
+       <nz-card>
+              <nz-table #subLocalities [nzData]="subLocalitiesList">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>Locality</th>
+                    <th>SubLocality</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let subLocality of subLocalities.data">
+                    <td>{{subLocality?.id}}</td>
+                    <td>{{subLocality?.locality?.city?.country?.name}}</td>
+                    <td>{{subLocality?.locality?.city?.name}}</td>
+                    <td>{{subLocality?.locality?.name}}</td>
+                    <td>{{subLocality?.name}}</td>
+                    <td>
+                        <span class="edit-button" (click)="createAndUpdateSubLocalityModal(subLocality?.id)" 
+                        nz-icon nzType="edit" nzTheme="outline"></span>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <span class="delete-button" (click)="showConfirmationPopupOnDeleteSubLocality(subLocality?.id)"
+                        nz-icon nzType="delete" nzTheme="outline"></span>
+                    </td>
+                  </tr>
+                </tbody>
+            </nz-table>
+       </nz-card>
+
 
     </nz-tab>
-</nz-tabset>
+
+  </nz-tabset>
+
+</div>

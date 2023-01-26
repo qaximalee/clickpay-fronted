@@ -1,28 +1,44 @@
-<button (click)="createAddOrUpdateCompanyModal(null)" nz-button nzType="primary" nzShape="round">
-    <span nz-icon nzType="plus" ></span>
-    Add
-</button>
+
+<div class="company">
+  <div nz-row>
+    <div nz-col [nzSpan]="20">
+      <div>
+        <h1>Companies</h1>
+      </div>
+    </div>
+    <div nz-col>
+      <div class="add-button">
+          <button (click)="createAddOrUpdateCompanyModal(null)" nz-button nzType="primary" nzShape="round">
+            <span nz-icon nzType="plus" ></span>
+              Add Company
+          </button>
+        </div>
+    </div>
+  </div>
   
-<nz-table #companies [nzData]="companyList">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let company of companies.data">
-        <td>{{company?.id}}</td>
-        <td>{{company?.name}}</td>
-        <td>
-          <span class="edit-button" (click)="createAddOrUpdateCompanyModal(company?.id)" 
-          nz-icon nzType="edit" nzTheme="outline"></span>
-          <nz-divider nzType="vertical"></nz-divider>
-          <span class="delete-button" (click)="showConfirmationPopupOnDelete(company?.id)" 
-           nz-icon nzType="delete" nzTheme="outline"></span>
-        </td>
-        
-      </tr>
-    </tbody>
-</nz-table>
+  <nz-card>
+    <nz-table #companies [nzData]="companyList">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let company of companies.data">
+            <td>{{company?.id}}</td>
+            <td>{{company?.name}}</td>
+            <td>
+              <span class="edit-button" (click)="createAddOrUpdateCompanyModal(company?.id)" 
+              nz-icon nzType="edit" nzTheme="outline"></span>
+              <nz-divider nzType="vertical"></nz-divider>
+              <span class="delete-button" (click)="showConfirmationPopupOnDelete(company?.id)" 
+              nz-icon nzType="delete" nzTheme="outline"></span>
+            </td>
+            
+          </tr>
+        </tbody>
+    </nz-table>
+  </nz-card>
+</div>

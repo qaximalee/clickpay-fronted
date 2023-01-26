@@ -32,8 +32,8 @@ export class CreateBillCreatorModalComponent implements OnInit {
     private _modal : NzModalService
   ) { }
 
-  monthList = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+  monthList = [ "Jan", "Feb", "Mar", "April", "May", "June",
+  "July", "Aug", "Sept", "Oct", "Nov", "Dec" ];
 
   yearList = [ 2020, 2021, 2022, 2023, 2024, 2025];
 
