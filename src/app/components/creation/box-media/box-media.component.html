@@ -1,28 +1,44 @@
-<button (click)="createAddOrUpdateBoxMediaModal(null)" nz-button nzType="primary" nzShape="round">
-    <span nz-icon nzType="plus" ></span>
-    Add
-</button>
-<nz-table #basicTable [nzData]="boxMediaList">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Box/Media</th>
-        <th>NearBy Location</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let boxMedia of basicTable.data">
-        <td>{{boxMedia?.id}}</td>
-        <td>{{boxMedia?.boxNumber}}</td>
-        <td>{{boxMedia?.nearbyLocation}}</td>
-        <td>
-          <span class="edit-button" (click)="createAddOrUpdateBoxMediaModal(boxMedia?.id)" 
-          nz-icon nzType="edit" nzTheme="outline"></span>
-          <nz-divider nzType="vertical"></nz-divider>
-          <span class="delete-button" (click)="showConfirmationPopupOnDelete(boxMedia?.id)"
-           nz-icon nzType="delete" nzTheme="outline"></span>
-        </td>
-      </tr>
-    </tbody>
-</nz-table>
+<div class="box-media">
+  <div nz-row>
+    <div nz-col [nzSpan]="10">
+      <div class="heading">
+        <h1>Box/Media</h1>
+      </div>
+    </div>
+    <div nz-col nzOffset="10">
+      <div class="add-button">
+      <button (click)="createAddOrUpdateBoxMediaModal(null)" nz-button nzType="primary" nzShape="round">
+        <span nz-icon nzType="plus" ></span>
+          Add Box/Media
+      </button>
+      </div>
+    </div>
+  </div>
+
+  <nz-card>
+    <nz-table #basicTable [nzData]="boxMediaList">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Box/Media</th>
+            <th>NearBy Location</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let boxMedia of basicTable.data">
+            <td>{{boxMedia?.id}}</td>
+            <td>{{boxMedia?.boxNumber}}</td>
+            <td>{{boxMedia?.nearbyLocation}}</td>
+            <td>
+              <span class="edit-button" (click)="createAddOrUpdateBoxMediaModal(boxMedia?.id)" 
+              nz-icon nzType="edit" nzTheme="outline"></span>
+              <nz-divider nzType="vertical"></nz-divider>
+              <span class="delete-button" (click)="showConfirmationPopupOnDelete(boxMedia?.id)"
+              nz-icon nzType="delete" nzTheme="outline"></span>
+            </td>
+          </tr>
+        </tbody>
+    </nz-table>
+  </nz-card>
+</div>

@@ -146,8 +146,8 @@ export class CreationService {
 
 
   // Bill Creator
-  public getBillCreatorList():Observable<any>{
-    return this._http.get(this.baseUrl+`bills-creator/`)
+  public getBillCreatorList(pageNo:number,pageSize:number):Observable<any>{
+    return this._http.get(this.baseUrl+`bills-creator/?pageNo=${pageNo}&pageSize=${pageSize}`)
   }
 
   public createBillsCreator(billsCreator:any):Observable<any>{
@@ -157,5 +157,12 @@ export class CreationService {
   public deleteBillsCreator(billCreatorId:number):Observable<any>{
     return this._http.delete(this.baseUrl+`bills-creator/?billsCreatorId=${billCreatorId}`)
   }
+
+  // users (customers)
+
+  public getCustomersList():Observable<any>{
+    return this._http.get(this.baseUrl+`user-profile/user-details`)
+  }
+
 
 }

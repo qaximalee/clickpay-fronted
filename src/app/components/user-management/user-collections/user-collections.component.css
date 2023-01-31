@@ -1,0 +1,8 @@
+.search-customer{
+    width: 200px;
+}
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

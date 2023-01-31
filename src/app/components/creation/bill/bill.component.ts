@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
@@ -15,7 +16,11 @@ export class BillComponent implements OnInit {
   private _httpConstants: HttpConstants = new HttpConstants();
   confirmModal?:NzModalRef
   billCreatorList: Array<any> = [];
-  
+  pageNo : number = 0;
+  pageSize : number = 6;
+  totalItems : number = 0; 
+  pageIndex : number = 1;
+
   constructor(
     private _creationService : CreationService,
     private _messageService : MessageService,
@@ -26,19 +31,27 @@ export class BillComponent implements OnInit {
   ngOnInit(): void {
     this.getBillsCreatorList();
   }
+  
+  onPageChange(page:any){
+  this.pageIndex = page;
+  this.pageNo = page - 1;
+  this.getBillsCreatorList();
+}
 
   getBillsCreatorList() {    
-    this._creationService.getBillCreatorList().subscribe({
+    this._creationService.getBillCreatorList(this.pageNo,this.pageSize).subscribe({
       next : (response : any) => {
         console.log("Get Bills Creator List Response",response);
         if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
-          this.billCreatorList = response?.data
+          this.billCreatorList = response?.data?.billsCreators;
+          this.totalItems = response?.data?.totalRows;
+          this.pageNo = response?.data?.pageNo;
         } 
         else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
-            this._messageService.info('Bills Creator Not Found')
+            this._messageService.info('Bills Creator Not Found');
         }
         else{
-          this._messageService.error('Error')
+          this._messageService.error('Error');
         }
       },
       error : (error : any) => {
@@ -111,5 +124,7 @@ export class BillComponent implements OnInit {
       }
     })
 }
+
+
 
 }
