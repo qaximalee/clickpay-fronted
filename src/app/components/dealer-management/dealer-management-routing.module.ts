@@ -6,7 +6,6 @@ import { DealerManagementComponent } from './dealer-management.component';
 
 const routes: Routes = [{ path: '', component: DealerManagementComponent,
 children : [
-  { path: '', redirectTo : 'dealer-details', pathMatch :'full'},
   { 
     path: 'dealer-details', component: DealerDetailsComponent
   },
