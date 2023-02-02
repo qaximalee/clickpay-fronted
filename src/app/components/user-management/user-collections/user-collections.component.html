@@ -12,17 +12,17 @@
       <div nz-col [nzSpan]="10">
           <nz-input-group  nzSize="large" >
               <nz-select class="search-customer" [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Customer..."
-              name="customer" [(ngModel)]="customerId" (ngModelChange)="onChangeOfCustomer($event)" #customer="ngModel" required>
-                  <nz-option *ngFor="let customer of customerList" [nzLabel]="customer?.name" [nzValue]="customer?.id"></nz-option>
+              name="customer" [(ngModel)]="Customer" (ngModelChange)="onChangeOfCustomer($event)" #customer="ngModel" required>
+                  <nz-option *ngFor="let customer of customerList" [nzLabel]="customer?.name" [nzValue]="customer"></nz-option>
               </nz-select>                
             </nz-input-group>
       </div>
 
-      <div nz-col>
-        <button nz-button nzType="primary" nzShape="round">
+      <div nz-col class="add-button">
+        <button [disabled]="customerId==0" (click)="createAddUserCollectionModal(null)" nz-button nzType="primary" nzShape="round">
           <span nz-icon nzType="plus" ></span>
           Add Collection
-      </button>
+        </button>
       </div>
 
     </div>

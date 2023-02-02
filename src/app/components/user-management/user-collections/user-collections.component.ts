@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CollectionService } from 'src/app/core/services/collection.service';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
 import { UserManagementService } from 'src/app/core/services/user-management.service';
+import { CreateUserCollectionsModalComponent } from './create-user-collections-modal/create-user-collections-modal.component';
 
 @Component({
   selector: 'app-user-collections',
@@ -16,13 +18,17 @@ export class UserCollectionsComponent implements OnInit {
   private _httpConstants: HttpConstants = new HttpConstants();
   customerList : Array<any> = [];
   collectionList : Array<any> = [];
+  Customer : any;
   customerId : number = 0;
+  customerAmount : number = 0;
   pageNo : number = 0;
   pageSize : number = 6;
   totalItems : number = 0; 
   pageIndex : number = 1;
 
   constructor(
+    private _modal: NzModalService,
+    private _viewContainerRef: ViewContainerRef,
     private _userService : UserManagementService,
     private _collectionService : CollectionService,
     private _messageService : MessageService
@@ -33,7 +39,15 @@ export class UserCollectionsComponent implements OnInit {
   }
 
   onChangeOfCustomer(event: any) {
-    event != null ? this.selectedCustomer = event : this.selectedCustomer = null;
+    console.log("event : "+event+ "cid"+this.Customer.id+this.Customer.name+this.Customer.amount);
+    if(event != null) {
+      this.selectedCustomer = this.Customer.id;
+      this.customerId = this.Customer.id;
+      this.customerAmount = this.Customer.amount;
+
+    } else{
+      this.selectedCustomer = null;
+    } 
     if(this.customerId!=null){
       this.getCollectionsList();
     }
@@ -99,6 +113,28 @@ export class UserCollectionsComponent implements OnInit {
     this.pageIndex = page;
     this.pageNo = page - 1;
     this.getCollectionsList();
+  }
+
+  createAddUserCollectionModal(UserCollectionId:any){
+    const modal = this._modal.create({
+      nzTitle: UserCollectionId ? 'Edit User Collection' : 'Create User Collection',
+      nzContent: CreateUserCollectionsModalComponent,
+      nzViewContainerRef: this._viewContainerRef,
+      nzComponentParams: {
+        data : UserCollectionId ? UserCollectionId : null,
+        title : 'USER COLLECTION',
+        customerId : this.customerId,
+        amount : this.customerAmount,
+      },
+      nzFooter: null,
+      nzKeyboard : true,
+      nzWidth : "60%",
+      nzCentered : true,
+      nzMaskClosable : false,
+    })
+    modal.afterClose.subscribe(()=> {
+      this.getCollectionsList();
+    })
   }
 
 }

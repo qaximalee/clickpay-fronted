@@ -1,0 +1,46 @@
+<form nz-form #userCollectionForm="ngForm" >
+    
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Month</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+        <nz-input-group  nzSize="large" >
+          <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Month..."
+          name="month" [(ngModel)]="collectionForm.month" #month="ngModel" required>
+              <nz-option *ngFor="let month of monthList" [nzLabel]="month" [nzValue]="month"></nz-option>
+          </nz-select>                
+      </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+   
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Year</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+        <nz-input-group  nzSize="large" >
+          <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Year..."
+          name="year" [(ngModel)]="collectionForm.year" #year="ngModel" required>
+              <nz-option *ngFor="let year of yearList" [nzLabel]="year" [nzValue]="year"></nz-option>
+          </nz-select>                
+      </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Payment Type</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+        <nz-input-group  nzSize="large" >
+          <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Package Type..."
+          name="connectionType" [(ngModel)]="collectionForm.paymentType" #paymentType="ngModel" required>
+              <nz-option *ngFor="let paymentType of paymentTypeList" [nzLabel]="paymentType" [nzValue]="paymentType"></nz-option>
+          </nz-select>                
+      </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    
+    <nz-form-item>
+      <nz-form-control [nzOffset]="7" [nzSpan]="12">
+        <button *ngIf="!data" (click)="createUserCollection()" type="button" class="save-button" 
+                 nz-button nzType="primary">{{ buttonName }}</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
