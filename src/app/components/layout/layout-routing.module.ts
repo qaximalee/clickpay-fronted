@@ -22,7 +22,10 @@ const routes: Routes = [
       path: 'user-management', 
       loadChildren: () => import('./../user-management/user-management.module').then(m => m.UserManagementModule) 
     },
-
+    { 
+      path: 'dealer-management', 
+      loadChildren: () => import('./../dealer-management/dealer-management.module').then(m => m.DealerManagementModule) 
+    },
   ] 
 }
 ];
