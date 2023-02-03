@@ -18,4 +18,8 @@ export class CollectionService {
     return this._http.get(this.baseUrl+`collections/by-customer-id?customerId=${customerId}&pageNo=${pageNo}&pageSize=${pageSize}`);
   }
   
+  public createUserCollection(userCollection:any):Observable<any>{
+    return this._http.post(this.baseUrl+`collections/`,userCollection);
+  }
+  
 }

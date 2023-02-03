@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CollectionService } from 'src/app/core/services/collection.service';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
 import { UserManagementService } from 'src/app/core/services/user-management.service';
+import { CreateUserCollectionsModalComponent } from './create-user-collections-modal/create-user-collections-modal.component';
 
 @Component({
   selector: 'app-user-collections',
@@ -16,13 +18,24 @@ export class UserCollectionsComponent implements OnInit {
   private _httpConstants: HttpConstants = new HttpConstants();
   customerList : Array<any> = [];
   collectionList : Array<any> = [];
-  customerId : number = 0;
+  Customer : any;
+  
   pageNo : number = 0;
   pageSize : number = 6;
   totalItems : number = 0; 
   pageIndex : number = 1;
 
+  CustomerData = {
+    id : 0,
+    name : null,
+    internetId : null,
+    amount : 0,
+    connectionType : null,
+  };
+
   constructor(
+    private _modal: NzModalService,
+    private _viewContainerRef: ViewContainerRef,
     private _userService : UserManagementService,
     private _collectionService : CollectionService,
     private _messageService : MessageService
@@ -33,8 +46,14 @@ export class UserCollectionsComponent implements OnInit {
   }
 
   onChangeOfCustomer(event: any) {
-    event != null ? this.selectedCustomer = event : this.selectedCustomer = null;
-    if(this.customerId!=null){
+    event != null ? this.selectedCustomer = this.Customer.id : this.selectedCustomer = null;
+    
+    if(this.Customer.id!=null){
+      this.CustomerData.id = this.Customer.id;
+      this.CustomerData.name = this.Customer.name;
+      this.CustomerData.amount = this.Customer.amount;
+      this.CustomerData.internetId = this.Customer.internetId;
+      this.CustomerData.connectionType = this.Customer.connectionType;
       this.getCollectionsList();
     }
     
@@ -68,7 +87,7 @@ export class UserCollectionsComponent implements OnInit {
   }
 
   getCollectionsList(){
-    this._collectionService.getCollectionsListOfCustomer(this.customerId,this.pageNo,this.pageSize).subscribe({
+    this._collectionService.getCollectionsListOfCustomer(this.CustomerData.id,this.pageNo,this.pageSize).subscribe({
       next : (response : any) => {
         console.log("Get Collections List Response",response);
         if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
@@ -99,6 +118,26 @@ export class UserCollectionsComponent implements OnInit {
     this.pageIndex = page;
     this.pageNo = page - 1;
     this.getCollectionsList();
+  }
+
+  createAddUserCollectionModal(UserCollectionId:any){
+    const modal = this._modal.create({
+      nzTitle: UserCollectionId ? 'Edit User Collection' : 'Create User Collection',
+      nzContent: CreateUserCollectionsModalComponent,
+      nzViewContainerRef: this._viewContainerRef,
+      nzComponentParams: {
+        data : this.CustomerData ,
+        title : 'USER COLLECTION',
+      },
+      nzFooter: null,
+      nzKeyboard : true,
+      nzWidth : "60%",
+      nzCentered : true,
+      nzMaskClosable : false,
+    })
+    modal.afterClose.subscribe(()=> {
+      this.getCollectionsList();
+    })
   }
 
 }

@@ -157,12 +157,4 @@ export class CreationService {
   public deleteBillsCreator(billCreatorId:number):Observable<any>{
     return this._http.delete(this.baseUrl+`bills-creator/?billsCreatorId=${billCreatorId}`)
   }
-
-  // users (customers)
-
-  public getCustomersList():Observable<any>{
-    return this._http.get(this.baseUrl+`user-profile/user-details`)
-  }
-
-
 }

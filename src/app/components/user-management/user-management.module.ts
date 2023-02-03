@@ -8,6 +8,7 @@ import { UserCollectionsComponent } from './user-collections/user-collections.co
 import { ComplainViewComponent } from './complain-view/complain-view.component';
 import { AntdesignModule } from 'src/app/modules/antdesign.module';
 import { CreateUpdateUserModalComponent } from './user-details/create-update-user-modal/create-update-user-modal.component';
+import { CreateUserCollectionsModalComponent } from './user-collections/create-user-collections-modal/create-user-collections-modal.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CreateUpdateUserModalComponent } from './user-details/create-update-use
     UserDetailsComponent,
     UserCollectionsComponent,
     ComplainViewComponent,
-    CreateUpdateUserModalComponent
+    CreateUpdateUserModalComponent,
+    CreateUserCollectionsModalComponent
   ],
   imports: [
     CommonModule,
