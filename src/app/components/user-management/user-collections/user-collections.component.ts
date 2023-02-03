@@ -19,12 +19,19 @@ export class UserCollectionsComponent implements OnInit {
   customerList : Array<any> = [];
   collectionList : Array<any> = [];
   Customer : any;
-  customerId : number = 0;
-  customerAmount : number = 0;
+  
   pageNo : number = 0;
   pageSize : number = 6;
   totalItems : number = 0; 
   pageIndex : number = 1;
+
+  CustomerData = {
+    id : 0,
+    name : null,
+    internetId : null,
+    amount : 0,
+    connectionType : null,
+  };
 
   constructor(
     private _modal: NzModalService,
@@ -39,16 +46,14 @@ export class UserCollectionsComponent implements OnInit {
   }
 
   onChangeOfCustomer(event: any) {
-    console.log("event : "+event+ "cid"+this.Customer.id+this.Customer.name+this.Customer.amount);
-    if(event != null) {
-      this.selectedCustomer = this.Customer.id;
-      this.customerId = this.Customer.id;
-      this.customerAmount = this.Customer.amount;
-
-    } else{
-      this.selectedCustomer = null;
-    } 
-    if(this.customerId!=null){
+    event != null ? this.selectedCustomer = this.Customer.id : this.selectedCustomer = null;
+    
+    if(this.Customer.id!=null){
+      this.CustomerData.id = this.Customer.id;
+      this.CustomerData.name = this.Customer.name;
+      this.CustomerData.amount = this.Customer.amount;
+      this.CustomerData.internetId = this.Customer.internetId;
+      this.CustomerData.connectionType = this.Customer.connectionType;
       this.getCollectionsList();
     }
     
@@ -82,7 +87,7 @@ export class UserCollectionsComponent implements OnInit {
   }
 
   getCollectionsList(){
-    this._collectionService.getCollectionsListOfCustomer(this.customerId,this.pageNo,this.pageSize).subscribe({
+    this._collectionService.getCollectionsListOfCustomer(this.CustomerData.id,this.pageNo,this.pageSize).subscribe({
       next : (response : any) => {
         console.log("Get Collections List Response",response);
         if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
@@ -121,10 +126,8 @@ export class UserCollectionsComponent implements OnInit {
       nzContent: CreateUserCollectionsModalComponent,
       nzViewContainerRef: this._viewContainerRef,
       nzComponentParams: {
-        data : UserCollectionId ? UserCollectionId : null,
+        data : this.CustomerData ,
         title : 'USER COLLECTION',
-        customerId : this.customerId,
-        amount : this.customerAmount,
       },
       nzFooter: null,
       nzKeyboard : true,

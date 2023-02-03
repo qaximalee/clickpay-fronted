@@ -1,5 +1,19 @@
 <form nz-form #userCollectionForm="ngForm" >
-    
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Customer Name</nz-form-label>
+        <nz-form-control  [nzSpan]="12">
+            <input [disabled]="collectionForm.customerName!=null" nz-input type="text" name="customerName" [(ngModel)]="collectionForm.customerName"  placeholder="Customer Name" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Internet ID</nz-form-label>
+        <nz-form-control  [nzSpan]="12">
+            <input [disabled]="collectionForm.internetId!=null" nz-input type="text" name="internetId" [(ngModel)]="collectionForm.internetId"  placeholder="Internet Id" />
+        </nz-form-control>
+      </nz-form-item>
+
     <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Month</nz-form-label>
         <nz-form-control [nzSpan]="12">
@@ -30,16 +44,30 @@
         <nz-form-control [nzSpan]="12">
         <nz-input-group  nzSize="large" >
           <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Package Type..."
-          name="connectionType" [(ngModel)]="collectionForm.paymentType" #paymentType="ngModel" required>
+          name="packageType" [(ngModel)]="collectionForm.paymentType" (ngModelChange)="onChangeOfPaymentType()" #paymentType="ngModel" required>
               <nz-option *ngFor="let paymentType of paymentTypeList" [nzLabel]="paymentType" [nzValue]="paymentType"></nz-option>
           </nz-select>                
       </nz-input-group>
       </nz-form-control>
     </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Amount</nz-form-label>
+        <nz-form-control  [nzSpan]="12">
+            <input [disabled]="collectionForm.paymentType=='Monthly' || collectionForm.paymentType==null" nz-input type="number" name="Amount" [(ngModel)]="collectionForm.amount"  placeholder="Amount" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>connection Type</nz-form-label>
+        <nz-form-control  [nzSpan]="12">
+            <input [disabled]="collectionForm.connectionType!=null" nz-input type="text" name="connectionType" [(ngModel)]="collectionForm.connectionType"  placeholder="Connection Type" />
+        </nz-form-control>
+      </nz-form-item>
     
     <nz-form-item>
       <nz-form-control [nzOffset]="7" [nzSpan]="12">
-        <button *ngIf="!data" (click)="createUserCollection()" type="button" class="save-button" 
+        <button *ngIf="data" (click)="createUserCollection()" type="button" class="save-button" 
                  nz-button nzType="primary">{{ buttonName }}</button>
       </nz-form-control>
     </nz-form-item>

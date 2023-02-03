@@ -13,10 +13,8 @@ import { MessageService } from 'src/app/core/services/message.service';
 })
 export class CreateUserCollectionsModalComponent implements OnInit {
 
-  @Input() data?: Array<any>;
+  @Input() data?: any;
   @Input() title?: string;
-  @Input() customerId?: number;
-  @Input() amount?: number;
   collectionForm: UserCollection = new UserCollection(); 
   confirmModal?: NzModalRef;
   @ViewChild('collectionForm') userCollectionForm!: NgForm;
@@ -42,6 +40,15 @@ export class CreateUserCollectionsModalComponent implements OnInit {
   paymentTypeList = [ "Monthly", "Installment", "Other"];
 
   ngOnInit(): void {
+    this.collectionForm.customerId = this.data?.id;
+    this.collectionForm.customerName = this.data?.name;
+    this.collectionForm.amount = this.data?.amount;
+    this.collectionForm.internetId = this.data?.internetId;
+    this.collectionForm.connectionType = this.data?.connectionType;
+  }
+
+  onChangeOfPaymentType(){
+    this.collectionForm.amount = this.data?.amount;
   }
 
   createUserCollection(){
@@ -61,6 +68,8 @@ export class CreateUserCollectionsModalComponent implements OnInit {
         console.log(error);
         if (error?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE) {
           this._messageService.info(error?.error?.msg);
+        }else if (error?.status === 302) {
+          this._messageService.info(error?.message);
         }
       },
       complete: () => { }
