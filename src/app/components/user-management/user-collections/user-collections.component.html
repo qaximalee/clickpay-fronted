@@ -9,7 +9,7 @@
         </div>
       </div>
 
-      <div nz-col [nzSpan]="10">
+      <div nz-col [nzSpan]="6">
           <nz-input-group  nzSize="large" >
               <nz-select class="search-customer" [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Customer..."
               name="customer" [(ngModel)]="Customer" (ngModelChange)="onChangeOfCustomer($event)" #customer="ngModel" required>
@@ -17,6 +17,13 @@
               </nz-select>                
             </nz-input-group>
       </div>
+
+      <div nz-col [nzSpan]="4" class="receiveAll-button">
+        <button [disabled]="CustomerData.id==0" (click)="receiveUserCollectionModal(null)" nz-button nzType="primary" nzShape="round">
+          Receive All
+        </button>
+      </div>
+
 
       <div nz-col class="add-button">
         <button [disabled]="CustomerData.id==0" (click)="createAddUserCollectionModal(null)" nz-button nzType="primary" nzShape="round">
@@ -69,7 +76,8 @@
               </nz-dropdown-menu>
               <nz-dropdown-menu #menuUnpaid="nzDropdownMenu">
                 <ul nz-menu>
-                  <li nz-menu-item>Delete</li>
+                  <li nz-menu-item (click)="receiveUserCollectionModal(collection)" >Paid</li>
+                  <li nz-menu-item (click)="showConfirmationPopupOnDelete(collection?.id)" >Delete</li>
                   <li nz-menu-item>View Details</li>
                 </ul>
               </nz-dropdown-menu>

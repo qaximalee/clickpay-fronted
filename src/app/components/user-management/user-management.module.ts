@@ -9,6 +9,7 @@ import { ComplainViewComponent } from './complain-view/complain-view.component';
 import { AntdesignModule } from 'src/app/modules/antdesign.module';
 import { CreateUpdateUserModalComponent } from './user-details/create-update-user-modal/create-update-user-modal.component';
 import { CreateUserCollectionsModalComponent } from './user-collections/create-user-collections-modal/create-user-collections-modal.component';
+import { ReceiveUserCollectionModalComponent } from './user-collections/receive-user-collection-modal/receive-user-collection-modal.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CreateUserCollectionsModalComponent } from './user-collections/create-u
     UserCollectionsComponent,
     ComplainViewComponent,
     CreateUpdateUserModalComponent,
-    CreateUserCollectionsModalComponent
+    CreateUserCollectionsModalComponent,
+    ReceiveUserCollectionModalComponent
   ],
   imports: [
     CommonModule,

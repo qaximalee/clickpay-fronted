@@ -21,5 +21,9 @@ export class CollectionService {
   public createUserCollection(userCollection:any):Observable<any>{
     return this._http.post(this.baseUrl+`collections/`,userCollection);
   }
+
+  public deleteUserCollection(userCollectionId:number,customerId:number):Observable<any>{
+    return this._http.delete(this.baseUrl+`collections/delete?collectionId=${userCollectionId}&customerId=${customerId}`);
+  }
   
 }
