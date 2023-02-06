@@ -1,0 +1,55 @@
+<div class="receive-collections">
+
+    <div>
+        <nz-table #borderedTable nzBordered [nzFrontPagination]="false" #basicTable [nzData]="data.collections">
+            <thead>
+                <tr>
+                    <th>Customer Id</th>
+                    <th>Name</th>
+                    <th>Month/Year</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let collection of basicTable.data">
+                    <td>{{data?.customer?.id}}</td>
+                    <td>{{data?.customer?.name}}</td>
+                    <td>{{collection?.month + " " + collection?.year}}</td>
+                    <td>{{collection?.paymentType[0] + collection?.paymentType.slice(1).toLowerCase() + ", " + collection?.connectionType}}</td>
+                    <td>{{collection?.amount}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <div class="receive-form">
+        <div nz-row>
+            <div nz-col [nzSpan]="10">
+                Payment Type
+                <input nz-input placeholder="Select Payment Type" type="text" name="paymentType" />
+            </div>
+            <div nz-col [nzOffset]="2" [nzSpan]="10">
+                Connection Type
+                <input nz-input placeholder="Amount" type="number" name="amount" label="" value=""/>
+            </div> 
+        </div>
+        <br>
+        <div nz-row>
+            <div nz-col [nzSpan]="10">
+                Receiving Date
+                <input nz-input placeholder="Receving Date" type="text" name="paymentType" [(ngModel)]="receiveRequest.receivingDate"
+                label="receiveRequest.receivingDate | date:'MM/dd/yyyy'" value="receiveRequest.receivingDate | date:'MM/dd/yyyy'" />
+            </div>
+            <div nz-col [nzOffset]="2" [nzSpan]="10">
+                Amount
+                <input nz-input placeholder="Amount" type="number" name="amount" [(ngModel)]="receiveRequest.amount"  
+                label="receiveRequest.amount" value="receiveRequest.amount"/>
+            </div> 
+        </div>
+        
+    </div>
+</div>
+
+  
+       

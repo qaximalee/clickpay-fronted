@@ -1,0 +1,146 @@
+<form nz-form #officerDetailFormView="ngForm" >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Name</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+      <input nz-input type="text" name="Name" [(ngModel)]="officerDetailForm.name" placeholder="Name"/>
+      <ng-template #userErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please input name!</ng-container>
+        <ng-container *ngIf="control.hasError('duplicated')">The name is redundant!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Email</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+      <input nz-input type="email" name="Email" [(ngModel)]="officerDetailForm.email" placeholder="Email"/>
+      <ng-template #userErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please input email!</ng-container>
+        <ng-container *ngIf="control.hasError('duplicated')">The email is redundant!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>CNIC</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+      <input nz-input type="text" name="CNIC" [(ngModel)]="officerDetailForm.cnic" placeholder="4230152256667"/>
+      <ng-template #userErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please input cnic!</ng-container>
+        <ng-container *ngIf="control.hasError('duplicated')">The cnic is redundant!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Address</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+      <input nz-input type="text" name="Address" [(ngModel)]="officerDetailForm.address" placeholder="Address"/>
+      <ng-template #userErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please input address!</ng-container>
+        <ng-container *ngIf="control.hasError('duplicated')">The address is redundant!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Mobile</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+      <input nz-input type="text" name="Mobile" [(ngModel)]="officerDetailForm.cellNo" placeholder="Mobile"/>
+      <ng-template #userErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please input mobile number!</ng-container>
+        <ng-container *ngIf="control.hasError('duplicated')">The mobile number is redundant!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Joining Date</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+      <input nz-input type="date" name="JoiningDate" [(ngModel)]="officerDetailForm.joiningDate"/>
+      <ng-template #userErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please input joining date!</ng-container>
+        <ng-container *ngIf="control.hasError('duplicated')">The joining date is redundant!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" >Leaving Date</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+      <input nz-input type="date" name="LeavingDate" [(ngModel)]="officerDetailForm.leavingDate" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Salary</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input nz-input type="number" name="Salary" [(ngModel)]="officerDetailForm.salary" placeholder="20000"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Username</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+      <input nz-input type="text" name="Username" [(ngModel)]="officerDetailForm.userName" placeholder="Username"/>
+      <ng-template #userErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please input username!</ng-container>
+        <ng-container *ngIf="control.hasError('duplicated')">The username is redundant!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="row" nz-row>
+    <div nz-col nzSpan="11">
+        <nz-input-group nzSize="large" [nzPrefix]="prefixTemplatePassword" [nzSuffix]="suffixTemplateEye">
+            <input [nzBorderless]="true" autocomplete="off" [type]="fieldTextType1 ? 'text' : 'password'" name="password" [(ngModel)]="officerDetailForm.password"
+             nz-input placeholder="Password" #password="ngModel" pattern="^.*([\w]|[\d]).*$" minlength="8" required  />
+        </nz-input-group>
+        <ng-template #prefixTemplatePassword><span nz-icon nzType="lock"></span></ng-template>
+        <ng-template #suffixTemplateEye><span nz-icon (click)="togglePassword()" class="password-field" nzTheme="fill" [nzType]="eyeType1"></span></ng-template>
+        
+        <small class="danger" *ngIf="(password.touched) && password.errors?.['required']">
+            Password is Required
+        </small>
+        <small class="danger" *ngIf="(password.touched) && password.errors?.['minlength']">
+            Password must minimum be of 8 charactors
+        </small>
+        <small class="danger" *ngIf="officerDetailForm.password.length > 20">
+            Password must be maximum of 20 charactors
+        </small>
+        <small class="danger" *ngIf="(password.touched || password.dirty) && password.errors?.['pattern']">
+            Atleast 1 number and 1 alphabet
+        </small>
+    </div>
+    <div nz-col nzOffset="2" nzSpan="11">
+        <nz-input-group nzSize="large" [nzPrefix]="prefixTemplateConfirmPassword" [nzSuffix]="suffixTemplateConfirmPasswordEye">
+            <input [nzBorderless]="true" [type]="fieldTextType2 ? 'text' : 'password'" name="password" name="confirmPassword" [(ngModel)]="officerDetailForm.confirmPassword"
+             nz-input placeholder="Confirm Password" #confirmPassword="ngModel" pattern="^.*([\w]|[\d]).*$" minlength="8" required  />
+        </nz-input-group>
+        <ng-template #prefixTemplateConfirmPassword><span nz-icon nzType="lock"></span></ng-template>
+        <ng-template #suffixTemplateConfirmPasswordEye><span nz-icon (click)="toggleConfirmPassword()" class="password-field" nzTheme="fill" [nzType]="eyeType2"></span></ng-template>
+        <small class="danger" *ngIf="(confirmPassword.touched) && confirmPassword.errors?.['required']">
+            Confirm Password is Required
+        </small>
+        <small class="danger" *ngIf="confirmPassword.errors?.['minlength']">
+            Confirm Password must be of 8 charactors
+        </small>
+        <small class="success" *ngIf="!password.errors?.['pattern'] && (officerDetailForm.password == officerDetailForm.confirmPassword)">
+            Password is Matched
+        </small>
+        <small class="danger" *ngIf="confirmPassword.touched && (officerDetailForm.password != officerDetailForm.confirmPassword)">
+            Password Not Matched
+        </small>
+        <small class="danger" *ngIf="confirmPassword.touched && password.errors?.['pattern']">
+            Atleast 1 number and 1 alphabet
+        </small>
+    </div>
+</div>
+
+  <nz-form-item>
+    <nz-form-control [nzOffset]="7" [nzSpan]="12">
+      <!-- <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
+      <button nz-button (click)="createOrUpdateOfficer()">{{ buttonName }}</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

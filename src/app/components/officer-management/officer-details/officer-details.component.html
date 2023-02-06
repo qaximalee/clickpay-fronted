@@ -1,0 +1,70 @@
+<div class="officer-detail">
+
+  <div nz-row>
+    <div nz-col [nzSpan]="20">
+      <div class="heading">
+        <h1>
+          Recovery Officer
+        </h1>
+    </div>
+
+    </div>
+    <div nz-col>
+      <button (click)="createAddOrUpdateOfficerModal(null)" nz-button nzType="primary" nzShape="round">
+        <span nz-icon nzType="plus" ></span>
+        Add Recovery Officer
+    </button>
+    </div>
+  </div>
+
+
+  <nz-card>
+    <nz-table #officer [nzData]="officerList" [nzFrontPagination]="false">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>CNIC</th>
+          <th>Phone No</th>
+          <th>Joining Date</th>
+          <th>Salary</th>
+          <th>Username</th>
+          <th>Password</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let officerData of officer.data">
+          <td>{{officerData?.id}}</td>
+          <td>{{officerData?.name}}</td>
+          <td>{{officerData?.address}}</td>
+          <td>{{officerData?.cnic}}</td>
+          <td>{{officerData?.cellNo}}</td>
+          <td>{{officerData?.joiningDate | date}}</td>
+          <td>{{officerData?.salary}}</td>
+          <td>{{officerData?.userName}}</td>
+          <td>{{officerData?.password}}</td>
+          <td>{{officerData?.status}}</td>
+          <td>
+              <button nz-button >
+                  <span nz-icon nzType="edit" ></span>
+              </button>
+          </td>
+        </tr>
+      </tbody>
+  </nz-table>
+  <nz-pagination 
+          class="pagination" 
+          [nzPageIndex]="pageIndex" 
+          [nzPageSize]="pageSize" 
+          [nzTotal]="totalItems"
+          (nzPageIndexChange)="onPageChange($event)">
+        </nz-pagination>
+  </nz-card>
+
+</div>
+
+
+  

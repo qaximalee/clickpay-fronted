@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
      { path: '', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) },
      { path: 'click-pay', loadChildren: () => import('./components/layout/layout.module').then(m => m.LayoutModule) },
-     { path: 'dealer-management', loadChildren: () => import('./components/dealer-management/dealer-management.module').then(m => m.DealerManagementModule) },
+     { path: 'dealer-management', loadChildren: () => import('./components/dealer-management/dealer-management.module').then(m => m.DealerManagementModule) },     
+     { path: 'officer-management', loadChildren: () => import('./components/officer-management/officer-management.module').then(m => m.OfficerManagementModule) },
   ];
 
 @NgModule({

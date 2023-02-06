@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CollectionService } from 'src/app/core/services/collection.service';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
 import { UserManagementService } from 'src/app/core/services/user-management.service';
 import { CreateUserCollectionsModalComponent } from './create-user-collections-modal/create-user-collections-modal.component';
+import { ReceiveUserCollectionModalComponent } from './receive-user-collection-modal/receive-user-collection-modal.component';
 
 @Component({
   selector: 'app-user-collections',
@@ -15,6 +16,7 @@ import { CreateUserCollectionsModalComponent } from './create-user-collections-m
 export class UserCollectionsComponent implements OnInit {
 
   selectedCustomer = null;
+  confirmModal?:NzModalRef
   private _httpConstants: HttpConstants = new HttpConstants();
   customerList : Array<any> = [];
   collectionList : Array<any> = [];
@@ -32,6 +34,11 @@ export class UserCollectionsComponent implements OnInit {
     amount : 0,
     connectionType : null,
   };
+
+  ReceiveCollections={
+    collections: [Array],
+    customer: null, 
+  }
 
   constructor(
     private _modal: NzModalService,
@@ -128,6 +135,75 @@ export class UserCollectionsComponent implements OnInit {
       nzComponentParams: {
         data : this.CustomerData ,
         title : 'USER COLLECTION',
+      },
+      nzFooter: null,
+      nzKeyboard : true,
+      nzWidth : "60%",
+      nzCentered : true,
+      nzMaskClosable : false,
+    })
+    modal.afterClose.subscribe(()=> {
+      this.getCollectionsList();
+    })
+  }
+
+  showConfirmationPopupOnDelete(collectionId:any) : void{
+    this.confirmModal = this._modal.confirm({
+      nzTitle: 'Are you sure you want to delete collection?',
+      nzContent: '',
+      nzCentered: true,
+      nzOnOk: () => this.deleteUserCollection(collectionId,this.Customer.id)
+    })
+  }
+
+  deleteUserCollection(collectionId:number,customerId:number){
+    console.log(collectionId+"  "+customerId);
+    
+      this._collectionService.deleteUserCollection(collectionId,customerId).subscribe({
+        next : (response : any) => {
+          console.log("Delete User Collection Response",response);
+          if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+            this._messageService.success('User Collection Deleted Successfully');
+            this._modal.closeAll();
+            this.getCollectionsList();
+          } 
+          else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+              this._messageService.info('User Collection Not Found')
+          }
+          else{
+            this._messageService.error('Error')
+          }
+        },
+        error : (error : any) => {
+          console.log(error);  
+          if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('User Collection Not Found');
+          }
+        },
+        complete : () => {
+          console.log('Complete');
+        }
+      })
+
+  }
+
+
+  receiveUserCollectionModal(collection:any){
+    if(collection!=null){
+      this.ReceiveCollections.collections = collection;
+    }else{
+      console.log(this.collectionList)
+      this.ReceiveCollections.collections = this.collectionList.filter(collection => collection.collectionStatus == 'UNPAID');
+    }
+    this.ReceiveCollections.customer = this.Customer;
+    
+    const modal = this._modal.create({
+      nzTitle: 'Receive User Collection',
+      nzContent: ReceiveUserCollectionModalComponent,
+      nzViewContainerRef: this._viewContainerRef,
+      nzComponentParams: {
+        data : this.ReceiveCollections,
+        title : 'RECEIVE USER COLLECTION',
       },
       nzFooter: null,
       nzKeyboard : true,

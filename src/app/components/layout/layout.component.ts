@@ -64,15 +64,15 @@ export class LayoutComponent implements OnInit {
   }
 
   routeToOfficerDetails(){
-    this._router.navigate(['click-pay/officer-management/']);
+    this._router.navigate(['click-pay/officer-management/officer-details']);
   }
 
   routeToAreaAllocation(){
-    this._router.navigate(['click-pay/officer-management/']);
+    this._router.navigate(['click-pay/officer-management/area-allocation']);
   }
 
   routeToCollectionFromOfficer(){
-    this._router.navigate(['click-pay/officer-management/']);
+    this._router.navigate(['click-pay/officer-management/officer-collections']);
   }
 
 }
