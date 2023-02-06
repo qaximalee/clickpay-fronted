@@ -64,13 +64,25 @@
             <td>{{collection?.amount}}</td>
             <td>{{collection?.collectionStatus}}</td>
             <td>
-              <button nz-button nz-dropdown [nzDropdownMenu]="collection?.collectionStatus == 'PAID' ? menuPaid : menuUnpaid">
+              
+                <span class="paid-button" (click)="receiveUserCollectionModal(collection)" hidden="collection?.collectionStatus == 'UNPAID'"
+                nz-icon nzType="dollar" nzTheme="outline"></span>
+                <nz-divider nzType="vertical"></nz-divider>
+                <span class="unpaid-button" (click)="showConfirmationPopupOnUnpaid(collection?.billNumber)" hidden="collection?.collectionStatus != 'PAID'"
+                nz-icon nzType="dollar" nzTheme="outline"></span>
+                <nz-divider nzType="vertical"></nz-divider>
+                <span class="delete-button" (click)="showConfirmationPopupOnDelete(collection?.id)" hidden="collection?.collectionStatus == 'PAID'"
+                nz-icon nzType="delete" nzTheme="outline"></span>
+              
+              <!-- <button nz-button nz-dropdown [nzDropdownMenu]="collection?.collectionStatus == 'PAID' ? menuPaid : menuUnpaid">
                 Edit
                 <span nz-icon nzType="down"></span>
               </button>
-              <nz-dropdown-menu #menuPaid="nzDropdownMenu">
+              <span nz-icon nzType="dollar" nzTheme="outline"></span>
+              <span nz-icon nzType="delete" nzTheme="outline"></span> -->
+              <!-- <nz-dropdown-menu #menuPaid="nzDropdownMenu">
                 <ul nz-menu>
-                  <li nz-menu-item>Unpaid</li>
+                  <li nz-menu-item (click)="showConfirmationPopupOnUnpaid(collection?.billNumber)">Unpaid</li>
                   <li nz-menu-item>View Details</li>
                 </ul>
               </nz-dropdown-menu>
@@ -80,7 +92,7 @@
                   <li nz-menu-item (click)="showConfirmationPopupOnDelete(collection?.id)" >Delete</li>
                   <li nz-menu-item>View Details</li>
                 </ul>
-              </nz-dropdown-menu>
+              </nz-dropdown-menu> -->
             </td>
           </tr>
         </tbody>

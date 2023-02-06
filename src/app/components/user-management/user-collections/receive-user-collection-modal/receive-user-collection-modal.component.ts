@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { NzModalRef } from 'ng-zorro-antd/modal';
-import { elementAt } from 'rxjs';
-import { ReceiveUserCollection } from 'src/app/core/models/receive-user-collection.model';
-import { UserCollection } from 'src/app/core/models/user-collection.model';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { HttpConstants } from 'src/app/core/constants/http.constants';
+import { PaymentMethod } from 'src/app/core/models/payment-method';
+import { CollectionService } from 'src/app/core/services/collection.service';
+import { MessageService } from 'src/app/core/services/message.service';
 
 @Component({
   selector: 'app-receive-user-collection-modal',
@@ -15,6 +15,7 @@ export class ReceiveUserCollectionModalComponent implements OnInit {
   @Input() data?: any;
   @Input() title?: string;
   confirmModal?: NzModalRef;
+  private _httpConstants: HttpConstants = new HttpConstants();
 
   receiveRequest = {
     amount : null,
@@ -25,11 +26,16 @@ export class ReceiveUserCollectionModalComponent implements OnInit {
     connectionType : null,
   }
 
+  paymentMethodList = Object.values(PaymentMethod);
 
-
-  constructor() { }
+  constructor(
+    private _modal: NzModalService,
+    private _collectionService : CollectionService,
+    private _messageService : MessageService
+  ) { }
 
   ngOnInit(): void {
+    
     this.data.collections.forEach((item: any, index=0) => {
         console.log(item)
         this.receiveRequest.amount += item.amount
@@ -44,11 +50,38 @@ export class ReceiveUserCollectionModalComponent implements OnInit {
   }
 
 
-  submitRecevieCollections(){
-    this.data.collections.array.forEach((element:any) => {
-      this.receiveRequest.collectionIds = element?.id;
-    });
-    this.receiveRequest.customerId = this.data?.customer?.id;
-    console.log("receiving request " +this.receiveRequest);
+  receiveUserCollection(){
+    console.log(this.receiveRequest);
+    this._collectionService.paidUserCollection(this.receiveRequest).subscribe({
+      next : (response : any) => {
+        console.log("Get Paid User Collection Response",response);
+        if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+          this._messageService.success('User Collection Received Successfully');
+            this._modal.closeAll();
+        } 
+        else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('User Collection Receiving Failed');
+        }
+        else{
+          this._messageService.error('Error');
+        }
+      },
+      error : (error : any) => {
+        console.log(error);  
+        if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+          this._messageService.info('User Collection Receiving Failed');
+        }
+      },
+      complete : () => {
+        console.log('Complete');
+      }
+    })
   }
+  // submitRecevieCollections(){
+  //   this.data.collections.array.forEach((element:any) => {
+  //     this.receiveRequest.collectionIds = element?.id;
+  //   });
+  //   this.receiveRequest.customerId = this.data?.customer?.id;
+  //   console.log("receiving request " +this.receiveRequest);
+  // }
 }

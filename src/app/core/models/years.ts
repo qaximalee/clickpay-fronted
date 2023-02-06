@@ -1,0 +1,10 @@
+export enum Years {
+    CURRENT_YEAR = new Date().getFullYear(),
+    PREVIOUS_YEAR = CURRENT_YEAR - 1,
+    PREVIOUS_2_YEARS = CURRENT_YEAR - 2,
+    NEXT_YEAR = CURRENT_YEAR + 1,
+    NEXT_2_YEARS = CURRENT_YEAR + 2,
+    NEXT_3_YEARS = CURRENT_YEAR + 3,
+    NEXT_4_YEARS = CURRENT_YEAR + 4,
+    NEXT_5_YEARS = CURRENT_YEAR + 5,
+  }

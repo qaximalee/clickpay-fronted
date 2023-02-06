@@ -1,4 +1,4 @@
-export enum PaymentType {
+export enum Months {
     January = 'JAN',
     February = 'FEB',
     March = 'MARCH',

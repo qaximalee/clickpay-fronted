@@ -25,5 +25,13 @@ export class CollectionService {
   public deleteUserCollection(userCollectionId:number,customerId:number):Observable<any>{
     return this._http.delete(this.baseUrl+`collections/delete?collectionId=${userCollectionId}&customerId=${customerId}`);
   }
+
+  public paidUserCollection(request:any):Observable<any>{
+    return this._http.post(this.baseUrl+`collections/update-as-paid`,request)
+  }
   
+  public unPaidUserCollection(billNumber:number):Observable<any>{
+    return this._http.post(this.baseUrl+`collections/update-as-unpaid?billNumber=${billNumber}`,null)
+  }
+
 }

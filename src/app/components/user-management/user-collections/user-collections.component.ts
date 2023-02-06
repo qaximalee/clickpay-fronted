@@ -190,7 +190,7 @@ export class UserCollectionsComponent implements OnInit {
 
   receiveUserCollectionModal(collection:any){
     if(collection!=null){
-      this.ReceiveCollections.collections = collection;
+      this.ReceiveCollections.collections[0] = collection;
     }else{
       console.log(this.collectionList)
       this.ReceiveCollections.collections = this.collectionList.filter(collection => collection.collectionStatus == 'UNPAID');
@@ -212,8 +212,49 @@ export class UserCollectionsComponent implements OnInit {
       nzMaskClosable : false,
     })
     modal.afterClose.subscribe(()=> {
+      this.ReceiveCollections.collections=[];
+      this.ReceiveCollections.customer=null;
       this.getCollectionsList();
     })
+  }
+
+  showConfirmationPopupOnUnpaid(billNumber:number) : void{
+    this.confirmModal = this._modal.confirm({
+      nzTitle: 'Are you sure you want to UnPaid collection?',
+      nzContent: '',
+      nzCentered: true,
+      nzOnOk: () => this.userCollectionUnPaid(billNumber)
+    })
+  }
+
+  userCollectionUnPaid(billNumber:number){
+    console.log(billNumber)
+    this._collectionService.unPaidUserCollection(billNumber).subscribe({
+      next : (response : any) => {
+        console.log("UnPaid User Collection Response",response);
+        if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+          this._messageService.success('User Collection UnPaid Successfully');
+          this._modal.closeAll();
+          this.getCollectionsList();
+        } 
+        else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('User Collection UnPaid Failed')
+        }
+        else{
+          this._messageService.error('Error')
+        }
+      },
+      error : (error : any) => {
+        console.log(error);  
+        if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+          this._messageService.info('User Collection UnPaid Failed');
+        }
+      },
+      complete : () => {
+        console.log('Complete');
+      }
+    })
+
   }
 
 }
