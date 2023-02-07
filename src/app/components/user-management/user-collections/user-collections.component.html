@@ -63,16 +63,18 @@
             <td>{{collection?.connectionType}}</td>
             <td>{{collection?.amount}}</td>
             <td>{{collection?.collectionStatus}}</td>
-            <td>
-              
-                <span class="paid-button" (click)="receiveUserCollectionModal(collection)" hidden="collection?.collectionStatus == 'UNPAID'"
-                nz-icon nzType="dollar" nzTheme="outline"></span>
-                <nz-divider nzType="vertical"></nz-divider>
-                <span class="unpaid-button" (click)="showConfirmationPopupOnUnpaid(collection?.billNumber)" hidden="collection?.collectionStatus != 'PAID'"
-                nz-icon nzType="dollar" nzTheme="outline"></span>
-                <nz-divider nzType="vertical"></nz-divider>
-                <span class="delete-button" (click)="showConfirmationPopupOnDelete(collection?.id)" hidden="collection?.collectionStatus == 'PAID'"
-                nz-icon nzType="delete" nzTheme="outline"></span>
+            <td> 
+              <!-- style="background-image: url('./assets/images/pay.png'); " -->
+                <span class="unpaid-button" *ngIf="collection?.collectionStatus=='PAID'" (click)="showConfirmationPopupOnUnpaid(collection?.billNumber)"
+                  nz-icon style="background-image: url('./assets/images/unpaid.png'); height: 20px; width: 20px; background-size: contain;" nzTheme="outline"></span>
+
+                <span class="paid-button" *ngIf="collection?.collectionStatus=='UNPAID'" (click)="receiveUserCollectionModal(collection)" 
+                  nz-icon  style="background-image: url('./assets/images/paid2.png'); height: 20px; width: 20px; background-size: contain;" nzTheme="outline"></span>
+
+                <nz-divider nzType="vertical" *ngIf="collection?.collectionStatus=='UNPAID'" ></nz-divider>
+
+                <span class="delete-button" *ngIf="collection?.collectionStatus=='UNPAID'" (click)="showConfirmationPopupOnDelete(collection?.id)" 
+                  nz-icon nzType="delete" nzTheme="outline"></span>
               
               <!-- <button nz-button nz-dropdown [nzDropdownMenu]="collection?.collectionStatus == 'PAID' ? menuPaid : menuUnpaid">
                 Edit
