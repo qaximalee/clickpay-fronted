@@ -2,7 +2,10 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
+import { Months } from 'src/app/core/models/months';
+import { PaymentType } from 'src/app/core/models/payment-type';
 import { UserCollection } from 'src/app/core/models/user-collection.model';
+import { Years } from 'src/app/core/models/years';
 import { CollectionService } from 'src/app/core/services/collection.service';
 import { MessageService } from 'src/app/core/services/message.service';
 
@@ -32,12 +35,13 @@ export class CreateUserCollectionsModalComponent implements OnInit {
     private _modal : NzModalService
   ) { }
 
-  monthList = [ "Jan", "Feb", "Mar", "April", "May", "June",
-  "July", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+  monthList = Object.values(Months);
+  ;
 
-  yearList = [ 2020, 2021, 2022, 2023, 2024, 2025];
+  yearList = Object.values(Years).filter(value => typeof value === 'number').sort();
 
-  paymentTypeList = [ "Monthly", "Installment", "Other"];
+  paymentTypeList = Object.values(PaymentType);
+  ;
 
   ngOnInit(): void {
     this.collectionForm.customerId = this.data?.id;

@@ -63,14 +63,28 @@
             <td>{{collection?.connectionType}}</td>
             <td>{{collection?.amount}}</td>
             <td>{{collection?.collectionStatus}}</td>
-            <td>
-              <button nz-button nz-dropdown [nzDropdownMenu]="collection?.collectionStatus == 'PAID' ? menuPaid : menuUnpaid">
+            <td> 
+              <!-- style="background-image: url('./assets/images/pay.png'); " -->
+                <span class="unpaid-button" *ngIf="collection?.collectionStatus=='PAID'" (click)="showConfirmationPopupOnUnpaid(collection?.billNumber)"
+                  nz-icon style="background-image: url('./assets/images/unpaid.png'); height: 20px; width: 20px; background-size: contain;" nzTheme="outline"></span>
+
+                <span class="paid-button" *ngIf="collection?.collectionStatus=='UNPAID'" (click)="receiveUserCollectionModal(collection)" 
+                  nz-icon  style="background-image: url('./assets/images/paid2.png'); height: 20px; width: 20px; background-size: contain;" nzTheme="outline"></span>
+
+                <nz-divider nzType="vertical" *ngIf="collection?.collectionStatus=='UNPAID'" ></nz-divider>
+
+                <span class="delete-button" *ngIf="collection?.collectionStatus=='UNPAID'" (click)="showConfirmationPopupOnDelete(collection?.id)" 
+                  nz-icon nzType="delete" nzTheme="outline"></span>
+              
+              <!-- <button nz-button nz-dropdown [nzDropdownMenu]="collection?.collectionStatus == 'PAID' ? menuPaid : menuUnpaid">
                 Edit
                 <span nz-icon nzType="down"></span>
               </button>
-              <nz-dropdown-menu #menuPaid="nzDropdownMenu">
+              <span nz-icon nzType="dollar" nzTheme="outline"></span>
+              <span nz-icon nzType="delete" nzTheme="outline"></span> -->
+              <!-- <nz-dropdown-menu #menuPaid="nzDropdownMenu">
                 <ul nz-menu>
-                  <li nz-menu-item>Unpaid</li>
+                  <li nz-menu-item (click)="showConfirmationPopupOnUnpaid(collection?.billNumber)">Unpaid</li>
                   <li nz-menu-item>View Details</li>
                 </ul>
               </nz-dropdown-menu>
@@ -80,7 +94,7 @@
                   <li nz-menu-item (click)="showConfirmationPopupOnDelete(collection?.id)" >Delete</li>
                   <li nz-menu-item>View Details</li>
                 </ul>
-              </nz-dropdown-menu>
+              </nz-dropdown-menu> -->
             </td>
           </tr>
         </tbody>
