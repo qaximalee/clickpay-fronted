@@ -25,8 +25,6 @@ export class ReceiveUserCollectionModalComponent implements OnInit {
     connectionType : null,
   }
 
-
-
   constructor() { }
 
   ngOnInit(): void {
