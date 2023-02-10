@@ -75,7 +75,12 @@
 
                 <span class="delete-button" *ngIf="collection?.collectionStatus=='UNPAID'" (click)="showConfirmationPopupOnDelete(collection?.id)" 
                   nz-icon nzType="delete" nzTheme="outline"></span>
-              
+                  
+                <nz-divider nzType="vertical" ></nz-divider>
+                
+                <span class="detail-button" (click)="detailUserCollectionModal(collection?.id)" 
+                  nz-icon nzType="eye" nzTheme="outline"></span>
+
               <!-- <button nz-button nz-dropdown [nzDropdownMenu]="collection?.collectionStatus == 'PAID' ? menuPaid : menuUnpaid">
                 Edit
                 <span nz-icon nzType="down"></span>

@@ -26,9 +26,13 @@ export class ReceiveUserCollectionModalComponent implements OnInit {
     connectionType : null,
   }
 
+  paymentMethodList = Object.values(PaymentMethod);
 
-
-  constructor() { }
+  constructor(
+    private _modal: NzModalService,
+    private _collectionService : CollectionService,
+    private _messageService : MessageService
+  ) { }
 
   ngOnInit(): void {
     
@@ -73,11 +77,5 @@ export class ReceiveUserCollectionModalComponent implements OnInit {
       }
     })
   }
-  // submitRecevieCollections(){
-  //   this.data.collections.array.forEach((element:any) => {
-  //     this.receiveRequest.collectionIds = element?.id;
-  //   });
-  //   this.receiveRequest.customerId = this.data?.customer?.id;
-  //   console.log("receiving request " +this.receiveRequest);
-  // }
+
 }

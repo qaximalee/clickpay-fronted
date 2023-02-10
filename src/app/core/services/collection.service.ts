@@ -34,4 +34,8 @@ export class CollectionService {
     return this._http.post(this.baseUrl+`collections/update-as-unpaid?billNumber=${billNumber}`,null)
   }
 
+  public getUserCollectionById(userCollectionId:number,customerId:number):Observable<any>{
+    return this._http.get(this.baseUrl+`collections/id?collectionId=${userCollectionId}&customerId=${customerId}`);
+  }
+
 }

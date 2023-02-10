@@ -2,10 +2,10 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CollectionService } from 'src/app/core/services/collection.service';
-import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
 import { UserManagementService } from 'src/app/core/services/user-management.service';
 import { CreateUserCollectionsModalComponent } from './create-user-collections-modal/create-user-collections-modal.component';
+import { DetailUserCollectionModalComponent } from './detail-user-collection-modal/detail-user-collection-modal.component';
 import { ReceiveUserCollectionModalComponent } from './receive-user-collection-modal/receive-user-collection-modal.component';
 
 @Component({
@@ -38,6 +38,11 @@ export class UserCollectionsComponent implements OnInit {
   ReceiveCollections={
     collections: [Array],
     customer: null, 
+  }
+
+  DetailUserCollectionRequest = {
+    collectionId: 0,
+    customerId: null, 
   }
 
   constructor(
@@ -255,6 +260,25 @@ export class UserCollectionsComponent implements OnInit {
       }
     })
 
+  }
+
+  detailUserCollectionModal(collectionId:number){
+    
+    this.DetailUserCollectionRequest.collectionId = collectionId;
+    this.DetailUserCollectionRequest.customerId = this.Customer.id;
+    
+    const modal = this._modal.create({
+      nzTitle: 'User Collection Details',
+      nzContent: DetailUserCollectionModalComponent,
+      nzViewContainerRef: this._viewContainerRef,
+      nzComponentParams: {
+        data : this.DetailUserCollectionRequest,
+        title : 'USER COLLECTION DETAILS'
+      },
+      nzFooter: null,
+      nzKeyboard : true,
+      nzWidth : "50%",
+    })
   }
 
 }

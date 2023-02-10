@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
+import { UserCollection } from 'src/app/core/models/user-collection.model';
+import { CollectionService } from 'src/app/core/services/collection.service';
 import { MessageService } from 'src/app/core/services/message.service';
 
 @Component({
@@ -14,25 +16,28 @@ export class DetailUserCollectionModalComponent implements OnInit {
   @Input() data?: any;
   
   httpConstants : HttpConstants = new HttpConstants();
-  userCollection : User | undefined;
+  userCollection : UserCollection | any;
 
   constructor(
+    private _userCollection : CollectionService,
     private _messageService : MessageService,
   ) { }
 
   ngOnInit(): void {
+    this.getUserCollectionDetails(this.data.collectionId,this.data.customerId);
   }
 
-  getUserDetails(userId:any){
-    this._userService.getUserDetails(userId).subscribe({
+  getUserCollectionDetails(userCollectionId:number,customerId:number){
+    console.log(userCollectionId);
+    console.log(customerId);
+    this._userCollection.getUserCollectionById(userCollectionId,customerId).subscribe({
       next: (response : any) => {
         console.log(response);
         if(response?.status == this.httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
-          this.user = response?.data;
-          console.log(this.user);
-          if(this.user?.plantSaleGroups != null){
-            this.mapPlantAndItsSalesGroup(this.user?.plantSaleGroups)
-          }
+          this.userCollection = response?.data;
+          this.userCollection.connectionType = response?.data?.customer?.connectionType?.type;
+          console.log("collection response in details : ");
+          console.log(this.userCollection);
           this._messageService.success('Success');
         }
         else if(response?.status == this.httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
