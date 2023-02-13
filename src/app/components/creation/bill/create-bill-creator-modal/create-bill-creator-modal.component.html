@@ -19,7 +19,7 @@
         <nz-input-group  nzSize="large" >
           <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Year..."
           name="year" [(ngModel)]="billForm.year" #year="ngModel" required>
-              <nz-option *ngFor="let year of yearList " [nzLabel]="year" [nzValue]="year"></nz-option>
+              <nz-option *ngFor="let year of yearList"  [nzLabel]="year" [nzValue]="year"></nz-option>
           </nz-select>                
       </nz-input-group>
       </nz-form-control>
