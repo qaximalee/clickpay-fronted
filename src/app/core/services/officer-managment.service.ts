@@ -20,5 +20,4 @@ export class OfficerManagementService {
     return this._http.post(this.baseUrl+`recovery-officer/officer`,officer)
   }
 
-  
 }
