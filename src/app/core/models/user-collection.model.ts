@@ -10,5 +10,11 @@ export class UserCollection {
   remarks : any = null;
   year: number = 0;
   connectionType: any = null;
+  collectionStatus : any = null;
+  createdBy : any = null;
+  creationDate : any = null;
+  lastModifiedDate : any = null;
+  modifiedBy : any = null;
+  deleted : boolean = false;
 
 }

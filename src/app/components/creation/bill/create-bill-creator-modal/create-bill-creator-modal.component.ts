@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { BillCreator } from 'src/app/core/models/bill-creator.model';
+import { Months } from 'src/app/core/models/months';
+import { Years } from 'src/app/core/models/years';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
 
@@ -32,12 +34,12 @@ export class CreateBillCreatorModalComponent implements OnInit {
     private _modal : NzModalService
   ) { }
 
-  monthList = [ "Jan", "Feb", "Mar", "April", "May", "June",
-  "July", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+  monthList = Object.values(Months);
 
-  yearList = [ 2020, 2021, 2022, 2023, 2024, 2025];
+  yearList = Object.values(Years).filter(value => typeof value === 'number').sort();
 
   ngOnInit(): void {
+    console.log(this.yearList)
     this.getConnectionTypeList();
   }
 

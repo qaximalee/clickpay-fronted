@@ -67,13 +67,13 @@ export class BillComponent implements OnInit {
   } 
 
 
-  createAddBillsCreatorModal(packageId:any){
+  createAddBillsCreatorModal(billCreatorId:any){
     const modal = this._modal.create({
-      nzTitle: packageId ? 'Edit Bills' : 'Create Bills',
+      nzTitle: billCreatorId ? 'Edit Bills' : 'Create Bills',
       nzContent: CreateBillCreatorModalComponent,
       nzViewContainerRef: this._viewContainerRef,
       nzComponentParams: {
-        data : packageId ? packageId : null,
+        data : billCreatorId ? billCreatorId : null,
         title : 'BILLS'
       },
       nzFooter: null,

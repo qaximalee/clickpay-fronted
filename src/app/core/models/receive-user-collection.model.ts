@@ -1,4 +1,4 @@
-export class ProductUpdate{
+export class ReceiveUserCollection{
 
     materialCode : string = '';
     startDate : string = '';

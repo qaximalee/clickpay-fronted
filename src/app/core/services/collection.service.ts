@@ -21,5 +21,21 @@ export class CollectionService {
   public createUserCollection(userCollection:any):Observable<any>{
     return this._http.post(this.baseUrl+`collections/`,userCollection);
   }
+
+  public deleteUserCollection(userCollectionId:number,customerId:number):Observable<any>{
+    return this._http.delete(this.baseUrl+`collections/delete?collectionId=${userCollectionId}&customerId=${customerId}`);
+  }
+
+  public paidUserCollection(request:any):Observable<any>{
+    return this._http.post(this.baseUrl+`collections/update-as-paid`,request)
+  }
   
+  public unPaidUserCollection(billNumber:number):Observable<any>{
+    return this._http.post(this.baseUrl+`collections/update-as-unpaid?billNumber=${billNumber}`,null)
+  }
+
+  public getUserCollectionById(userCollectionId:number,customerId:number):Observable<any>{
+    return this._http.get(this.baseUrl+`collections/id?collectionId=${userCollectionId}&customerId=${customerId}`);
+  }
+
 }
