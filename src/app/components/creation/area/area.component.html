@@ -131,10 +131,10 @@
                 <tbody>
                   <tr *ngFor="let subLocality of subLocalities.data">
                     <td>{{subLocality?.id}}</td>
-                    <td>{{subLocality?.locality?.city?.country?.name}}</td>
-                    <td>{{subLocality?.locality?.city?.name}}</td>
-                    <td>{{subLocality?.locality?.name}}</td>
-                    <td>{{subLocality?.name}}</td>
+                    <td>{{subLocality?.countryName}}</td>
+                    <td>{{subLocality?.cityName}}</td>
+                    <td>{{subLocality?.localityName}}</td>
+                    <td>{{subLocality?.subLocalityName}}</td>
                     <td>
                         <span class="edit-button" (click)="createAndUpdateSubLocalityModal(subLocality?.id)" 
                         nz-icon nzType="edit" nzTheme="outline"></span>
