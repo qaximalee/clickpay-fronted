@@ -16,5 +16,6 @@ export class UserCollection {
   lastModifiedDate : any = null;
   modifiedBy : any = null;
   deleted : boolean = false;
+  bill : any = null;
 
 }

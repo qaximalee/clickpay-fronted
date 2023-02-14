@@ -9,11 +9,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AntdesignModule } from './modules/antdesign.module';
 import { RequestInterceptor } from './core/interceptors/request.interceptor';
+import { DetailUserCollectionModalComponent } from './components/user-management/user-collections/detail-user-collection-modal/detail-user-collection-modal.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,64 @@
+.heading{
+    font-variant: small-caps;
+}
+
+
+.label{
+    color: #00388B;
+    font-weight: 700;
+
+}
+
+.label-modal{
+    color: #00388B;
+    font-weight: 700;
+}
+
+.text{
+    color: #3D3D3D;
+    font-variant: normal;
+    font-weight: 700;
+}
+
+.claim-history-table{
+    height: inherit;
+}
+
+
+.row{
+    margin-bottom: 20px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row-first{
+    margin-bottom: 20px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancel{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancel-button{
+  width: 20%;
+  font-size: large;
+  border-color: #00388B;
+  color: #00388B;
+  text-align: center;
+  padding: 2px;
+  height: 40px;
+  border-radius: 6px;
+}
+
+.download-icon{
+    margin-top: 10px;
+}

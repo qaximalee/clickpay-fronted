@@ -38,4 +38,8 @@ export class CollectionService {
     return this._http.get(this.baseUrl+`collections/id?collectionId=${userCollectionId}&customerId=${customerId}`);
   }
 
+  // bill paid 
+  public getBillDetailById(billNumber:number):Observable<any>{
+    return this._http.get(this.baseUrl+`bill/?billNo=${billNumber}`);
+  }
 }

@@ -2,11 +2,10 @@
     <div class="modal-content">
         <div class="row-first" nz-row>
             <div nz-col nzSpan="10">
-
                 <label class="label-modal">Collection Id : <span class="text"> {{ userCollection?.id }}</span></label>
             </div>
             <div nz-col nzOffset="2" nzSpan="10">
-                <label class="label-modal">Internet Id : <span class="text"> {{ userCollection?.internetId }}</span> </label>
+                <label class="label-modal">Internet Id : <span class="text"> {{ userCollection?.customer?.internetId }}</span> </label>
             </div>
         </div>
         <div class="row" nz-row>
@@ -19,9 +18,6 @@
         </div>
         <div class="row" nz-row>
             <div nz-col nzSpan="10">
-                <label class="label-modal">Collection Status : <span class="text"> {{ userCollection?.collectionStatus }}</span> </label>
-            </div>
-            <div nz-col nzOffset="2" nzSpan="10">
                 <label class="label-modal">Payment Type : <span class="text">{{ userCollection?.paymentType }}</span> </label>
             </div>
             <div nz-col nzOffset="2" nzSpan="10">
@@ -30,9 +26,14 @@
         </div>
         <div class="row" nz-row>
             <div nz-col nzSpan="10">
-                <label class="label-modal">Amount : <span class="text">{{ userCollection?.amount }}</span> </label>
+                <label class="label-modal">Collection Status : <span class="text"> {{ userCollection?.collectionStatus }}</span> </label>
             </div>
             <div nz-col nzOffset="2" nzSpan="10">
+                <label class="label-modal">Amount : <span class="text">{{ userCollection?.amount }}</span> </label>
+            </div>
+        </div>
+        <div *ngIf="userCollection?.remarks" class="row" nz-row>
+            <div nz-col nzSpan="10">
                 <label class="label-modal"> Remarks : <span class="text">{{ userCollection?.remarks }}</span> </label>            
             </div>
         </div>
@@ -41,15 +42,23 @@
                 <label class="label-modal">Created By : <span class="text">{{ userCollection?.createdBy }}</span> </label>
             </div>
             <div nz-col nzOffset="2" nzSpan="10">
-                <label class="label-modal"> Created Date : <span class="date">{{ userCollection?.createdDate }}</span> </label>            
+                <label class="label-modal"> Created Date : <span class="text">{{ userCollection?.creationDate | date:'short' }}</span> </label>            
             </div>
         </div>
-        <div class="row" nz-row>
+        <div *ngIf="userCollection?.bill" class="row"  nz-row>
             <div nz-col nzSpan="10">
-                <label class="label-modal">Modified By : <span class="text">{{ userCollection?.modifiedBy }}</span> </label>
+                <label class="label-modal">Bill Number : <span class="text">{{ userCollection?.bill?.billNumber }}</span> </label>
             </div>
             <div nz-col nzOffset="2" nzSpan="10">
-                <label class="label-modal"> Modified Date: <span class="text">{{ userCollection?.LastModifiedDate }}</span> </label>            
+                <label class="label-modal"> Amount Paid: <span class="text">{{ userCollection?.bill?.amount }}</span> </label>            
+            </div>
+        </div>
+        <div *ngIf="userCollection?.bill" class="row" nz-row>
+            <div nz-col nzSpan="10">
+                <label class="label-modal">Received By : <span class="text">{{ userCollection?.modifiedBy }}</span> </label>
+            </div>
+            <div nz-col nzOffset="2" nzSpan="10">
+                <label class="label-modal"> Received Date: <span class="text">{{ userCollection?.lastModifiedDate | date:'short'}}</span> </label>            
             </div>
         </div>
     </div>
