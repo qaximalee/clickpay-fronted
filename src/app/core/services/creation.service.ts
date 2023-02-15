@@ -154,7 +154,7 @@ export class CreationService {
     return this._http.post(this.baseUrl+'bills-creator/',billsCreator)
   }
 
-  public deleteBillsCreator(billCreatorId:number):Observable<any>{
-    return this._http.delete(this.baseUrl+`bills-creator/?billsCreatorId=${billCreatorId}`)
+  public deleteBillsCreator(billCreator:any):Observable<any>{
+    return this._http.post(this.baseUrl+`bills-creator/delete`,billCreator)
   }
 }
