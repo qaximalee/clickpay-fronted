@@ -35,6 +35,10 @@ export class CreationService {
   }
 
   // Package
+  public getPackageListByCompany(companyId:any):Observable<any>{
+    return this._http.get(this.baseUrl+`user-profile/package/by-company?companyId=${companyId}`)
+  }
+
   public getPackageList():Observable<any>{
     return this._http.get(this.baseUrl+`user-profile/package`)
   }

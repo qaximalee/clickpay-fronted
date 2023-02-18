@@ -71,8 +71,8 @@ export class LayoutComponent implements OnInit {
     this._router.navigate(['click-pay/officer-management/area-allocation']);
   }
 
-  routeToCollectionFromOfficer(){
-    this._router.navigate(['click-pay/officer-management/officer-collections']);
+  routeToOfficerCollectionHistory(){
+    this._router.navigate(['click-pay/officer-management/officer-collection-history']);
   }
 
 }

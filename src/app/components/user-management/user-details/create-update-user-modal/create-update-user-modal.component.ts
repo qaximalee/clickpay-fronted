@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
+import { Discount } from 'src/app/core/models/discount';
 import { User } from 'src/app/core/models/user.model';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
@@ -19,7 +20,7 @@ export class CreateUpdateUserModalComponent implements OnInit {
   userDetailForm: User = new User(); 
   @ViewChild('userDetailFormView') userDetailFormView!: NgForm;
   
-  discountList: Array<string> = ['HALF', 'FULL', 'QUARTER', 'SEMI', 'CUSTOM'];
+  discountList: Array<string> = Object.values(Discount);
   
   private _httpConstants: HttpConstants = new HttpConstants();
 
@@ -31,6 +32,7 @@ export class CreateUpdateUserModalComponent implements OnInit {
   connectionTypeList: Array<any> = [];
   subLocalitiesList: Array<any> = [];
 
+  amount: any;
   isDisabled: boolean = true;
 
   constructor(
@@ -44,7 +46,10 @@ export class CreateUpdateUserModalComponent implements OnInit {
     if (this.data != null) {
       this.buttonName = 'Update';
     }
-    this.getPackageList();
+    // if(this.userDetailForm.companyId != null){
+    //   this.getPackageList();
+    // }
+    
     this.getBoxMediaList();
     this.getCompanyList();
     this.getSubLocalityList();
@@ -52,11 +57,11 @@ export class CreateUpdateUserModalComponent implements OnInit {
   }
 
   getPackageList(){
-    this._creationService.getPackageList().subscribe({
+    this._creationService.getPackageListByCompany(this.userDetailForm.companyId).subscribe({
       next : (response : any) => {
         console.log("Get Package List Response",response);
         if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
-          this.packageList = response?.data
+          this.packageList = response?.data;    
         } 
         else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
             this._messageService.info('Packages Not Found')
@@ -72,6 +77,7 @@ export class CreateUpdateUserModalComponent implements OnInit {
         }
       },
       complete : () => {
+        this.userDetailForm.packagesId = null;
         console.log('Complete');
       }
     })
@@ -182,7 +188,9 @@ export class CreateUpdateUserModalComponent implements OnInit {
   }  
 
   onChangeOfPackage(event: any){
-    event != null ? this.userDetailForm.packagesId = event : this.userDetailForm.packagesId = null;
+    event != null ? this.userDetailForm.packagesId = event.id : this.userDetailForm.packagesId = null;
+    this.amount = event.salePrice;
+    this.userDetailForm.amount = event.salePrice;
   }
 
   onChangeOfBoxMedia(event: any){
@@ -194,11 +202,34 @@ export class CreateUpdateUserModalComponent implements OnInit {
   }
 
   onChangeOfCompany(event: any){
-    event != null ? this.userDetailForm.companyId = event : this.userDetailForm.companyId = null;
+    if(event != null){
+      this.userDetailForm.companyId = event;
+      this.userDetailForm.amount = null;
+      this.getPackageList();
+    }else{
+      this.userDetailForm.companyId = null;
+      this.userDetailForm.packagesId = null;
+      this.userDetailForm.amount = null;
+      this.packageList = [];
+    }
   }
 
   onChangeOfDiscount(event: any) {
-    event != null ? this.userDetailForm.discount = event : this.userDetailForm.discount = '';
+    if(event!=null){
+      this.userDetailForm.discount = event;
+      if(event=='HALF'){
+        this.userDetailForm.amount = this.amount/2;
+      }
+      else if(event=='FULL'){
+        this.userDetailForm.amount = 0;
+      }
+      else if(event=='QUARTER'){
+        this.userDetailForm.amount = this.amount/4;
+      }
+    }
+    else{
+      this.userDetailForm.discount = '';
+    }
     this.userDetailForm.discount != null && this.userDetailForm.discount === 'CUSTOM' ? this.isDisabled = false : this.isDisabled = true;
   }
 
