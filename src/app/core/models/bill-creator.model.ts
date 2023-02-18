@@ -1,4 +1,5 @@
 export class BillCreator {
+    billCreatorId: number = 0;
     amount: any = null;
     connectionType: any = null;
     month: string = '';

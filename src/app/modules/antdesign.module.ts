@@ -63,7 +63,7 @@ registerLocaleData(en);
     NzCollapseModule,
     NzToolTipModule,
     NzDatePickerModule,
-    NzTabsModule
+    NzTabsModule,
     ],
 
   exports: [

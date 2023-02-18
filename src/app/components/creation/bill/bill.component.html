@@ -47,7 +47,7 @@
                 <td>{{billCreator?.deleted ? (billCreator?.lastModifiedDate|date:'short') : (billCreator?.creationDate|date:'short') }}</td>
                 <td>{{billCreator?.by?.firstName+' '+billCreator?.by?.lastName}}</td>
                 <td>
-                  <span class="delete-button" (click)="showConfirmationPopupOnDelete(billCreator?.id)"
+                  <span class="delete-button" [class.disabled]="billCreator?.deleted" (click)="showConfirmationPopupOnDelete(billCreator)"
                   nz-icon nzType="delete" nzTheme="outline"></span>
                 </td>
               </tr>
@@ -63,3 +63,4 @@
     </div>
   </nz-card>
 </div>
+<!-- [ngClass]="{'disabled': billCreator?.delete} -->

@@ -2,6 +2,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
+import { BillCreator } from 'src/app/core/models/bill-creator.model';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
 import { CreateBillCreatorModalComponent } from './create-bill-creator-modal/create-bill-creator-modal.component';
@@ -20,6 +21,7 @@ export class BillComponent implements OnInit {
   pageSize : number = 6;
   totalItems : number = 0; 
   pageIndex : number = 1;
+  billCreatorModel: BillCreator = new BillCreator(); 
 
   constructor(
     private _creationService : CreationService,
@@ -87,18 +89,26 @@ export class BillComponent implements OnInit {
     })
   }
 
-  showConfirmationPopupOnDelete(billCreatorId:any) : void{
+  showConfirmationPopupOnDelete(billCreator:any) : void{
     this.confirmModal = this._modal.confirm({
-      nzTitle: 'Are you sure you want to delete bills?',
+      nzTitle: 'Are you sure you want to delete bill creator?',
       nzContent: '',
       nzCentered: true,
-      nzOnOk: () => this.deleteBillsCreator(billCreatorId)
+      nzOnOk: () => this.deleteBillsCreator(billCreator)
     })  
   }
 
-  deleteBillsCreator(billCreatorId:any){
-    console.log(billCreatorId);
-    this._creationService.deleteBillsCreator(billCreatorId).subscribe({
+  deleteBillsCreator(billCreator:any){
+    console.log(billCreator);
+    
+    this.billCreatorModel.billCreatorId = billCreator?.id;
+    this.billCreatorModel.month = billCreator?.month;
+    this.billCreatorModel.year = billCreator?.year;
+    this.billCreatorModel.connectionType = billCreator?.connectionType?.id;
+    this.billCreatorModel.subLocality = billCreator?.subLocality?.id;
+
+    console.log(this.billCreatorModel);
+    this._creationService.deleteBillsCreator(this.billCreatorModel).subscribe({
       next : (response : any) => {
         console.log("Delete Bill Creator Response",response);
         if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
@@ -107,8 +117,11 @@ export class BillComponent implements OnInit {
           this.getBillsCreatorList();
         } 
         else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
-            this._messageService.info('Bill Creator Not Found')
+            this._messageService.info(response?.message)
         }
+        else if(response?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE){
+          this._messageService.info(response?.message)
+      }
         else{
           this._messageService.error('Error')
         }
