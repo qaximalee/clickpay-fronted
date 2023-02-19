@@ -2,7 +2,7 @@
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Name</nz-form-label>
       <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-        <input nz-input type="text" name="Name" [(ngModel)]="userDetailForm.name" placeholder="Name"/>
+        <input nz-input type="text" name="Name" [(ngModel)]="userDetailForm.name" placeholder="Name" required/>
         <ng-template #userErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">Please input name!</ng-container>
           <ng-container *ngIf="control.hasError('duplicated')">The name is redundant!</ng-container>
@@ -13,7 +13,7 @@
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Email</nz-form-label>
       <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-        <input nz-input type="email" name="Email" [(ngModel)]="userDetailForm.email" placeholder="Email"/>
+        <input nz-input type="email" name="Email" [(ngModel)]="userDetailForm.email" placeholder="Email" required/>
         <ng-template #userErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">Please input email!</ng-container>
           <ng-container *ngIf="control.hasError('duplicated')">The email is redundant!</ng-container>
@@ -24,7 +24,7 @@
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Address</nz-form-label>
       <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-        <input nz-input type="text" name="Address" [(ngModel)]="userDetailForm.address" placeholder="Address"/>
+        <input nz-input type="text" name="Address" [(ngModel)]="userDetailForm.address" placeholder="Address" required/>
         <ng-template #userErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">Please input address!</ng-container>
           <ng-container *ngIf="control.hasError('duplicated')">The address is redundant!</ng-container>
@@ -35,7 +35,7 @@
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Mobile</nz-form-label>
       <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-        <input nz-input type="text" name="Mobile" [(ngModel)]="userDetailForm.mobile" placeholder="Mobile"/>
+        <input nz-input type="text" name="Mobile" [(ngModel)]="userDetailForm.mobile" placeholder="Mobile" required/>
         <ng-template #userErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">Please input mobile number!</ng-container>
           <ng-container *ngIf="control.hasError('duplicated')">The mobile number is redundant!</ng-container>
@@ -46,7 +46,7 @@
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Installation Date</nz-form-label>
       <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-        <input nz-input type="date" name="InstallationDate" [(ngModel)]="userDetailForm.installationDate"/>
+        <input nz-input type="date" name="InstallationDate" [(ngModel)]="userDetailForm.installationDate" required/>
         <ng-template #userErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">Please input installation date!</ng-container>
           <ng-container *ngIf="control.hasError('duplicated')">The installation date is redundant!</ng-container>
@@ -85,7 +85,7 @@
       <nz-input-group  nzSize="large" >
         <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Sub-Locality..."
         name="subLocality" [(ngModel)]="userDetailForm.subLocalityId" (ngModelChange)="onChangeOfSubLocality($event)" #subLocality="ngModel" required>
-            <nz-option *ngFor="let subLocality of subLocalitiesList" [nzLabel]="subLocality?.name" [nzValue]="subLocality?.id"></nz-option>
+            <nz-option *ngFor="let subLocality of subLocalitiesList" [nzLabel]="subLocality?.subLocalityName" [nzValue]="subLocality?.id"></nz-option>
         </nz-select>                
     </nz-input-group>
     </nz-form-control>
@@ -96,7 +96,7 @@
       <nz-form-control [nzSpan]="12">
       <nz-input-group  nzSize="large" >
         <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Company..."
-        name="role" [(ngModel)]="userDetailForm.companyId" (ngModelChange)="onChangeOfCompany($event)" #role="ngModel" required>
+        name="company" [(ngModel)]="userDetailForm.companyId" (ngModelChange)="onChangeOfCompany($event)" #company="ngModel" required>
             <nz-option *ngFor="let company of companyList" [nzLabel]="company?.name" [nzValue]="company?.id"></nz-option>
         </nz-select>                
     </nz-input-group>
@@ -108,7 +108,7 @@
       <nz-form-control [nzSpan]="12">
       <nz-input-group  nzSize="large" >
         <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Connection Type..."
-        name="role" [(ngModel)]="userDetailForm.connectionTypeId" (ngModelChange)="onChangeOfConnectionType($event)" #role="ngModel" required>
+        name="connectionType" [(ngModel)]="userDetailForm.connectionTypeId" (ngModelChange)="onChangeOfConnectionType($event)" #connectionType="ngModel" required>
             <nz-option *ngFor="let connectionType of connectionTypeList" [nzLabel]="connectionType?.type" [nzValue]="connectionType?.id"></nz-option>
         </nz-select>                
     </nz-input-group>
@@ -120,7 +120,7 @@
       <nz-form-control [nzSpan]="12">
       <nz-input-group  nzSize="large" >
         <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Box Media..."
-        name="role" [(ngModel)]="userDetailForm.boxMediaId" (ngModelChange)="onChangeOfBoxMedia($event)" #role="ngModel">
+        name="boxMedia" [(ngModel)]="userDetailForm.boxMediaId" (ngModelChange)="onChangeOfBoxMedia($event)" #boxMedia="ngModel" required>
             <nz-option *ngFor="let boxMedia of boxMediaList" [nzLabel]="boxMedia?.boxNumber" [nzValue]="boxMedia?.id"></nz-option>
         </nz-select>                
     </nz-input-group>
@@ -132,8 +132,8 @@
       <nz-form-control [nzSpan]="12">
       <nz-input-group  nzSize="large" >
         <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Package..."
-        name="role" [(ngModel)]="userDetailForm.packagesId" (ngModelChange)="onChangeOfPackage($event)" #role="ngModel" required="">
-            <nz-option *ngFor="let package of packageList" [nzLabel]="package?.packageName" [nzValue]="package?.id"></nz-option>
+        name="package" [(ngModel)]="userDetailForm.packagesId" (ngModelChange)="onChangeOfPackage($event)" #package="ngModel" required>
+            <nz-option *ngFor="let package of packageList" [nzLabel]="package?.packageName" [nzValue]="package"></nz-option>
         </nz-select>                
     </nz-input-group>
     </nz-form-control>
@@ -144,7 +144,7 @@
       <nz-form-control [nzSpan]="12">
       <nz-input-group  nzSize="large" >
         <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Discount..."
-        name="Discount" [(ngModel)]="userDetailForm.discount" (ngModelChange)="onChangeOfDiscount($event)" #Discount="ngModel">
+        name="Discount" [(ngModel)]="userDetailForm.discount" (ngModelChange)="onChangeOfDiscount($event)" #Discount="ngModel" required>
             <nz-option *ngFor="let discount of discountList" [nzLabel]="discount" [nzValue]="discount"></nz-option>
         </nz-select>                
     </nz-input-group>

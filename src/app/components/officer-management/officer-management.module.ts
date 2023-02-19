@@ -5,9 +5,9 @@ import { OfficerManagementRoutingModule } from './officer-management-routing.mod
 import { OfficerManagementComponent } from './officer-management.component';
 import { OfficerDetailsComponent } from './officer-details/officer-details.component';
 import { AreaAllocationComponent } from './area-allocation/area-allocation.component';
-import { OfficerCollectionsComponent } from './officer-collections/officer-collections.component';
 import { CreateUpdateOfficerModalComponent } from './officer-details/create-update-officer-modal/create-update-officer-modal.component';
 import { AntdesignModule } from 'src/app/modules/antdesign.module';
+import { OfficerCollectionHistoryComponent } from './officer-collection-history/officer-collection-history.component';
 
 
 @NgModule({
@@ -15,8 +15,8 @@ import { AntdesignModule } from 'src/app/modules/antdesign.module';
     OfficerManagementComponent,
     OfficerDetailsComponent,
     AreaAllocationComponent,
-    OfficerCollectionsComponent,
-    CreateUpdateOfficerModalComponent
+    CreateUpdateOfficerModalComponent,
+    OfficerCollectionHistoryComponent
   ],
   imports: [
     CommonModule,

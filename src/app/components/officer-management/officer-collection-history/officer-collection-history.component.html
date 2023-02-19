@@ -1,0 +1,94 @@
+<div class="officer-collection-history">
+
+    <div nz-row>
+      <div nz-col [nzSpan]="10">
+        <div class="heading">
+          <h1>
+            Recovery Officer Collection History
+          </h1>
+          <h3>
+            Name: Qasim Ali<br>
+            Total Amounts Collected: 7000<br>
+            Collected Users: 3<br>
+          </h3>
+      </div>
+      </div>
+      <div nz-col [nzSpan]="5">
+        <nz-range-picker></nz-range-picker>
+        </div>
+      <div nz-col [nzSpan]="1">
+        <nz-input-group  nzSize="large" >
+            <nz-select class="search-customer" [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Officer..."
+            name="customer" required>
+                <nz-option nzLabel="Qasim Ali" >Qasim Ali</nz-option>
+                <nz-option nzLabel="Niaz Ali" >Niaz Ali</nz-option>
+                <nz-option nzLabel="Azan Ali"  >Azan Ali</nz-option>
+            </nz-select>                
+          </nz-input-group>
+    </div>
+    </div>
+  
+  
+    <nz-card>
+      <nz-table #officer [nzData]="officerList" [nzFrontPagination]="false">
+        <thead>
+          <!-- <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Total Users</th>
+            <th>Total Amounts</th>
+          </tr> -->
+          <tr>
+            <th>Internet Id</th>
+            <th>Month/Year</th>
+            <th>Payment Type</th>
+            <th>Connection Type</th>
+            <th>Amount</th>
+            <th>Received At</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>speedex-1</td>
+            <td>Jan 2023</td>
+            <td>MONTHLY</td>
+            <td>Internet</td>
+            <td>2000</td>
+            <td>2/15/23, 4:24 PM</td>
+            <td>PAID</td>
+          </tr>
+          <tr>
+            <td>speedex-2</td>
+            <td>Jan 2023</td>
+            <td>MONTHLY</td>
+            <td>Internet</td>
+            <td>2500</td>
+            <td>2/16/23, 4:24 PM</td>
+            <td>PAID</td>
+          </tr>
+          <tr>
+            <td>speedex-3</td>
+            <td>Jan 2023</td>
+            <td>MONTHLY</td>
+            <td>Internet</td>
+            <td>2500</td>
+            <td>2/16/23, 4:24 PM</td>
+            <td>PAID</td>
+          </tr>
+        </tbody>
+    </nz-table>
+    <!-- <nz-pagination 
+            class="pagination" 
+            [nzPageIndex]="pageIndex" 
+            [nzPageSize]="pageSize" 
+            [nzTotal]="totalItems"
+            (nzPageIndexChange)="onPageChange($event)">
+          </nz-pagination> -->
+    </nz-card>
+  
+  </div>
+  
+  
+    
+  

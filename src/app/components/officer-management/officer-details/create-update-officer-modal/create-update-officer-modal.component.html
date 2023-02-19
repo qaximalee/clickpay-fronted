@@ -66,13 +66,6 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSpan]="7" >Leaving Date</nz-form-label>
-    <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-      <input nz-input type="date" name="LeavingDate" [(ngModel)]="officerDetailForm.leavingDate" />
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
     <nz-form-label [nzSpan]="7" nzRequired>Salary</nz-form-label>
     <nz-form-control [nzSpan]="12">
       <input nz-input type="number" name="Salary" [(ngModel)]="officerDetailForm.salary" placeholder="20000"/>

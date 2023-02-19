@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AreaAllocationComponent } from './area-allocation/area-allocation.component';
-import { OfficerCollectionsComponent } from './officer-collections/officer-collections.component';
+import { OfficerCollectionHistoryComponent } from './officer-collection-history/officer-collection-history.component';
 import { OfficerDetailsComponent } from './officer-details/officer-details.component';
 import { OfficerManagementComponent } from './officer-management.component';
 
@@ -14,7 +14,7 @@ children : [
     path: 'area-allocation', component: AreaAllocationComponent
   },
   { 
-    path: 'officer-collections', component: OfficerCollectionsComponent
+    path: 'officer-collection-history', component: OfficerCollectionHistoryComponent
   },
 ]
 }];

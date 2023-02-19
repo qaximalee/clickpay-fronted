@@ -22,8 +22,8 @@ export class OfficerDetailsComponent implements OnInit {
 
   requestData = {
     status: null,
-    pageNo: 0,
-    pageSize: 0
+    pageNo: this.pageNo,
+    pageSize: this.pageSize
   };
 
   constructor(

@@ -1,7 +1,6 @@
 export enum Discount {
     Half = 'HALF', 
     Full = 'FULL', 
-    Quarter = 'QUARTER', 
-    Semi = 'SEMI', 
+    Quarter = 'QUARTER',  
     Custom = 'CUSTOM',
 }
