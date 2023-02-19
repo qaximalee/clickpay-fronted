@@ -13,7 +13,7 @@
     <nz-form-item >
       <nz-form-label [nzSpan]="7" nzRequired>Locality</nz-form-label>
       <nz-form-control [nzSpan]="12">
-      <nz-input-group  nzSize="large" >
+      <nz-input-group  nzSize="large" > 
         <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Locality..."
         name="role" [(ngModel)]="localityId" (ngModelChange)="onChangeOfLocality($event)" #role="ngModel" required>
             <nz-option *ngFor="let locality of localityList" [nzLabel]="locality?.name" [nzValue]="locality?.id"></nz-option>

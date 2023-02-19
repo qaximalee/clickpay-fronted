@@ -14,6 +14,7 @@
     color: white;
     font-size:x-large;
     font-weight: 1000;
+    text-align: center;
   }
 
   nz-header {
@@ -37,4 +38,38 @@
 
   nz-footer {
     text-align: center;
+  }
+
+  .sider-open {
+    overflow-y: auto;
+    height: 100vh;
+    /* width: 235px !important;
+    flex: 0 0 235px !important;
+    max-width: 235px !important;
+    min-width: 235px !important; */
+    flex: 0 0 80px !important;
+    max-width: 80px !important;
+    min-width: 80px !important;
+    /* flex: none !important;
+    max-width: none !important;
+    min-width: none !important; */
+    /* position: fixed;
+    z-index: 1; */
+    top: 0;
+    left: 0;
+}
+
+
+  .sider-closed {
+    overflow-y: auto;
+    height: 100vh;
+    flex: 0 0 235px !important;
+    max-width: 235px !important;
+    min-width: 235px !important;
+    /* flex: 0 0 80px !important;
+    max-width: 80px !important;
+    min-width: 80px !important; */
+    top: 0;
+    left: 0;
+    
   }

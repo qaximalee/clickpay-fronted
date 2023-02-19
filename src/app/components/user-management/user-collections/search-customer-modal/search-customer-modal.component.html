@@ -1,0 +1,61 @@
+
+<div class="search-customer">
+    <div nz-row >
+        <div nz-col nzSpan="6">
+                <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Sub-Locality..."
+                name="subLocality" [(ngModel)]="userFilterRequest.subLocalityId" (ngModelChange)="onChangeOfSubLocality($event)" #subLocality="ngModel" required>
+                    <nz-option *ngFor="let subLocality of subLocalitiesList" [nzLabel]="subLocality?.subLocalityName" [nzValue]="subLocality?.id"></nz-option>
+                </nz-select>
+        </div>
+        <div nz-col nzSpan="4">
+                <nz-select [nzBorderless]="false" nzAllowClear  nzPlaceHolder="All"
+                name="packageType" [(ngModel)]="userFilterRequest.customerStatus"  (ngModelChange)="onChangeOfCustomerStatus($event)" #customerStatus="ngModel" required>
+                  <nz-option nzLabel="Active" nzValue="Active"></nz-option>
+                  <nz-option nzLabel="InActive" nzValue="InActive"></nz-option>
+              </nz-select>
+        </div>
+        <div nz-col nzSpan="4">
+                <nz-select [nzBorderless]="false" nzAllowClear nzPlaceHolder="All"
+                name="packageType" [(ngModel)]="userFilterRequest.userCollectionStatus"  (ngModelChange)="onChangeOfCollectionStatus($event)" #collectionStatus="ngModel" required>
+                  <nz-option  nzLabel="Paid" nzValue="Paid"></nz-option>
+                  <nz-option nzLabel="Unpaid" nzValue="Unpaid"></nz-option>
+              </nz-select>
+        </div>
+        <div nz-col nzSpan="6">    
+                <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Package Type..."
+                name="connectionType" [(ngModel)]="userFilterRequest.connectionTypeId" (ngModelChange)="onChangeOfConnectionType($event)" #connectionType="ngModel" required>
+                  <nz-option *ngFor="let connectionType of connectionTypeList" [nzLabel]="connectionType?.type" [nzValue]="connectionType?.id"></nz-option>
+              </nz-select>
+        </div>
+        <div nz-col nzSpan="4">
+                <input nz-input type="text" name="SearchInput" (input)="onInputChange(userFilterRequest.searchInput)"
+                [(ngModel)]="userFilterRequest.searchInput"  placeholder="Enter Search Input..." />
+        </div>
+    </div>
+    
+    <div class="customers">
+        <nz-table #borderedTable nzBordered [nzFrontPagination]="false" #basicTable [nzData]="customerList" >
+            <thead>
+                <tr> 
+                    <th>Internet ID</th>
+                    <th>Customer Name</th>
+                    <th>Address</th>
+                    <th>Mobile Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of basicTable.data">
+                    <td>{{customer?.id}}</td>
+                    <td>{{customer?.name}}</td>
+                    <td>{{customer?.address}}</td>
+                    <td>{{customer?.mobile}}</td>
+                    <td>
+                        <button (click)="onCustomerSelect(customer)" nz-button nzType="primary">Select</button>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+</div>

@@ -121,7 +121,7 @@ export class BillComponent implements OnInit {
         }
         else if(response?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE){
           this._messageService.info(response?.message)
-      }
+        }
         else{
           this._messageService.error('Error')
         }

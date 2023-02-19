@@ -19,7 +19,7 @@ export class CreateUserCollectionsModalComponent implements OnInit {
   @Input() data?: any;
   @Input() title?: string;
   collectionForm: UserCollection = new UserCollection(); 
-  confirmModal?: NzModalRef;
+  confirmModal?: NzModalRef;  
   @ViewChild('collectionForm') userCollectionForm!: NgForm;
   
   private _httpConstants: HttpConstants = new HttpConstants();
@@ -36,12 +36,10 @@ export class CreateUserCollectionsModalComponent implements OnInit {
   ) { }
 
   monthList = Object.values(Months);
-  ;
 
   yearList = Object.values(Years).filter(value => typeof value === 'number').sort();
 
   paymentTypeList = Object.values(PaymentType);
-  ;
 
   ngOnInit(): void {
     this.collectionForm.customerId = this.data?.id;

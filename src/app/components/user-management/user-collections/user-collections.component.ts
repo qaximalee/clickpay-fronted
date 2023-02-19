@@ -2,11 +2,13 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { CollectionService } from 'src/app/core/services/collection.service';
+import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
 import { UserManagementService } from 'src/app/core/services/user-management.service';
 import { CreateUserCollectionsModalComponent } from './create-user-collections-modal/create-user-collections-modal.component';
 import { DetailUserCollectionModalComponent } from './detail-user-collection-modal/detail-user-collection-modal.component';
 import { ReceiveUserCollectionModalComponent } from './receive-user-collection-modal/receive-user-collection-modal.component';
+import { SearchCustomerModalComponent } from './search-customer-modal/search-customer-modal.component';
 
 @Component({
   selector: 'app-user-collections',
@@ -55,6 +57,14 @@ export class UserCollectionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCustomerList();
+    this._userService.$customer.subscribe((res:any)=> {
+      console.log(res);
+      this.CustomerData.id = res?.id;
+      this.CustomerData.name = res?.name;
+      this.CustomerData.amount = res?.amount;
+      this.CustomerData.internetId = res?.internetId;
+      this.CustomerData.connectionType = res?.connectionType;
+    })
   }
 
   onChangeOfCustomer(event: any) {
@@ -278,6 +288,26 @@ export class UserCollectionsComponent implements OnInit {
       nzFooter: null,
       nzKeyboard : true,
       nzWidth : "50%",
+    })
+  }
+
+  createSearchCustomerModal(){
+    const modal = this._modal.create({
+      nzTitle: 'Search Customer',
+      nzContent: SearchCustomerModalComponent,
+      nzViewContainerRef: this._viewContainerRef,
+      nzComponentParams: {
+        data : null ,
+        title : 'SEARCH CUSTOMER',
+      },
+      nzFooter: null,
+      nzKeyboard : true,
+      nzWidth : "60%",
+      nzCentered : true,
+      nzMaskClosable : false,
+    })
+    modal.afterClose.subscribe(()=> {
+     this.getCollectionsList();
     })
   }
 

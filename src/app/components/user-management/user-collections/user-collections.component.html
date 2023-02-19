@@ -1,7 +1,7 @@
 <div class="user-collection">
 
     <div nz-row>
-      <div nz-col [nzSpan]="10">
+      <div nz-col [nzSpan]="7">
         <div class="heading">
           <h1>
             Customer Collections
@@ -13,17 +13,22 @@
           <nz-input-group  nzSize="large" >
               <nz-select class="search-customer" [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Customer..."
               name="customer" [(ngModel)]="Customer" (ngModelChange)="onChangeOfCustomer($event)" #customer="ngModel" required>
-                  <nz-option *ngFor="let customer of customerList" [nzLabel]="customer?.name" [nzValue]="customer"></nz-option>
+                  <nz-option *ngFor="let customer of customerList" [nzLabel]="customer?.name + ' - ' + customer?.internetId" [nzValue]="customer"></nz-option>
               </nz-select>                
             </nz-input-group>
       </div>
 
-      <div nz-col [nzSpan]="4" class="receiveAll-button">
+      <div nz-col [nzSpan]="4" class="searchCustomer-button">
+        <button (click)="createSearchCustomerModal()" nz-button nzType="primary" nzShape="round">
+          Search Customer
+        </button>
+      </div>
+
+      <div nz-col [nzSpan]="3" class="receiveAll-button">
         <button [disabled]="CustomerData.id==0" (click)="receiveUserCollectionModal(null)" nz-button nzType="primary" nzShape="round">
           Receive All
         </button>
       </div>
-
 
       <div nz-col class="add-button">
         <button [disabled]="CustomerData.id==0" (click)="createAddUserCollectionModal(null)" nz-button nzType="primary" nzShape="round">

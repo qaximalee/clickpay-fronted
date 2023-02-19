@@ -12,6 +12,7 @@ import { CreateUserCollectionsModalComponent } from './user-collections/create-u
 import { ReceiveUserCollectionModalComponent } from './user-collections/receive-user-collection-modal/receive-user-collection-modal.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { DetailUserCollectionModalComponent } from './user-collections/detail-user-collection-modal/detail-user-collection-modal.component';
+import { SearchCustomerModalComponent } from './user-collections/search-customer-modal/search-customer-modal.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DetailUserCollectionModalComponent } from './user-collections/detail-us
     CreateUpdateUserModalComponent,
     CreateUserCollectionsModalComponent,
     ReceiveUserCollectionModalComponent,
-    DetailUserCollectionModalComponent
+    DetailUserCollectionModalComponent,
+    SearchCustomerModalComponent
 
   ],
   imports: [
