@@ -57,7 +57,7 @@ export class BoxMediaComponent implements OnInit {
 
   createAddOrUpdateBoxMediaModal(boxMediaId:any){
     const modal = this._modal.create({
-      nzTitle: boxMediaId ? 'Edit Box/Media' : 'Create Box/Media',
+      nzTitle: boxMediaId ? '<b>Edit Box/Media</b>' : '<b>Create Box/Media</b>',
       nzContent: CreateUpdateBoxMediaModalComponent,
       nzViewContainerRef: this._viewContainerRef,
       nzComponentParams: {
@@ -66,9 +66,9 @@ export class BoxMediaComponent implements OnInit {
       },
       nzFooter: null,
       nzKeyboard : true,
-      nzWidth : "60%",
+      nzWidth : "35%",
       nzCentered : true,
-      nzMaskClosable : false,
+      nzMaskClosable : true,
     })
     modal.afterClose.subscribe(()=> {
       this.getBoxMediaList();

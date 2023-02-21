@@ -56,7 +56,7 @@ export class CompanyComponent implements OnInit {
 
   createAddOrUpdateCompanyModal(companyId:any){
     const modal = this._modal.create({
-      nzTitle: companyId ? 'Edit Company' : 'Create Company',
+      nzTitle: companyId ? '<b>Edit Company</b>' : '<b>Create Company</b>',
       nzContent: CreateUpdateModalComponent,
       nzViewContainerRef: this._viewContainerRef,
       nzComponentParams: {
@@ -65,9 +65,9 @@ export class CompanyComponent implements OnInit {
       },
       nzFooter: null,
       nzKeyboard : true,
-      nzWidth : "60%",
+      nzWidth : "35%",
       nzCentered : true,
-      nzMaskClosable : false,
+      nzMaskClosable : true,
     })
     modal.afterClose.subscribe(()=> {
       this.getCompanyList();

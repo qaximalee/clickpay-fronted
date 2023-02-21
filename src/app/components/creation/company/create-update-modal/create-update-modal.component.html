@@ -1,23 +1,17 @@
-<form nz-form #cForm="ngForm" >
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzRequired>Company Name</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-        <input nz-input type="text" name="name" [(ngModel)]="companyName" placeholder="Company Name" />
-        <ng-template #userErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">Please input your company name!</ng-container>
-          <ng-container *ngIf="control.hasError('duplicated')">The company name is redundant!</ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    
-    <nz-form-item>
-      <nz-form-control [nzOffset]="7" [nzSpan]="12">
-        <!-- <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
-        <button nz-button (click)="createOrUpdateCompany()">{{ buttonName }}</button>
-        <button *ngIf="data" type="button" class="save-button" 
-                (click)="showConfirmationPopup()"  nz-button nzType="primary">{{ buttonName }}</button>
-        <button *ngIf="!data" type="button" class="save-button" 
-                (click)="createOrUpdateCompany()" nz-button nzType="primary">{{ buttonName }}</button>
-      </nz-form-control>
-    </nz-form-item>
+<div class="create-company">
+  <form nz-form #cForm="ngForm" >
+      <div nz-row >
+        <nz-input-group>
+          <h4>Company Name</h4>
+          <input nz-input type="text" name="name" [(ngModel)]="companyName" placeholder="Company Name" />
+        </nz-input-group>
+      </div>  
+
+    <div class="submit-button" nz-row  >
+      <button *ngIf="data" type="button" class="save-button" 
+        (click)="showConfirmationPopup()"  nz-button nzType="primary">{{ buttonName }}</button>
+      <button *ngIf="!data" type="button" class="save-button" 
+        (click)="createOrUpdateCompany()" nz-button nzType="primary">{{ buttonName }}</button>
+    </div>
   </form>
+</div>

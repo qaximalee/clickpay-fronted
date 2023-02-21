@@ -55,7 +55,7 @@ export class PackageComponent implements OnInit {
 
   createAddOrUpdatePackageModal(packageId:any){
     const modal = this._modal.create({
-      nzTitle: packageId ? 'Edit Package' : 'Create Package',
+      nzTitle: packageId ? '<b>Edit Package</b>' : '<b>Create Package</b>',
       nzContent: CreateUpdatePackageModalComponent,
       nzViewContainerRef: this._viewContainerRef,
       nzComponentParams: {
@@ -64,7 +64,7 @@ export class PackageComponent implements OnInit {
       },
       nzFooter: null,
       nzKeyboard : true,
-      nzWidth : "60%",
+      nzWidth : "50%",
       nzCentered : true,
       nzMaskClosable : false,
     })
