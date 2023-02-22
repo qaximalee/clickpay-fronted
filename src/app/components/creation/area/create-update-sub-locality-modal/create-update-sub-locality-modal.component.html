@@ -1,42 +1,36 @@
-<form nz-form #subLocalityForm="ngForm" >
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzRequired>Sub Locality Name</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-        <input nz-input type="text" name="SubLocalityName" [(ngModel)]="subLocalityName" placeholder="Sub Locality Name" />
-        <ng-template #userErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">Please input sub locality name!</ng-container>
-          <ng-container *ngIf="control.hasError('duplicated')">The sub locality name is redundant!</ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
+<div class="create-subLocality">
+  
+  <form nz-form #subLocalityForm="ngForm" >
 
-    <nz-form-item >
-      <nz-form-label [nzSpan]="7" nzRequired>Locality</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-      <nz-input-group  nzSize="large" > 
-        <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Locality..."
-        name="role" [(ngModel)]="localityId" (ngModelChange)="onChangeOfLocality($event)" #role="ngModel" required>
-            <nz-option *ngFor="let locality of localityList" [nzLabel]="locality?.name" [nzValue]="locality?.id"></nz-option>
-        </nz-select>                
-    </nz-input-group>
-    </nz-form-control>
-    </nz-form-item>
+      <div nz-row class="row" >
+          <nz-input-group>
+            <h4>Sub Locality Name</h4>
+            <input nz-input type="text" name="SubLocalityName" [(ngModel)]="subLocalityName" placeholder="Sub Locality Name" />
+          </nz-input-group>
+      </div> 
+      
+      <div nz-row class="row" >
+        <nz-input-group  >
+            <h4>Locality</h4>
+            <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Locality..."
+            name="role" [(ngModel)]="localityId" (ngModelChange)="onChangeOfLocality($event)" #role="ngModel" required>
+                <nz-option *ngFor="let locality of localityList" [nzLabel]="locality?.name" [nzValue]="locality?.id"></nz-option>
+            </nz-select>                
+          </nz-input-group>
+      </div> 
+      
+      <div nz-row class="row" >
+        <nz-input-group>
+          <h4>Country</h4>
+          <input nz-input type="text" name="Country" value="Pakistan" disabled/>
+        </nz-input-group>
+      </div>
 
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzRequired>Country</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-        <input nz-input type="text" name="Country" value="Pakistan" disabled/>
-      </nz-form-control>
-    </nz-form-item>
-    
-    <nz-form-item>
-      <nz-form-control [nzOffset]="7" [nzSpan]="12">
-        <!-- <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
-        <button nz-button (click)="createSubLocality()">{{ buttonName }}</button>
-        <button *ngIf="data" type="button" class="save-button" 
+    <div class="submit-button" nz-row  >
+      <button *ngIf="data" type="button" class="save-button" 
         (click)="showConfirmationPopup()"  nz-button nzType="primary">{{ buttonName }}</button>
-        <button *ngIf="!data" type="button" class="save-button" 
+      <button *ngIf="!data" type="button" class="save-button" 
         (click)="createSubLocality()" nz-button nzType="primary">{{ buttonName }}</button>
-      </nz-form-control>
-    </nz-form-item>
+    </div>
   </form>
+</div>

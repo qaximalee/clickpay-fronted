@@ -24,9 +24,11 @@ export class CreateBillCreatorModalComponent implements OnInit {
   private _httpConstants: HttpConstants = new HttpConstants();
   
   selectedConnectionType = null;
+  selectedSubLocality = null;
   buttonName: string = 'Create';
   companyList: Array<any> = [];
   connectionTypeList: Array<any> = [];
+  subLocalitiesList: Array<any> = [];
   
   constructor(
     private _creationService : CreationService,
@@ -41,6 +43,7 @@ export class CreateBillCreatorModalComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.yearList)
     this.getConnectionTypeList();
+    this.getSubLocalityList();
   }
 
 
@@ -52,6 +55,9 @@ export class CreateBillCreatorModalComponent implements OnInit {
         if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
           this._messageService.success('Bills Created Successfully');
           this._modal.closeAll();
+        }
+        if (response?.status == this._httpConstants.REQUEST_STATUS.ALREADY_EXIST_302.CODE) {
+          this._messageService.error('Bills Already Created');
         }
         else {
           console.log('Error');
@@ -93,8 +99,44 @@ export class CreateBillCreatorModalComponent implements OnInit {
     })
   }  
 
+  getSubLocalityList() {    
+    this._creationService.getSubLocalityList().subscribe({
+      next : (response : any) => {
+        console.log("Get Sub-Locality List Response",response);
+        if(response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE){
+          this.subLocalitiesList = response?.data
+          this.subLocalitiesList.push({
+            id: null,
+            subLocalityName : 'All',
+
+          })
+        } 
+        else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+            this._messageService.info('Sub-Localities Not Found')
+        }
+        else{
+          this._messageService.error('Error')
+        }
+      },
+      error : (error : any) => {
+        console.log(error);  
+        if(error?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
+          this._messageService.info('Sub-Localities Not Found');
+        }
+      },
+      complete : () => {
+        console.log('Complete');
+      }
+    })
+  }
+
+
   onChangeOfConnectionType(event: any) {
     event != null ? this.selectedConnectionType = event : this.selectedConnectionType = null;
+  }
+
+  onChangeOfSubLocality(event: any) {
+    event != null ? this.selectedSubLocality = event : this.selectedSubLocality = null;
   }
 
 }

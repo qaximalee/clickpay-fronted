@@ -47,7 +47,7 @@ export class AreaComponent implements OnInit {
       },
       nzFooter: null,
       nzKeyboard : true,
-      nzWidth : "60%",
+      nzWidth : "35%",
       nzCentered : true,
       nzMaskClosable : false,
     })
@@ -67,7 +67,7 @@ export class AreaComponent implements OnInit {
       },
       nzFooter: null,
       nzKeyboard : true,
-      nzWidth : "60%",
+      nzWidth : "35%",
       nzCentered : true,
       nzMaskClosable : false,
     })
@@ -78,7 +78,7 @@ export class AreaComponent implements OnInit {
 
   createAndUpdateSubLocalityModal(subLocalityId: any){
     const modal = this._modal.create({
-      nzTitle: subLocalityId ? 'Edit Sub Locality' : 'Create Sub Locality',
+      nzTitle: subLocalityId ? '<b>Edit Sub Locality</b>' : '<b>Create Sub Locality</b>',
       nzContent: CreateUpdateSubLocalityModalComponent,
       nzViewContainerRef: this._viewContainerRef,
       nzComponentParams: {
@@ -87,7 +87,7 @@ export class AreaComponent implements OnInit {
       },
       nzFooter: null,
       nzKeyboard : true,
-      nzWidth : "60%",
+      nzWidth : "35%",
       nzCentered : true,
       nzMaskClosable : false,
     })

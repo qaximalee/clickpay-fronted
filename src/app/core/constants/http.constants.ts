@@ -25,6 +25,10 @@ export class HttpConstants {
         CODE: 409,
         MESSAGE: 'Already Exists!',
       },
+      ALREADY_EXIST_302: {
+        CODE: 302,
+        MESSAGE: 'Already Exists!',
+      },
       SERVER_ERROR_500: {
         CODE: 500,
         MESSAGE: 'Server Error!',

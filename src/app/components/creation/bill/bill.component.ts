@@ -71,7 +71,7 @@ export class BillComponent implements OnInit {
 
   createAddBillsCreatorModal(billCreatorId:any){
     const modal = this._modal.create({
-      nzTitle: billCreatorId ? 'Edit Bills' : 'Create Bills',
+      nzTitle: billCreatorId ? '<b>Edit Bills<b>' : '<b>Create Bills<b>',
       nzContent: CreateBillCreatorModalComponent,
       nzViewContainerRef: this._viewContainerRef,
       nzComponentParams: {
@@ -80,7 +80,7 @@ export class BillComponent implements OnInit {
       },
       nzFooter: null,
       nzKeyboard : true,
-      nzWidth : "60%",
+      nzWidth : "50%",
       nzCentered : true,
       nzMaskClosable : false,
     })
