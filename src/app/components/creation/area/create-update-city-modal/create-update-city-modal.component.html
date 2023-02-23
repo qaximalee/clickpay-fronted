@@ -1,4 +1,31 @@
-<form nz-form #cityForm="ngForm" >
+<div class="create-city">
+
+  <form nz-form #cityForm="ngForm" >
+
+      <div nz-row class="row" >
+          <nz-input-group>
+            <h4>City Name</h4>
+            <input nz-input type="text" name="CityName" [(ngModel)]="cityName" placeholder="City Name" />
+          </nz-input-group>
+      </div> 
+      
+      <div nz-row class="row" >
+        <nz-input-group>
+          <h4>Country</h4>
+          <input nz-input type="text" name="Country" value="Pakistan" disabled/>
+        </nz-input-group>
+      </div>
+
+    <div class="submit-button" nz-row  >
+      <button *ngIf="data" type="button" class="save-button" 
+        (click)="showConfirmationPopup()"  nz-button nzType="primary">{{ buttonName }}</button>
+      <button *ngIf="!data" type="button" class="save-button" 
+        (click)="createCity()" nz-button nzType="primary">{{ buttonName }}</button>
+    </div>
+  </form>
+</div>
+
+<!-- <form nz-form #cityForm="ngForm" >
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>City Name</nz-form-label>
       <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
@@ -16,15 +43,15 @@
           <input nz-input type="text" name="Country" value="Pakistan" disabled/>
         </nz-form-control>
     </nz-form-item>
-    
+      
     <nz-form-item>
       <nz-form-control [nzOffset]="7" [nzSpan]="12">
-        <!-- <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
-        <button nz-button (click)="createCity()">{{ buttonName }}</button>
+         <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
+        <!-- <button nz-button (click)="createCity()">{{ buttonName }}</button>
         <button *ngIf="data" type="button" class="save-button" 
                 (click)="showConfirmationPopup()"  nz-button nzType="primary">{{ buttonName }}</button>
         <button *ngIf="!data" type="button" class="save-button" 
                 (click)="createCity()" nz-button nzType="primary">{{ buttonName }}</button>
       </nz-form-control>
     </nz-form-item>
-  </form>
+  </form>  -->

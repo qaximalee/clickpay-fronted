@@ -46,10 +46,11 @@ export class CreateUpdateSubLocalityModalComponent implements OnInit {
       next: (response: any) => {
         console.log(response);
         if (response?.status == this._httpConstants.REQUEST_STATUS.CREATED_201.CODE) {
-          this.data
-            ? this._messageService.success('Sub Locality Updated Successfully')
-            : this._messageService.success('Sub Locality Created Successfully')
+          this._messageService.success('Sub Locality Created Successfully')
           this._modal.closeAll();
+        }
+        else if(response?.status == this._httpConstants.REQUEST_STATUS.ALREADY_EXIST_302.CODE){
+          this._messageService.error('Sub-Locality Already Created');
         }
         else {
           console.log('Error');
@@ -71,8 +72,10 @@ export class CreateUpdateSubLocalityModalComponent implements OnInit {
       next: (response: any) => {
         console.log(response);
         if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
-          this._messageService.success('Locality Updated Successfully');
+          this._messageService.success('Sub-Locality Updated Successfully');
           this._modal.closeAll();
+        }else if(response?.status == this._httpConstants.REQUEST_STATUS.ALREADY_EXIST_302.CODE){
+          this._messageService.error('Sub-Locality Already Exists');
         }
         else {
           console.log('Error');

@@ -45,6 +45,8 @@ export class CreateUpdateCityModalComponent implements OnInit {
         if (response?.status == this._httpConstants.REQUEST_STATUS.CREATED_201.CODE) {
           this._messageService.success('City Created Successfully')
           this._modal.closeAll();
+        }else if(response?.status == this._httpConstants.REQUEST_STATUS.ALREADY_EXIST_302.CODE){
+          this._messageService.error('City Already Created');
         }
         else {
           console.log('Error');
@@ -68,6 +70,8 @@ export class CreateUpdateCityModalComponent implements OnInit {
         if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
           this._messageService.success('City Updated Successfully');
           this._modal.closeAll();
+        }else if(response?.status == this._httpConstants.REQUEST_STATUS.ALREADY_EXIST_302.CODE){
+          this._messageService.error('City Already Exists');
         }
         else {
           console.log('Error');

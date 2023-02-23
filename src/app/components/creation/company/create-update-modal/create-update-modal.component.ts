@@ -44,6 +44,8 @@ export class CreateUpdateModalComponent implements OnInit {
         if (response?.status == this._httpConstants.REQUEST_STATUS.CREATED_201.CODE) {
           this._messageService.success('Company Created Successfully');
           this._modal.closeAll();
+        }else if(response?.status == this._httpConstants.REQUEST_STATUS.ALREADY_EXIST_302.CODE){
+          this._messageService.error('Compnay Already Created');
         }
         else {
           console.log('Error');

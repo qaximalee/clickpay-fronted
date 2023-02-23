@@ -45,6 +45,8 @@ export class CreateUpdateBoxMediaModalComponent implements OnInit {
         if (response?.status == this._httpConstants.REQUEST_STATUS.CREATED_201.CODE) {
           this._messageService.success('Box/Media Created Successfully');
           this._modal.closeAll();
+        }else if(response?.status == this._httpConstants.REQUEST_STATUS.ALREADY_EXIST_302.CODE){
+          this._messageService.error('Box/Media Already Created');
         }
         else {
           console.log('Error');
@@ -68,6 +70,8 @@ export class CreateUpdateBoxMediaModalComponent implements OnInit {
         if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
           this._messageService.success('Box/Media Updated Successfully');
           this._modal.closeAll();
+        }else if(response?.status == this._httpConstants.REQUEST_STATUS.ALREADY_EXIST_302.CODE){
+          this._messageService.error('Box/Media Already Exists');
         }
         else {
           console.log('Error');
