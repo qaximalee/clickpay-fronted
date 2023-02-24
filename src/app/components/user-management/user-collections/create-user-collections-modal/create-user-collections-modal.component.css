@@ -1,0 +1,19 @@
+.submit-button{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.row{
+    margin-top: 10px;
+}
+
+
+nz-select{
+    width:100%;
+}
+
+nz-input-group{
+    padding-right: 10px;
+}

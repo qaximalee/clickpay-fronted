@@ -1,6 +1,5 @@
 <div class="receive-collections">
 
-    
         <div class="unpaid-collections">
             <nz-table #borderedTable nzBordered [nzFrontPagination]="false" #basicTable [nzData]="data.collections">
                 <thead>
@@ -25,48 +24,49 @@
         </div>
     
         <div class="receive-form">
-            <div nz-row>
-                
-                <div nz-col [nzSpan]="10">
-                    Payment Method
-                    <br>
+
+            <div nz-row class="row" >
+                <div nz-col nzSpan="12">
+                  <nz-input-group>
+                    <h4>Payment Method</h4>
                     <nz-select width="10" [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Payment Method..."
                         name="paymentType" [(ngModel)]="receiveRequest.paymentMethod" #paymentType="ngModel" required>
                             <nz-option *ngFor="let paymentMethod of paymentMethodList" [nzLabel]="paymentMethod" [nzValue]="paymentMethod"></nz-option>
-                    </nz-select>            
+                    </nz-select>  
+                  </nz-input-group>
                 </div>
-    
-                <div nz-col [nzOffset]="2" [nzSpan]="10">
-                    Connection Type
+                <div nz-col nzSpan="12">
+                  <nz-input-group >
+                    <h4>Connection Type</h4>
                     <input nz-input placeholder="Coonection Type" type="text" name="connectionType" [(ngModel)]="receiveRequest.connectionType"
                         label="receiveRequest.connectionType" value="receiveRequest.connectionType" disabled="true"/>
-                </div> 
-    
-            </div>
-            <br>
-            <div nz-row>
-                <div nz-col [nzSpan]="10">
-                    Receiving Date
-                    <input nz-input placeholder="Receving Date" type="text" name="paymentType" [(ngModel)]="receiveRequest.receivingDate"
-                    label="receiveRequest.receivingDate" value="receiveRequest.receivingDate | date:'short'" />
+                  </nz-input-group>
                 </div>
-                <div nz-col [nzOffset]="2" [nzSpan]="10">
-                    Amount
+              </div> 
+
+            <div nz-row class="row" >
+                <div nz-col nzSpan="12">
+                  <nz-input-group>
+                    <h4>Receiving Date</h4>
+                    <input nz-input placeholder="Receving Date" type="text" name="paymentType" [(ngModel)]="receiveRequest.receivingDate"
+                        label="receiveRequest.receivingDate" value="receiveRequest.receivingDate | date:'short'" />
+                  </nz-input-group>
+                </div>
+                <div nz-col nzSpan="12">
+                  <nz-input-group >
+                    <h4>Amount</h4>
                     <input nz-input placeholder="Amount" type="number" name="amount" [(ngModel)]="receiveRequest.amount"  
                     label="receiveRequest.amount" value="receiveRequest.amount" disabled="true"/>
-                </div> 
-            </div>
-    
-            <div nz-row>
-                <button (click)="receiveUserCollection()" nz-button nzType="primary" nzShape="round">
-              Submit
-            </button>
+                  </nz-input-group>
+                </div>
+              </div> 
+
+            <div nz-row class="submit-button">
+                <button  (click)="receiveUserCollection()" nz-button nzType="primary" nzShape="round">
+                    Submit
+                </button>
             </div>
             
         </div>
     
-    
-</div>
-
-  
-       
+</div>   

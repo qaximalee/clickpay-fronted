@@ -1,75 +1,70 @@
-<form nz-form #userCollectionForm="ngForm" >
+<div class="create-user-collection">
+  <form nz-form #userCollectionForm="ngForm" >
 
-    <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>Customer Name</nz-form-label>
-        <nz-form-control  [nzSpan]="12">
+      <div nz-row class="row" >
+        <div nz-col nzSpan="12">
+          <nz-input-group>
+            <h4>Customer Name</h4>
             <input [disabled]="collectionForm.customerName!=null" nz-input type="text" name="customerName" [(ngModel)]="collectionForm.customerName"  placeholder="Customer Name" />
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>Internet ID</nz-form-label>
-        <nz-form-control  [nzSpan]="12">
-            <input [disabled]="collectionForm.internetId!=null" nz-input type="text" name="internetId" [(ngModel)]="collectionForm.internetId"  placeholder="Internet Id" />
-        </nz-form-control>
-      </nz-form-item>
-
-    <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>Month</nz-form-label>
-        <nz-form-control [nzSpan]="12">
-        <nz-input-group  nzSize="large" >
-          <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Month..."
-          name="month" [(ngModel)]="collectionForm.month" #month="ngModel" required>
+          </nz-input-group>
+        </div>
+        <div nz-col  nzSpan="12">
+          <nz-input-group  >
+            <h4>Internet ID</h4>
+            <input [disabled]="collectionForm.internetId!=null" nz-input type="text" name="internetId" [(ngModel)]="collectionForm.internetId"  placeholder="Internet Id" />                
+          </nz-input-group>
+        </div>
+      </div> 
+      
+      <div nz-row class="row" >
+        <div nz-col nzSpan="12">
+          <nz-input-group>
+            <h4>Month</h4>
+            <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Month..."
+              name="month" [(ngModel)]="collectionForm.month" #month="ngModel" required>
               <nz-option *ngFor="let month of monthList" [nzLabel]="month" [nzValue]="month"></nz-option>
-          </nz-select>                
-      </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-
-   
-    <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>Year</nz-form-label>
-        <nz-form-control [nzSpan]="12">
-        <nz-input-group  nzSize="large" >
-          <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Year..."
-          name="year" [(ngModel)]="collectionForm.year" #year="ngModel" required>
+            </nz-select> 
+          </nz-input-group>
+        </div>
+        <div nz-col nzSpan="12">
+          <nz-input-group >
+            <h4>Year</h4>
+            <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Year..."
+              name="year" [(ngModel)]="collectionForm.year" #year="ngModel" required>
               <nz-option *ngFor="let year of yearList" [nzLabel]="year" [nzValue]="year"></nz-option>
-          </nz-select>                
-      </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>Payment Type</nz-form-label>
-        <nz-form-control [nzSpan]="12">
-        <nz-input-group  nzSize="large" >
-          <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Package Type..."
-          name="packageType" [(ngModel)]="collectionForm.paymentType" (ngModelChange)="onChangeOfPaymentType()" #paymentType="ngModel" required>
+            </nz-select> 
+          </nz-input-group>
+        </div>
+      </div> 
+      
+      <div nz-row class="row" >
+        <div nz-col nzSpan="12">
+          <nz-input-group>
+            <h4>Payment Type</h4>
+            <nz-select [nzBorderless]="false" nzShowSearch nzAllowClear nzPlaceHolder="Select Package Type..."
+              name="packageType" [(ngModel)]="collectionForm.paymentType" (ngModelChange)="onChangeOfPaymentType()" #paymentType="ngModel" required>
               <nz-option *ngFor="let paymentType of paymentTypeList" [nzLabel]="paymentType" [nzValue]="paymentType"></nz-option>
-          </nz-select>                
-      </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>Amount</nz-form-label>
-        <nz-form-control  [nzSpan]="12">
+            </nz-select>  
+          </nz-input-group>
+        </div>
+        <div nz-col nzSpan="12">
+          <nz-input-group >
+            <h4>Amount</h4>
             <input [disabled]="collectionForm.paymentType=='Monthly' || collectionForm.paymentType==null" nz-input type="number" name="Amount" [(ngModel)]="collectionForm.amount"  placeholder="Amount" />
-        </nz-form-control>
-      </nz-form-item>
+          </nz-input-group>
+        </div>
+      </div> 
 
-      <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>connection Type</nz-form-label>
-        <nz-form-control  [nzSpan]="12">
+      <div nz-row class="row" >
+          <nz-input-group>
+            <h4>Connection Type</h4>
             <input [disabled]="collectionForm.connectionType!=null" nz-input type="text" name="connectionType" [(ngModel)]="collectionForm.connectionType"  placeholder="Connection Type" />
-        </nz-form-control>
-      </nz-form-item>
-    
-    <nz-form-item>
-      <nz-form-control [nzOffset]="7" [nzSpan]="12">
-        <button *ngIf="data" (click)="createUserCollection()" type="button" class="save-button" 
+          </nz-input-group> 
+      </div> 
+
+    <div class="submit-button" nz-row  >
+      <button *ngIf="data" (click)="createUserCollection()" type="button" class="save-button" 
                  nz-button nzType="primary">{{ buttonName }}</button>
-      </nz-form-control>
-    </nz-form-item>
-  
+    </div>
   </form>
+</div>

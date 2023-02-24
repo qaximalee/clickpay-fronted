@@ -62,7 +62,7 @@ export class UserDetailsComponent implements OnInit {
       },
       nzFooter: null,
       nzKeyboard : true,
-      nzWidth : "60%",
+      nzWidth : "50%",
       nzCentered : true,
       nzMaskClosable : false,
     })

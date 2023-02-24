@@ -144,7 +144,7 @@ export class UserCollectionsComponent implements OnInit {
 
   createAddUserCollectionModal(UserCollectionId:any){
     const modal = this._modal.create({
-      nzTitle: UserCollectionId ? 'Edit User Collection' : 'Create User Collection',
+      nzTitle: UserCollectionId ? '<b>Edit User Collection</b>' : '<b>Create User Collection</b>',
       nzContent: CreateUserCollectionsModalComponent,
       nzViewContainerRef: this._viewContainerRef,
       nzComponentParams: {
@@ -153,7 +153,7 @@ export class UserCollectionsComponent implements OnInit {
       },
       nzFooter: null,
       nzKeyboard : true,
-      nzWidth : "60%",
+      nzWidth : "50%",
       nzCentered : true,
       nzMaskClosable : false,
     })
