@@ -10,7 +10,6 @@ import { AntdesignModule } from 'src/app/modules/antdesign.module';
 import { CreateUpdateUserModalComponent } from './user-details/create-update-user-modal/create-update-user-modal.component';
 import { CreateUserCollectionsModalComponent } from './user-collections/create-user-collections-modal/create-user-collections-modal.component';
 import { ReceiveUserCollectionModalComponent } from './user-collections/receive-user-collection-modal/receive-user-collection-modal.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { DetailUserCollectionModalComponent } from './user-collections/detail-user-collection-modal/detail-user-collection-modal.component';
 import { SearchCustomerModalComponent } from './user-collections/search-customer-modal/search-customer-modal.component';
 

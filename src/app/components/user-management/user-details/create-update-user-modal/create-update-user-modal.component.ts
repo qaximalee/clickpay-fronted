@@ -225,6 +225,8 @@ export class CreateUpdateUserModalComponent implements OnInit {
       }
       else if(event=='QUARTER'){
         this.userDetailForm.amount = this.amount/4;
+      }else{
+        this.userDetailForm.amount = this.amount
       }
     }
     else{
@@ -262,5 +264,8 @@ export class CreateUpdateUserModalComponent implements OnInit {
     })
   }
 
+  handleChange(event:any){
+    console.log(event);
+  }
 
 }
