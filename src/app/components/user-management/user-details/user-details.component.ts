@@ -53,7 +53,7 @@ export class UserDetailsComponent implements OnInit {
 
   createAddOrUpdateUserModal(userId:any){
     const modal = this._modal.create({
-      nzTitle: userId ? 'Edit Package' : 'Create Package',
+      nzTitle: userId ? '<b>Edit User</b>' : '<b>Create User</b>',
       nzContent: CreateUpdateUserModalComponent,
       nzViewContainerRef: this._viewContainerRef,
       nzComponentParams: {

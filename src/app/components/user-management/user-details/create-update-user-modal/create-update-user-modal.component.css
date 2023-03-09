@@ -22,3 +22,8 @@ nz-select{
 nz-input-group{
     padding-right: 10px;
 }
+
+.new-picture-div {
+    border: 2px dashed #6EB43F;
+    height:60px;
+  }

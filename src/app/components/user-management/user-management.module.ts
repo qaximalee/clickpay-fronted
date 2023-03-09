@@ -12,6 +12,7 @@ import { CreateUserCollectionsModalComponent } from './user-collections/create-u
 import { ReceiveUserCollectionModalComponent } from './user-collections/receive-user-collection-modal/receive-user-collection-modal.component';
 import { DetailUserCollectionModalComponent } from './user-collections/detail-user-collection-modal/detail-user-collection-modal.component';
 import { SearchCustomerModalComponent } from './user-collections/search-customer-modal/search-customer-modal.component';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SearchCustomerModalComponent } from './user-collections/search-customer
   imports: [
     CommonModule,
     UserManagementRoutingModule,
-    AntdesignModule
+    AntdesignModule,
+    NzUploadModule
   ]
 })
 export class UserManagementModule { }

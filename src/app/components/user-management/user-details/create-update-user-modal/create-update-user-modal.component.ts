@@ -7,6 +7,8 @@ import { User } from 'src/app/core/models/user.model';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
 import { UserManagementService } from 'src/app/core/services/user-management.service';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-create-update-user-modal',
@@ -32,6 +34,8 @@ export class CreateUpdateUserModalComponent implements OnInit {
   connectionTypeList: Array<any> = [];
   subLocalitiesList: Array<any> = [];
 
+  fileList : NzUploadFile[] = [];
+
   amount: any;
   isDisabled: boolean = true;
 
@@ -39,12 +43,14 @@ export class CreateUpdateUserModalComponent implements OnInit {
     private _creationService : CreationService,
     private _userManagementService : UserManagementService,
     private _messageService : MessageService,
-    private _modal : NzModalService
+    private _modal : NzModalService,
+    private sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit(): void {
     if (this.data != null) {
       this.buttonName = 'Update';
+        this.getUserById(this.data);
     }
     // if(this.userDetailForm.companyId != null){
     //   this.getPackageList();
@@ -239,22 +245,17 @@ export class CreateUpdateUserModalComponent implements OnInit {
     event != null ? this.userDetailForm.subLocalityId = event : this.userDetailForm.subLocalityId = null;
   }
 
-  createOrUpdateUser(){
+  createUser(){
     console.log(this.userDetailForm);
     this._userManagementService.createUser(this.userDetailForm).subscribe({
       next: (response: any) => {
         console.log(response);
         if (response?.status == this._httpConstants.REQUEST_STATUS.CREATED_201.CODE) {
-          this.data
-            ? this._messageService.success('User Updated Successfully')
-            : this._messageService.success('User Created Successfully')
+          this._messageService.success('User Created Successfully')
           this._modal.closeAll();
         }
-        else {
-          console.log('Error');
-        }
       },
-      error: (error: any) => {
+      error: (error: any) => {  
         console.log(error);
         if (error?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE) {
           this._messageService.info(error?.error?.msg);
@@ -264,8 +265,107 @@ export class CreateUpdateUserModalComponent implements OnInit {
     })
   }
 
-  handleChange(event:any){
-    console.log(event);
+  beforeUpload = (file: NzUploadFile): boolean => {
+    this.fileList = this.fileList.concat(file);
+    return false; 
+  };
+
+  uploadCustomerCNICAndCreateOrUpdateCustomer(){
+    const formData = new FormData();
+    
+    if(this.fileList.length != 2){
+      this._messageService.info("CNIC 1 Front And 1 Back Image Upload.");
+    }
+
+    this.fileList.forEach((file: any) => {
+      if (file) {
+        formData.append('files', file);
+      }
+    });
+    
+    this._userManagementService.uploadCustomerCNIC(formData).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        if (response?.status == this._httpConstants.REQUEST_STATUS.CREATED_201.CODE) {
+          this.userDetailForm.cnicImageFront = response[0];
+          this.userDetailForm.cnicImageBack = response[1];
+
+          let fileName = this.userDetailForm.cnicImageFront.split('?')[1].split('&')[0].split('=')[1];
+          this.getCNICImages(fileName);
+
+          if(this.data != null){
+            this.updateUser();
+          }else{
+            this.createUser();
+          }
+        }else{
+          console.log('Error');
+          this._messageService.info("Error");
+        }
+      }
+    })
+  }
+
+  getCNICImages(filename: any) {
+    this._userManagementService.getCNICImage(filename).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          let objectURL = URL.createObjectURL(response);
+          let img = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        },
+        error: (error: any) => {
+          console.log(error);
+          this._messageService.error('Error');
+        },
+      });
+  }
+
+  getUserById(userId:any){
+    this._userManagementService.getCustomerById(userId).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
+          this.userDetailForm = response?.data;
+        }
+        else {
+          console.log('Error');
+          this._messageService.info('Error');
+        }
+      },
+      error: (error: any) => {
+        console.log(error);
+        if (error?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE) {
+          this._messageService.info(error?.error?.msg);
+        }
+      }
+    })
+
+  }
+
+  updateUser() {
+    console.log("update calling :"+this.userDetailForm.customerId);
+    // this._creationService.updatePackage(this.userDetailForm).subscribe({
+    //   next: (response: any) => {
+    //     console.log(response);
+    //     if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
+    //       this._messageService.success('User Updated Successfully');
+    //       this._modal.closeAll();
+    //     }else if(response?.status == this._httpConstants.REQUEST_STATUS.ALREADY_EXIST_302.CODE){
+    //       this._messageService.error('User Already Exists');
+    //     }
+    //     else {
+    //       console.log('Error');
+    //       this._messageService.info('Error');
+    //     }
+    //   },
+    //   error: (error: any) => {
+    //     console.log(error);
+    //     if (error?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE) {
+    //       this._messageService.info(error?.error?.msg);
+    //     }
+    //   },
+    //   complete: () => { }
+    // })
   }
 
 }

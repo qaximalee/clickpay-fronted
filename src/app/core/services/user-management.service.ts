@@ -37,4 +37,21 @@ export class UserManagementService {
     this.customer.next(selectedCustomer);
   }
   
+  public uploadCustomerCNIC(files:any):Observable<any>{
+    return this._http.post(this.baseUrl+`cnic-file/upload`,files)
+  }
+
+  public getCNICImage(filename : any):Observable<any>{
+    return this._http.get(this.baseUrl+`cnic-file/download?filename=${filename}`,
+    { responseType: 'blob'});
+  }
+
+  public getCustomerById(userId:number):Observable<any>{
+    return this._http.get(this.baseUrl+`user-profile/user-details/${userId}`)
+  }
+
+  // public updatetCustomer(user:any):Observable<any>{
+  //   return this._http.get(this.baseUrl+`user-profile/user-details/${userId}`)
+  // }
+
 }

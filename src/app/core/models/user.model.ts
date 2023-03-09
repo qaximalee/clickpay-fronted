@@ -17,6 +17,8 @@ export class User{
     rechargeDate: any = null;
     subLocalityId: any = null;
     email: string = '';
+    cnicImageBack: any = null;
+    cnicImageFront: any = null;
 }
 
 
