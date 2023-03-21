@@ -49,7 +49,10 @@ export class OfficerDetailsComponent implements OnInit {
           this.pageNo = response?.data?.pageNo;
         } 
         else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
-            this._messageService.info('Recovery Officer(s) Not Found')
+          this._messageService.info('Recovery Officer(s) Not Found');
+          this.officerList = [];
+          this.totalItems = 0;
+          this.pageNo = 0;
         }
         else{
           this._messageService.error('Error')

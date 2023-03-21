@@ -119,6 +119,9 @@ export class UserCollectionsComponent implements OnInit {
         } 
         else if(response?.status == this._httpConstants.REQUEST_STATUS.REQUEST_NOT_FOUND_404.CODE){
             this._messageService.info('Collections Not Found');
+            this.collectionList = [];
+            this.totalItems = 0;
+            this.pageNo = 0;
         }
         else{
           this._messageService.error('Error');

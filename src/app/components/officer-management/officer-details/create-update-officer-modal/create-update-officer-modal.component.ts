@@ -58,16 +58,16 @@ export class CreateUpdateOfficerModalComponent implements OnInit {
     }
   }
 
-  createOrUpdateOfficer(){
+  createRecoveryOfficer(){
     console.log(this.officerDetailForm);
     this._officerService.createRecoveryOfficer(this.officerDetailForm).subscribe({
       next: (response: any) => {
         console.log(response);
         if (response?.status == this._httpConstants.REQUEST_STATUS.CREATED_201.CODE) {
-          this.data
-            ? this._messageService.success('Recovery Officer Updated Successfully')
-            : this._messageService.success('Recovery Officer Created Successfully')
+          this._messageService.success('Recovery Officer Created Successfully');
           this._modal.closeAll();
+        }else if (response?.status == this._httpConstants.REQUEST_STATUS.ALREADY_EXIST_302.CODE){
+          this._messageService.info('Recovery Officer Already Exist');
         }
         else {
           console.log('Error');
