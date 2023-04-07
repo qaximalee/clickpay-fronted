@@ -1,4 +1,127 @@
-<form nz-form #officerDetailFormView="ngForm" >
+<div class="create-officer">
+
+  <form nz-form #officerFormView="ngForm" >
+
+    <div nz-row class="row" >
+      <div nz-col nzSpan="12">
+        <nz-input-group>
+          <h4>Name</h4>
+          <input nz-input type="text" name="Name" [(ngModel)]="officerDetailForm.name" placeholder="Recovery Officer Name"/>
+        </nz-input-group>
+      </div>
+      <div nz-col  nzSpan="12">
+        <nz-input-group  >
+          <h4>Email</h4>
+          <input nz-input type="email" name="Email" [(ngModel)]="officerDetailForm.email" placeholder="Email"/>  
+        </nz-input-group>
+      </div>
+    </div> 
+
+    <div nz-row class="row" >
+      <div nz-col nzSpan="12">
+        <nz-input-group>
+          <h4>CNIC</h4>
+          <input nz-input type="text" name="CNIC" [(ngModel)]="officerDetailForm.cnic" placeholder="4230152256667"/>
+        </nz-input-group>
+      </div>
+      <div nz-col  nzSpan="12">
+        <nz-input-group  >
+          <h4>Address</h4>
+          <input nz-input type="text" name="Address" [(ngModel)]="officerDetailForm.address" placeholder="Address"/>
+        </nz-input-group>
+      </div>
+    </div> 
+
+    <div nz-row class="row" >
+      <div nz-col nzSpan="12">
+        <nz-input-group>
+          <h4>Mobile</h4>
+          <input nz-input type="text" name="Mobile" [(ngModel)]="officerDetailForm.cellNo" placeholder="Mobile"/>
+        </nz-input-group>
+      </div>
+      <div nz-col  nzSpan="12">
+        <nz-input-group  >
+          <h4>Joining Date</h4>
+          <input nz-input type="date" name="JoiningDate" [(ngModel)]="officerDetailForm.joiningDate"/> 
+        </nz-input-group>
+      </div>
+    </div> 
+
+    <div nz-row class="row" >
+      <div nz-col nzSpan="12">
+        <nz-input-group>
+          <h4>Salary</h4>
+          <input nz-input type="number" name="Salary" [(ngModel)]="officerDetailForm.salary" placeholder="20000"/>
+        </nz-input-group>
+      </div>
+      <div nz-col  nzSpan="12">
+        <nz-input-group  >
+          <h4>Username</h4>
+          <input nz-input type="text" name="Username" [(ngModel)]="officerDetailForm.userName" placeholder="Username"/> 
+        </nz-input-group>
+      </div>
+    </div> 
+
+    <div nz-row class="row" >
+      <div nz-col nzSpan="12">
+        <h4>Password</h4>
+        <nz-input-group [nzPrefix]="prefixTemplatePassword" [nzSuffix]="suffixTemplateEye">
+            <input autocomplete="off" [type]="fieldTextType1 ? 'text' : 'password'" name="password" [(ngModel)]="officerDetailForm.password"
+             nz-input placeholder="Password" #password="ngModel" pattern="^.*([\w]|[\d]).*$" minlength="8" required  />
+        </nz-input-group>
+        <ng-template #prefixTemplatePassword><span nz-icon nzType="lock"></span></ng-template>
+        <ng-template #suffixTemplateEye><span nz-icon (click)="togglePassword()" class="password-field" nzTheme="fill" [nzType]="eyeType1"></span></ng-template>
+        <small class="danger" *ngIf="(password.touched) && password.errors?.['required']">
+            Password is Required
+        </small>
+        <small class="danger" *ngIf="(password.touched) && password.errors?.['minlength']">
+            Password must minimum be of 8 charactors
+        </small>
+        <small class="danger" *ngIf="officerDetailForm.password.length > 20">
+            Password must be maximum of 20 charactors
+        </small>
+        <small class="danger" *ngIf="(password.touched || password.dirty) && password.errors?.['pattern']">
+            Atleast 1 number and 1 alphabet
+        </small>
+      </div>
+      <div nz-col nzSpan="12">
+        <h4>Confirm Password</h4>
+        <nz-input-group [nzPrefix]="prefixTemplateConfirmPassword" [nzSuffix]="suffixTemplateConfirmPasswordEye">
+          <input [type]="fieldTextType2 ? 'text' : 'password'" name="password" name="confirmPassword" [(ngModel)]="officerDetailForm.confirmPassword"
+           nz-input placeholder="Confirm Password" #confirmPassword="ngModel" pattern="^.*([\w]|[\d]).*$" minlength="8" required  />
+      </nz-input-group>
+      <ng-template #prefixTemplateConfirmPassword><span nz-icon nzType="lock"></span></ng-template>
+      <ng-template #suffixTemplateConfirmPasswordEye><span nz-icon (click)="toggleConfirmPassword()" class="password-field" nzTheme="fill" [nzType]="eyeType2"></span></ng-template>
+      <small class="danger" *ngIf="(confirmPassword.touched) && confirmPassword.errors?.['required']">
+          Confirm Password is Required
+      </small>
+      <small class="danger" *ngIf="confirmPassword.errors?.['minlength']">
+          Confirm Password must be of 8 charactors
+      </small>
+      <small class="success" *ngIf="!password.errors?.['pattern'] && (officerDetailForm.password == officerDetailForm.confirmPassword)">
+          Password is Matched
+      </small>
+      <small class="danger" *ngIf="confirmPassword.touched && (officerDetailForm.password != officerDetailForm.confirmPassword)">
+          Password Not Matched
+      </small>
+      <small class="danger" *ngIf="confirmPassword.touched && password.errors?.['pattern']">
+          Atleast 1 number and 1 alphabet
+      </small>
+      </div>
+    </div> 
+
+    <div class="submit-button" nz-row  >
+      <button *ngIf="data" type="button" class="save-button" 
+                (click)="showConfirmationPopup()"  nz-button nzType="primary">{{ buttonName }}</button>
+        <button *ngIf="!data" type="button" class="save-button" 
+                (click)="createRecoveryOfficer()" nz-button nzType="primary">{{ buttonName }}</button>
+    </div>
+
+  </form>
+
+</div>
+<!-- 
+<form nz-form #officerFormView="ngForm" >
   <nz-form-item>
     <nz-form-label [nzSpan]="7" nzRequired>Name</nz-form-label>
     <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
@@ -132,8 +255,8 @@
 
   <nz-form-item>
     <nz-form-control [nzOffset]="7" [nzSpan]="12">
-      <!-- <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
-      <button nz-button (click)="createRecoveryOfficer()">{{ buttonName }}</button>
+       <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button> -->
+      <!-- <button nz-button (click)="createRecoveryOfficer()">{{ buttonName }}</button>
     </nz-form-control>
   </nz-form-item>
-</form>
+</form> --> 

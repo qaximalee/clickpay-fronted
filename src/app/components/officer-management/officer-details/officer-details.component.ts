@@ -72,7 +72,7 @@ export class OfficerDetailsComponent implements OnInit {
 
   createAddOrUpdateOfficerModal(officerId:any){
     const modal = this._modal.create({
-      nzTitle: officerId ? 'Edit Officer' : 'Create Officer',
+      nzTitle: officerId ? '<b>Edit Recovery Officer</b>' : '<b>Create Recovery Officer</b>',
       nzContent: CreateUpdateOfficerModalComponent,
       nzViewContainerRef: this._viewContainerRef,
       nzComponentParams: {
@@ -81,7 +81,7 @@ export class OfficerDetailsComponent implements OnInit {
       },
       nzFooter: null,
       nzKeyboard : true,
-      nzWidth : "60%",
+      nzWidth : "50%",
       nzCentered : true,
       nzMaskClosable : false,
     })

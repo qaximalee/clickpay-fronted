@@ -24,4 +24,8 @@ export class OfficerManagementService {
     return this._http.get(this.baseUrl+`recovery-officer/recovery-officer-collection/customer-dropdown`);
   }
 
+  public getRecoveryOfficerById(officerId:any): Observable<any>{
+    return this._http.get(this.baseUrl+`recovery-officer/officer/${officerId}`);
+  }
+
 }

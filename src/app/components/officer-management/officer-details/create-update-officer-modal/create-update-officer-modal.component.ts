@@ -17,7 +17,7 @@ export class CreateUpdateOfficerModalComponent implements OnInit {
   @Input() data?: Array<any>;
   @Input() title?: string;
   officerDetailForm: Officer = new Officer(); 
-  @ViewChild('userDetailFormView') userDetailFormView!: NgForm;
+  @ViewChild('officerFormView') officerFormView!: NgForm;
 
   private _httpConstants: HttpConstants = new HttpConstants();
 
@@ -34,6 +34,10 @@ export class CreateUpdateOfficerModalComponent implements OnInit {
     private _modal : NzModalService) { }
 
   ngOnInit(): void {
+    if (this.data != null) {
+      this.buttonName = 'Update';
+        this.getRecoveryOfficerById(this.data);
+    }
   }
 
   togglePassword() {
@@ -83,5 +87,31 @@ export class CreateUpdateOfficerModalComponent implements OnInit {
     })
   }
 
+  getRecoveryOfficerById(officerId:any){
+    this._officerService.getRecoveryOfficerById(officerId).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
+          this.officerDetailForm = response?.data;
+          this.officerDetailForm.confirmPassword = response?.data?.password;
+        }
+        else {
+          console.log('Error');
+          this._messageService.info('Error');
+        }
+      },
+      error: (error: any) => {
+        console.log(error);
+        if (error?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE) {
+          this._messageService.info(error?.error?.msg);
+        }
+      }
+    })
+
+  }
+
+  showConfirmationPopup(){
+    
+  }
 
 }
