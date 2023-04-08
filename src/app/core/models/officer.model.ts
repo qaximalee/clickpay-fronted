@@ -11,5 +11,6 @@ export class Officer{
     joiningDate: any = null;
     leavingDate: any = null;
     salary: number = 0;
+    status: string = '';
 }
 

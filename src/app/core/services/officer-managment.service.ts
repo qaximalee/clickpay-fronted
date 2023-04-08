@@ -20,6 +20,10 @@ export class OfficerManagementService {
     return this._http.post(this.baseUrl+`recovery-officer/officer`,officer);
   }
 
+  public updateRecoveryOfficer(officer:any):Observable<any>{
+    return this._http.put(this.baseUrl+`recovery-officer/officer`,officer);
+  }
+
   public getAllCustomerByRecoveryOfficer(): Observable<any>{
     return this._http.get(this.baseUrl+`recovery-officer/recovery-officer-collection/customer-dropdown`);
   }

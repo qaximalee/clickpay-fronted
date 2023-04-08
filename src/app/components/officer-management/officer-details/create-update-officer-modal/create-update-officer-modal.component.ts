@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HttpConstants } from 'src/app/core/constants/http.constants';
 import { Officer } from 'src/app/core/models/officer.model';
 import { User } from 'src/app/core/models/user.model';
@@ -17,6 +17,7 @@ export class CreateUpdateOfficerModalComponent implements OnInit {
   @Input() data?: Array<any>;
   @Input() title?: string;
   officerDetailForm: Officer = new Officer(); 
+  confirmModal?: NzModalRef;
   @ViewChild('officerFormView') officerFormView!: NgForm;
 
   private _httpConstants: HttpConstants = new HttpConstants();
@@ -110,8 +111,39 @@ export class CreateUpdateOfficerModalComponent implements OnInit {
 
   }
 
-  showConfirmationPopup(){
-    
+  showConfirmationPopup() : void {
+    this.confirmModal = this._modal.confirm({
+      nzTitle: 'Are you sure you want to save changes?',
+      nzContent: '',
+      nzCentered: true,
+      nzOnOk: () => this.updateRecoveryOfficer()
+    });
   }
+
+  updateRecoveryOfficer(){
+    console.log(this.officerDetailForm);
+    this._officerService.updateRecoveryOfficer(this.officerDetailForm).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        if (response?.status == this._httpConstants.REQUEST_STATUS.SUCCESS_200.CODE) {
+          this._messageService.success('Recovery Officer Updated Successfully');
+          this._modal.closeAll();
+        }else if (response?.status == this._httpConstants.REQUEST_STATUS.ALREADY_EXIST_302.CODE){
+          this._messageService.info('Recovery Officer Already Exist');
+        }
+        else {
+          console.log('Error');
+        }
+      },
+      error: (error: any) => {
+        console.log(error);
+        if (error?.status == this._httpConstants.REQUEST_STATUS.BAD_REQUEST_400.CODE) {
+          this._messageService.info(error?.error?.msg);
+        }
+      },
+      complete: () => { }
+    })
+  }
+
 
 }
