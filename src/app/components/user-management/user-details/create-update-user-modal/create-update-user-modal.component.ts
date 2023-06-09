@@ -7,8 +7,9 @@ import { User } from 'src/app/core/models/user.model';
 import { CreationService } from 'src/app/core/services/creation.service';
 import { MessageService } from 'src/app/core/services/message.service';
 import { UserManagementService } from 'src/app/core/services/user-management.service';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable, Observer } from 'rxjs';
 
 @Component({
   selector: 'app-create-update-user-modal',
@@ -38,6 +39,11 @@ export class CreateUpdateUserModalComponent implements OnInit {
 
   amount: any;
   isDisabled: boolean = true;
+  cnicFront: string | null = null;
+  cnicBack: string | null = null;
+  loading = false;
+  avatarUrl?: string;
+
 
   constructor(
     private _creationService : CreationService,
@@ -60,6 +66,65 @@ export class CreateUpdateUserModalComponent implements OnInit {
     this.getCompanyList();
     this.getSubLocalityList();
     this.getConnectionTypeList();
+  }
+
+  beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]): Observable<boolean> =>
+    new Observable((observer: Observer<boolean>) => {
+      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+      if (!isJpgOrPng) {
+        observer.complete();
+        return;
+      }
+      const isLt2M = file.size! / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        observer.complete();
+        return;
+      }
+      observer.next(isJpgOrPng && isLt2M);
+      observer.complete();
+    });
+
+  // handleChange(field: string, event: NzUploadChangeParam): void {
+  //   if (event.file.status === 'done') {
+  //     // File upload completed
+  //     console.log('File uploaded successfully');
+  //     // Get the uploaded image URL
+  //     const imageUrl = event.file.response.imageUrl;
+  //     // Update the corresponding field
+  //     if (field === 'cnicFront') {
+  //       this.cnicFront = imageUrl;
+  //     } else if (field === 'cnicBack') {
+  //       this.cnicBack = imageUrl;
+  //     }
+  //   } else if (event.file.status === 'error') {
+  //     // File upload failed
+  //     console.log('File upload failed');
+  //     // Handle the error or perform any additional actions
+  //   }
+  // }
+
+  private getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
+  }
+  
+  handleChange(info: { file: NzUploadFile }): void {
+    switch (info.file.status) {
+      case 'uploading':
+        this.loading = true;
+        break;
+      case 'done':
+        // Get this url from response in real world.
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          this.loading = false;
+          this.avatarUrl = img;
+        });
+        break;
+      case 'error':
+        this.loading = false;
+        break;
+    }
   }
 
   getPackageList(){
@@ -265,10 +330,12 @@ export class CreateUpdateUserModalComponent implements OnInit {
     })
   }
 
-  beforeUpload = (file: NzUploadFile): boolean => {
-    this.fileList = this.fileList.concat(file);
-    return false; 
-  };
+  // beforeUpload = (file: NzUploadFile): boolean => {
+  //   this.fileList = this.fileList.concat(file);
+  //   return false; 
+  // };
+
+
 
   uploadCustomerCNICAndCreateOrUpdateCustomer(){
     const formData = new FormData();

@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
 
-  loginUrl : 'http://localhost:8081/oauth/token',
-  baseUrl : 'http://localhost:8081/api/v1/'
+  loginUrl : 'http://localhost:8484/oauth/token',
+  baseUrl : 'http://localhost:8484/api/v1/'
 
 };
 
